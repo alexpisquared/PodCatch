@@ -1,8 +1,6 @@
-﻿<Window x:Class="NAudioTrimmer.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        xmlns:local="clr-namespace:NAudioTrimmer"
-        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"  
-        xmlns:na="clr-namespace:NAudio.Gui;assembly=NAudio"  
-        Title="Audio Trimmer 4.8" MinHeight="220" Height="350" MaxHeight="350" Width="1200" AllowDrop="True" Drop="onDrop" Background="#333" WindowStyle="None" WindowStartupLocation="CenterScreen">
+﻿<Window x:Class="NAudioTrimmer6.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        xmlns:local="clr-namespace:NAudioTrimmer6"
+        Title="Audio Trimmer 4.8" MinHeight="220" Height="350" MaxHeight="350" Width="2200" AllowDrop="True" Drop="onDrop" Background="#333" WindowStyle="None" WindowStartupLocation="CenterScreen">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
   </WindowChrome.WindowChrome>
@@ -92,26 +90,15 @@
         <Button    Content="▼_Set slider A to current"           Click="onMediaPosnToSliderA" Foreground="#0b4" />
         <Button    Content="▲S_et slider B to current"           Click="onMediaPosnToSliderB" Foreground="#0b4" />
       </StackPanel>
-      <CheckBox  Content="_Auto" Checked="onTglAutoResetter" Unchecked="onTglAutoResetter" />
+      <CheckBox  Content="_Auto" Checked="onTglAutoResetter" Unchecked="onTglAutoResetter" ToolTip="Toggle Auto Resetter"/>
       <Button    Content="_Play/Pause"                        Click="onTglPlay"            Foreground="#0ac" FontWeight="Bold" IsDefault="True" />
-      <Button    Content="_Trim "                             Click="onTrimBoth"           Foreground="#d44" FontWeight="Bold" />
+      <Button    Content="_Trim "                             Click="onTrimBoth"           Foreground="#d44" FontWeight="Bold" ToolTip="Trims both ends and saves to .\Trimmed\"/>
       <!--<Button    Content="**"                             Click="on01"                 Foreground="#888" FontWeight="SemiBold" />
       <Button    Content="_Waveform"                          Click="onShowWaveform"       Foreground="#08f" FontWeight="SemiBold" x:Name="btn1"/>
       <Button    Content="**"                                 Click="on00"                 Foreground="#888" FontWeight="SemiBold" />-->
     </StackPanel>
 
     <!--<WindowsFormsHost Grid.Column="1" Grid.Row="4" Background="#def">      <na:WaveViewer x:Name="waveViewer1" />    </WindowsFormsHost>-->
-
-    <TextBlock Text="Obsolete - use ..6 instead" Grid.ColumnSpan="5" Grid.RowSpan="7" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="88" RenderTransformOrigin="0.5,0.5" Foreground="#f80">
-      <TextBlock.RenderTransform>
-        <TransformGroup>
-          <ScaleTransform/>
-          <SkewTransform/>
-          <RotateTransform Angle="-13.987"/>
-          <TranslateTransform/>
-        </TransformGroup>
-      </TextBlock.RenderTransform>
-    </TextBlock>
 
   </Grid>
 </Window>
