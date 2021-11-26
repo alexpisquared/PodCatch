@@ -1,6 +1,6 @@
 ﻿<Window x:Class="NAudioTrimmer6.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:NAudioTrimmer6"
-        Title="Audio Trimmer 4.8" MinHeight="220" Height="350" MaxHeight="350" Width="2200" AllowDrop="True" Drop="onDrop" Background="#333" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="Audio Trimmer 4.8" MinHeight="220" Height="350" MaxHeight="350" Width="2200" AllowDrop="True" Drop="onDrop" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
   </WindowChrome.WindowChrome>
@@ -30,7 +30,7 @@
       <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
   </Window.Resources>
-  <Grid x:Name="root0">
+  <Grid x:Name="root0" Background="#a111">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="10"/>
       <ColumnDefinition Width="*"/>
@@ -85,17 +85,21 @@
     <Slider      Grid.Column="1" Grid.Row="4" x:Name="slB" ValueChanged="slB_ValueChanged" PreviewKeyDown="slS_PreviewKeyDown" SmallChange=".05" VerticalAlignment="Center" TickPlacement="TopLeft"     Foreground="#ee0" LargeChange="1" TickFrequency="60" />
 
     <StackPanel  Grid.Column="1" Grid.Row="6" x:Name="cntrlPnl" Orientation="Horizontal" HorizontalAlignment="Center">
-      <Button    Content="|&lt;-_Back to Slider Point"              Click="onBackToPositionA"    Foreground="#cc0" />
       <StackPanel  >
         <Button    Content="▼_Set slider A to current"           Click="onMediaPosnToSliderA" Foreground="#0b4" />
         <Button    Content="▲S_et slider B to current"           Click="onMediaPosnToSliderB" Foreground="#0b4" />
       </StackPanel>
-      <CheckBox  Content="_Auto" Checked="onTglAutoResetter" Unchecked="onTglAutoResetter" ToolTip="Toggle Auto Resetter"/>
-      <Button    Content="_Play/Pause"                        Click="onTglPlay"            Foreground="#0ac" FontWeight="Bold" IsDefault="True" />
-      <Button    Content="_Trim "                             Click="onTrimBoth"           Foreground="#d44" FontWeight="Bold" ToolTip="Trims both ends and saves to .\Trimmed\"/>
-      <!--<Button    Content="**"                             Click="on01"                 Foreground="#888" FontWeight="SemiBold" />
-      <Button    Content="_Waveform"                          Click="onShowWaveform"       Foreground="#08f" FontWeight="SemiBold" x:Name="btn1"/>
-      <Button    Content="**"                                 Click="on00"                 Foreground="#888" FontWeight="SemiBold" />-->
+      
+      <Button    Content="|&lt;-_Back to Slider Point"           Click="onBackToPositionA"    Foreground="#fbb" Margin="26 0 0 0" />
+      <CheckBox  Content="_Auto-Back " Checked="onTglAutoResetter" Unchecked="onTglAutoResetter" ToolTip="Toggle Auto Resetter"/>
+
+      <CheckBox  Content="_Motion    " Checked="onTglProgMoverter" Unchecked="onTglProgMoverter" ToolTip="Toggle Auto Resetter" Foreground="#08f" Background="#08f" IsChecked="True" Margin="26 0 0 0" />
+      
+      <Button    Content="_Play/Pause"     Click="onTglPlay"            Foreground="#0a0" FontWeight="Bold" Margin="26 0 0 0" IsDefault="True" />
+      <Button    Content="_Trim/Save"      Click="onTrimBoth"           Foreground="#d44" FontWeight="Bold" Margin="26 0 0 0" ToolTip="Trims both ends and saves to .\Trimmed\"/>
+      <!--<Button    Content="**"          Click="on01"                 Foreground="#888" FontWeight="SemiBold" />
+      <Button    Content="_Waveform"       Click="onShowWaveform"       Foreground="#08f" FontWeight="SemiBold" x:Name="btn1"/>
+      <Button    Content="**"              Click="on00"                 Foreground="#888" FontWeight="SemiBold" />-->
     </StackPanel>
 
     <!--<WindowsFormsHost Grid.Column="1" Grid.Row="4" Background="#def">      <na:WaveViewer x:Name="waveViewer1" />    </WindowsFormsHost>-->

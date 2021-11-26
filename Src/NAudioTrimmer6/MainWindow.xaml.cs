@@ -18,7 +18,7 @@ namespace NAudioTrimmer6
     readonly IBitmapHelper _bmpHelper;
     readonly DispatcherTimer _resettter, _progMover;
     bool _isPlaying;
-    string SettingsDefaultLastFile;
+    string SettingsDefaultLastFile = @"C:\Users\alexp\Videos\0Pod\_Player\BpM\105 BPM - Globetrotter.mp3";
 
     public MainWindow(INAudioHelper naHelper, BitmapHelper waveImage)
     {
@@ -52,14 +52,10 @@ namespace NAudioTrimmer6
       _progMover = new DispatcherTimer(TimeSpan.FromSeconds(.02), DispatcherPriority.Normal, new EventHandler((s, e) => onPbMover()), Dispatcher.CurrentDispatcher);
       _resettter = new DispatcherTimer(TimeSpan.FromSeconds(2), DispatcherPriority.Background, new EventHandler((s, e) => onBackToPositionA(s, null)), Dispatcher.CurrentDispatcher); //tu: one-line timer
       _resettter.Stop();
+      if (Debugger.IsAttached) Topmost = true;
     }
-    void slS_PreviewKeyDown(object s, KeyEventArgs e)    {    }      //            e.Handled = true;
-    async void onLoaded(object s, RoutedEventArgs e)
-    {
-      //if (string.IsNullOrEmpty(Settings.Default.LastFile)) return;
-
-      //await playNewFile(Settings.Default.LastFile);
-    }
+    void slS_PreviewKeyDown(object s, KeyEventArgs e) { }      //            e.Handled = true;
+    async void onLoaded(object s, RoutedEventArgs e) { if (!string.IsNullOrEmpty(SettingsDefaultLastFile)) await playNewFile(SettingsDefaultLastFile); }
     async void mediaOpened(object s, RoutedEventArgs e)
     {
       hlPath.NavigateUri = new Uri(tbPath.Text = $"{System.IO.Path.GetDirectoryName(me1.Source.LocalPath)}\\");
@@ -95,8 +91,8 @@ namespace NAudioTrimmer6
     async void onMediaPosnToSliderB(object s, RoutedEventArgs e) { slB.Value = me1.Position.TotalSeconds; await Task.Yield(); }
     async void onTrimBoth(object s, RoutedEventArgs e) => await trim(_nauHelper.TrimMp3Both);// async void onTrimLeft(object s, RoutedEventArgs e) => await trim(_naHelper.TrimMp3Left); async void onTrimRght(object s, RoutedEventArgs e) => await trim(_naHelper.TrimMp3Rght);
     async void onTglPlay(object s, RoutedEventArgs e) { if (_isPlaying) me1.Pause(); else me1.Play(); _isPlaying = !_isPlaying; await Task.Yield(); }
-    async void pb1_MouseUp_L_A(object s, MouseButtonEventArgs e) { slA.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(root).X / ((ProgressBar)s).ActualWidth; await Task.Yield(); }
-    async void pb1_MouseUp_R_B(object s, MouseButtonEventArgs e) { slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(root).X / ((ProgressBar)s).ActualWidth; await Task.Yield(); }
+    void pb1_MouseUp_L_A(object s, MouseButtonEventArgs e) => slA.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(str1).X / ((ProgressBar)s).ActualWidth;
+    void pb1_MouseUp_R_B(object s, MouseButtonEventArgs e) => slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(str1).X / ((ProgressBar)s).ActualWidth;
     async void pb1_MousMov(object s, /**/  MouseEventArgs e) => await Task.Yield();             //slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(root).X / ((ProgressBar)s).ActualWidth;
     async void onPbMover()
     {
@@ -113,6 +109,7 @@ namespace NAudioTrimmer6
       await Task.Yield();
     }
     async void onTglAutoResetter(object s, RoutedEventArgs e) { _resettter.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
+    async void onTglProgMoverter(object s, RoutedEventArgs e) { _progMover.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
     async void onRequestNavigate(object s, System.Windows.Navigation.RequestNavigateEventArgs e) { Process.Start(new ProcessStartInfo(Path.Combine(e.Uri.LocalPath, ""))); e.Handled = true; await Task.Yield(); }
 
     async Task playNewFile(string file)
@@ -142,7 +139,8 @@ namespace NAudioTrimmer6
     async Task loadShowWaveForm()
     {
       //((Button)s).Visibility = Visibility.Hidden;
-      tbPntB.Text = $"Loading waveform...";
+      tbPntB.Text = $"Wait!!! Loading waveform.............................";
+      await Task.Delay(100);
 
       im1.Source = null;
       await Task.Run(() => _nauHelper.LoadWaveFormToBitmap(SettingsDefaultLastFile)).ContinueWith(_ =>
