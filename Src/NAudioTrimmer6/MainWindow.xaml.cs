@@ -19,6 +19,7 @@ namespace NAudioTrimmer6
     readonly DispatcherTimer _resettter, _progMover;
     bool _isPlaying;
     string SettingsDefaultLastFile = @"C:\Users\alexp\Videos\0Pod\_Player\BpM\105 BPM - Globetrotter.mp3";
+    private double _markerPosn = 0;
 
     public MainWindow(INAudioHelper naHelper, BitmapHelper waveImage)
     {
@@ -91,8 +92,14 @@ namespace NAudioTrimmer6
     async void onMediaPosnToSliderB(object s, RoutedEventArgs e) { slB.Value = me1.Position.TotalSeconds; await Task.Yield(); }
     async void onTrimBoth(object s, RoutedEventArgs e) => await trim(_nauHelper.TrimMp3Both);// async void onTrimLeft(object s, RoutedEventArgs e) => await trim(_naHelper.TrimMp3Left); async void onTrimRght(object s, RoutedEventArgs e) => await trim(_naHelper.TrimMp3Rght);
     async void onTglPlay(object s, RoutedEventArgs e) { if (_isPlaying) me1.Pause(); else me1.Play(); _isPlaying = !_isPlaying; await Task.Yield(); }
-    void pb1_MouseUp_L_A(object s, MouseButtonEventArgs e) => slA.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(str1).X / ((ProgressBar)s).ActualWidth;
-    void pb1_MouseUp_R_B(object s, MouseButtonEventArgs e) => slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(str1).X / ((ProgressBar)s).ActualWidth;
+    void pb1_MouseUp_L_A(object s, MouseButtonEventArgs e)
+    {
+      slA.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(w40k).X / ((ProgressBar)s).ActualWidth;
+      Trace.WriteLine($"  {((MouseDevice)e.Device).GetPosition(w40k).X}    {((MouseDevice)e.Device).GetPosition(sv1).X}    {((MouseDevice)e.Device).GetPosition(root).X}");
+      _markerPosn = ((MouseDevice)e.Device).GetPosition(sv1).X-50;
+    }
+
+    void pb1_MouseUp_R_B(object s, MouseButtonEventArgs e) => slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(w40k).X / ((ProgressBar)s).ActualWidth;
     async void pb1_MousMov(object s, /**/  MouseEventArgs e) => await Task.Yield();             //slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(root).X / ((ProgressBar)s).ActualWidth;
     async void onPbMover()
     {
@@ -104,7 +111,7 @@ namespace NAudioTrimmer6
       }
 
       if (me1.NaturalDuration.HasTimeSpan)
-        sv1.ScrollToHorizontalOffset(str1.ActualWidth * me1.Position.TotalSeconds / me1.NaturalDuration.TimeSpan.TotalSeconds);
+        sv1.ScrollToHorizontalOffset(-_markerPosn + w40k.ActualWidth * me1.Position.TotalSeconds / me1.NaturalDuration.TimeSpan.TotalSeconds);
 
       await Task.Yield();
     }
