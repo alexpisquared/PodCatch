@@ -117,7 +117,16 @@ namespace NAudioTrimmer6
     }
     async void onTglAutoResetter(object s, RoutedEventArgs e) { _resettter.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
     async void onTglProgMoverter(object s, RoutedEventArgs e) { _progMover.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
-    async void onRequestNavigate(object s, System.Windows.Navigation.RequestNavigateEventArgs e) { Process.Start(new ProcessStartInfo(Path.Combine(e.Uri.LocalPath, ""))); e.Handled = true; await Task.Yield(); }
+    async void onRequestNavigate(object s, System.Windows.Navigation.RequestNavigateEventArgs e) {
+      var audioFile = Path.Combine(e.Uri.LocalPath, tbFile.Text); 
+
+      if (audioFile is not null && File.Exists(audioFile))
+        _ = Process.Start("Explorer.exe", $"/select, \"{audioFile}\"");
+      else
+        _ = MessageBox.Show($"Failed to create the CSV file \n\n{audioFile} \n\n", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+      
+      e.Handled = true; await Task.Yield();
+    }
 
     async Task playNewFile(string file)
     {
