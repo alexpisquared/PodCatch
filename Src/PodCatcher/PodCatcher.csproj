@@ -368,4 +368,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
 </Project>
