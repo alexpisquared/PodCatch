@@ -172,9 +172,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AAV.Shared\Src\Net6.0\AAV.Sys\AAV.Sys.csproj">
-      <Project>{0fe93aeb-e360-4267-b100-cebd5f7b6049}</Project>
-      <Name>AAV.Sys</Name>
+    <ProjectReference Include="..\..\..\..\C\AAV\AAV.Sys\AAV.Sys.4.8.csproj">
+      <Project>{60bb75f4-e913-40f9-be60-d5e408f24751}</Project>
+      <Name>AAV.Sys.4.8</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

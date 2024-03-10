@@ -240,7 +240,7 @@ namespace PodCatcher.ViewModels
 
 		public ICommand CheckSaveCmd { get { return _CheckSaveCmd ?? (_CheckSaveCmd = new RelayCommand(x => onCheckSave(x), x => canCheckSave) { }); } }		ICommand _CheckSaveCmd;
 		public bool canCheckSave { get { return true; } }
-		void onCheckSave(object x) { DbSaveMsgBox.CheckAskSave(Db); }
+		void onCheckSave(object x) { AsLink.DbSaveMsgBox_OldRestoredInDec2023.CheckAskSave(Db); }
 
 		public ICommand SaveChangesCmd { get { return _SaveChangesCmd ?? (_SaveChangesCmd = new RelayCommand(x => onSaveChanges(x), x => canSaveChanges) { }); } }		ICommand _SaveChangesCmd;
 		public bool canSaveChanges { get { return true; } }
