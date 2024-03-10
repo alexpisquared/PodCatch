@@ -309,7 +309,7 @@
           <ProgressBar Maximum="{Binding Max4}" Value="{Binding Val4, FallbackValue=5}" Foreground="{Binding AG, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
         </StackPanel>
 
-        <MenuItem   Command="{Binding StopCntDnCmd}"  Header="Stop CD_n" ToolTip="" Visibility="{Binding CanStopCntDn, Converter={cnv:VisibilityConverter}}" Foreground="#d00" FontWeight="SemiBold" />
+        <MenuItem   Command="{Binding StopCntDnCmd}"  Header="Stop CD_n" ToolTip="" Visibility="{Binding IsCntDnOn, Converter={cnv:VisibilityConverter}}" Foreground="#d00" FontWeight="SemiBold" />
 
         <MenuItem Header="_Delete">
           <MenuItem   Command="{Binding DelCastsCmd}"  Header="Keep Old" ToolTip="Delete only available in RSS Casts for the selected feed" />
