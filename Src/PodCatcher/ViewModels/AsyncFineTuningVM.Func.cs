@@ -260,7 +260,15 @@ namespace PodCatcher.ViewModels
 
     void reload1(Feed feed, DateTime? upTo = null) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.FeedId == feed.Id).OrderByDescending(r => r.PublishedAt)); info(); }
     void reloadActiveRecentDnlds(DateTime? upTo = null) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => (r.ModifiedAt >= (upTo ?? _crlnTS)) || r.ReDownload).OrderByDescending(r => r.ModifiedAt)); IsFeedNmVsbl = true; info(); }
-    void reloadTopNnRecentDnlds(int topX = 128) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
+    void reloadTopNnRecentDnlds(int topX = 128)
+    {
+      _db.Database.CommandTimeout = 900; // seconds
+      DnLdList = new ObservableCollection<DnLd>(_db.DnLds.OrderByDescending(r => r.PublishedAt)
+        //too slow: .ThenBy(r => r.Feed.Name)  :2024
+        .Take(topX)); 
+      IsFeedNmVsbl = true; 
+      info();
+    }
     void reloadTopNnDnldedDnlds(int topX = 128) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.DownloadedAt != null).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
     void reloadTopNnPendngDnlds(int topX = 128) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.ReDownload).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
     void onSearchF(string value)
@@ -309,7 +317,7 @@ namespace PodCatcher.ViewModels
     {
       FeedList = new ObservableCollection<Feed>(_db.Feeds.Where(r =>
 #if DEBUG
-              //r.Id == 101 &&
+        //r.Id == 101 &&
 #endif
         // /*string.Compare(r.HostMachineId, Environment.MachineName, true) == 0 &&*/  --------------- Oct 2016
         (IncDel || !r.IsDeleted)).OrderByDescending(r => r.IsActive).ThenBy(r => r.Name));

@@ -29,8 +29,8 @@ namespace Db.PodcastMgt.DbModel
                 {
                     default:
                     case "AP-201704-LW": 
-                    case "Asus2":        /**/ return $@"data source=.\sqlexpress;               initial catalog=PodcastMgt{dbg}; integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
-                    case "AP-201704-L~": /**/ return $@"data source={Environment.MachineName};  initial catalog=PodcastMgt{dbg}; integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
+                    case "Asus2":        /**/ return $@"data source=.\sqlexpress;               initial catalog=PodcastMgt{dbg}; integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;Encrypt=False;Connect Timeout=180";
+                    case "AP-201704-L~": /**/ return $@"data source={Environment.MachineName};  initial catalog=PodcastMgt{dbg}; integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;Encrypt=False;Connect Timeout=180";
                 }
             }
         }
