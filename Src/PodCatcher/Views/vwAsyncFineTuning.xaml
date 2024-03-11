@@ -298,7 +298,7 @@
       <TextBlock Text="{Binding Appender, FallbackValue=123}" Foreground="#08f" MinWidth="222" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Margin="15 0" ToolTip="{Binding Appender}" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" MaxHeight="93" />
       <TextBlock Text="{Binding WinTitle, FallbackValue=123}" Foreground="#0c8" MinWidth="222" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="15 0" ToolTip="{Binding WinTitle}" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" />
 
-      <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" >
+      <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" Foreground="#08f" >
         <StackPanel Orientation="Horizontal" Margin="3" >
           <ProgressBar Maximum="{Binding Max1}" Value="{Binding Val1, FallbackValue=5}" Foreground="{Binding DF, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
           <Rectangle Fill="#aaa" Width="4" Height="1" />
@@ -309,9 +309,9 @@
           <ProgressBar Maximum="{Binding Max4}" Value="{Binding Val4, FallbackValue=5}" Foreground="{Binding AG, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
         </StackPanel>
 
-        <MenuItem   Command="{Binding StopCntDnCmd}"  Header="Stop CD_n" ToolTip="" Visibility="{Binding IsCntDnOn, Converter={cnv:VisibilityConverter}}" Foreground="#d00" FontWeight="SemiBold" />
+        <MenuItem   Command="{Binding StopCntDnCmd}"  Header="Stop CDn" ToolTip="" Visibility="{Binding IsCntDnOn, Converter={cnv:VisibilityConverter}}" Foreground="#d80" FontWeight="SemiBold" />
 
-        <MenuItem Header="_Delete">
+        <MenuItem Header="Del" Foreground="#f30">
           <MenuItem   Command="{Binding DelCastsCmd}"  Header="Keep Old" ToolTip="Delete only available in RSS Casts for the selected feed" />
           <MenuItem   Command="{Binding DelCasAlCmd}"  Header="All"      ToolTip="Delete all Casts for the selected feed" />
         </MenuItem >
@@ -332,7 +332,7 @@
           <Separator />
           <MenuItem Header="F_9 All 4 Steps  "	Command="{Binding F9All4StepsCmd}" ToolTip="Run All Steps" />
         </MenuItem>
-        <MenuItem Header="Se_ttings">
+        <MenuItem Header="Settings">
           <MenuItem Header="Proxy Setting" IsCheckable="True" />
           <Separator />
           <MenuItem>
@@ -355,14 +355,14 @@
           </MenuItem>
         </MenuItem>
 
-        <MenuItem Command="{Binding RecentCmd}" Header="  _Recent" Foreground="#070" ToolTip="Show top recent casts from all feeds." />
-        <MenuItem Command="{Binding DnldedCmd}" Header="Dn_Loaded" Foreground="#070" ToolTip="DnLoaded Only!" />
-        <MenuItem Command="{Binding PendngCmd}" Header="_Pending " Foreground="#070" ToolTip="Marked for download only." />
+        <MenuItem Command="{Binding RecentCmd}" Header="  Recent" Foreground="#070" ToolTip="Show top recent casts from all feeds." />
+        <MenuItem Command="{Binding DnldedCmd}" Header="DnLoaded" Foreground="#070" ToolTip="DnLoaded Only!" />
+        <MenuItem Command="{Binding PendngCmd}" Header="Pending " Foreground="#070" ToolTip="Marked for download only." />
 
         <CheckBox IsChecked="{Binding IsBusy}" Content="Is_Busy"  ToolTip="" />
         <CheckBox IsChecked="{Binding IncDel}" Content="_IncDel" ToolTip="Show all Feeds - including deleted" />
-        <MenuItem   Command="{Binding SeeDLsCmd}"  Header="IsFeedNmVsbl"       ToolTip="Show to be DnLoaded" />
-        <CheckBox IsChecked="{Binding IsFeedNmVsbl}" Content="IsFeedNmVsbl" ToolTip="Show active/to be Downloads" />
+        <MenuItem   Command="{Binding SeeDLsCmd}"     Header="SeeDLsCmd"    ToolTip="Show to be DnLoaded"         Foreground="#0aa" />
+        <CheckBox IsChecked="{Binding IsFeedNmVsbl}" Content="IsFeedNmVsbl" ToolTip="Show active/to be Downloads" Foreground="#0aa" />
 
         <MenuItem Command="{Binding FdCmd}"   Header="Cmd0" ToolTip="Ctrl-D: Nothing yet " />
         <MenuItem Click="Button_Click"				Header="Ev0"  ToolTip="Ctrl-D: Nothing yet " />

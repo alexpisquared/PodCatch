@@ -15,7 +15,7 @@ namespace PodCatcher
 		{
 			try
 			{
-				Debug.WriteLine("~> {0,-32}   {1,5} casts,    LatestRssText.Length={2,5:N0} kb", feed.Name, feed.DnLds.Count, .001 * feed.LatestRssText.Length);
+				Debug.WriteLine("~> {0,-32}   {1,5} casts,    LatestRssText.Length={2,5:N0} kb", feed.Name, feed.DnLds?.Count, .001 * feed.LatestRssText?.Length);
 
 				var inst = new RssHelper();
 				inst.ParseRssToGetAllCasts(feed);
