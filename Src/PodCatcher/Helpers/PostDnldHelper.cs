@@ -104,25 +104,24 @@ namespace PodCatcher.Helpers
       return (hasNew || notAll, $"####  {trgDir.Split('\\').LastOrDefault(),-32} Latest dnld: {lastDnloadFileTime:yyyy-MM-dd HH} => {(hasNew ? "ToDo" : "Skip")}     Anons/TTL: {ano,4}/{ttl,-4} => {(notAll ? "ToDo" : "Skip")} ==> {((notAll || hasNew) ? "ToDo" : "Skip")} ");
     }
 
-    public static async Task GenerateAllAndFolderAnons(A0DbContext _db, string path)
+    public static async Task GenerateAllAndFolderAnons(A0DbContext _db, string pathWalkmanMirror)
     {
-      //if (Environment.MachineName == "LN1") return;
-
       try
       {
-        //making sure no files left uncut:
-        var walkmanPlayableFiles = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(f => MediaHelper.WalkmanPlayableExtDsv.Contains(Path.GetExtension(f).ToLower()) && !f.EndsWith(MediaHelper.AnonsExt));
+        var walkmanPlayableFiles = Directory.GetFiles(pathWalkmanMirror, "*.*", SearchOption.AllDirectories).Where(f => MediaHelper.WalkmanPlayableExtDsv.Contains(Path.GetExtension(f).ToLower()) && !f.EndsWith(MediaHelper.AnonsExt));
+        var needReqson = isAnonGenNeeded(pathWalkmanMirror);
+        if (!needReqson.needed)
+        {
+          Debug.WriteLine($"<<<<  {pathWalkmanMirror,-80}: {walkmanPlayableFiles.Count(),4} media files,  \t {needReqson.reason}");
+        }
+        else
+        {
+          collectTotalTime(_db, walkmanPlayableFiles, out var ttlCasts, out var ttlDurnMin);
+          AdvertCutter.CreateSummaryAnons(ttlDurnMin, pathWalkmanMirror);
 
-        //todo: decide what to do with cutting in pieces for the new walkman: await doPostDownloadProcessing(_db, walkmanPlayableFiles);
+          Debug.WriteLine($"<<<<  {pathWalkmanMirror,-80}: {walkmanPlayableFiles.Count(),4} media files,  \t {needReqson.reason},  {ttlDurnMin,4:N0}  min ");
 
-        collectTotalTime(_db, walkmanPlayableFiles, out var ttlCasts, out var ttlDurnMin);
-        AdvertCutter.CreateSummaryAnons(ttlDurnMin, path);
-
-        var needReqson = isAnonGenNeeded(path);
-        Debug.Write($"<<<<  {path,-80}: {walkmanPlayableFiles.Count(),4} media files, {ttlDurnMin,4:N0}  min \t {needReqson.reason}");
-
-        if (needReqson.needed)
-          foreach (var file in walkmanPlayableFiles) // add anonses for each cast:
+          foreach (var file in walkmanPlayableFiles) // add announces for each cast:
           {
             var dr = getDnldRow(_db, file);// Path.GetFileName(dir)); //				
             if (dr == null)
@@ -130,7 +129,7 @@ namespace PodCatcher.Helpers
 
             await getUpdateSaveMediaDuration(_db, file, dr);
 
-#if !DEBUG
+#if !__DEBUG
             AdvertCutter.CreateOverwriteAnons(dr.Feed == null ? "Unknown feed" : dr.Feed.Name, dr.PublishedAt, dr.CastTitle, ttlCasts, ttlDurnMin, dr.DurationMin.Value, file);
 #endif
 
@@ -138,9 +137,9 @@ namespace PodCatcher.Helpers
             ttlCasts--;
             Bpr.BeepOk();
           }
+        }
       }
       catch (Exception ex) { ex.Log(); }
-      Debug.WriteLine($">>>>");
     }
 
     private static async Task getUpdateSaveMediaDuration(A0DbContext _db, string file, DnLd dr)

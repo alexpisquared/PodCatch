@@ -298,7 +298,7 @@
       <TextBlock Text="{Binding Appender, FallbackValue=123}" Foreground="#08f" MinWidth="222" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Margin="15 0" ToolTip="{Binding Appender}" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" MaxHeight="93" />
       <TextBlock Text="{Binding WinTitle, FallbackValue=123}" Foreground="#0c8" MinWidth="222" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="15 0" ToolTip="{Binding WinTitle}" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" />
 
-      <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" Foreground="{StaticResource LablForegroundBrush}" >
+      <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" >
         <StackPanel Orientation="Horizontal" Margin="3" >
           <ProgressBar Maximum="{Binding Max1}" Value="{Binding Val1, FallbackValue=5}" Foreground="{Binding DF, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
           <Rectangle Fill="#aaa" Width="4" Height="1" />
@@ -367,7 +367,7 @@
         <MenuItem Command="{Binding FdCmd}"   Header="Cmd0" ToolTip="Ctrl-D: Nothing yet " />
         <MenuItem Click="Button_Click"				Header="Ev0"  ToolTip="Ctrl-D: Nothing yet " />
 
-        <MenuItem Header="{Binding CurVer}" Foreground="#06c" FontStyle="Italic" FontWeight="SemiBold" />
+        <MenuItem Header="{Binding CurVer, FallbackValue='12312'}" Foreground="#0c8" Background="#00a" FontStyle="Italic" FontWeight="SemiBold" />
 
       </Menu>
 

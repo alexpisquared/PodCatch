@@ -6,11 +6,11 @@ namespace PodcastClientTpl
   public class ConstHelper // ORG RO
   {
     public const string
-            _0Pod = @"0Pod",
-            _PLYR = @"_Player",
+            _0Pod = "0Pod",
+            _PLYR = "_Player",
             _splr = @"\" + _PLYR,
             _Plyr = _0Pod + _splr,
-            _Plr2 = _0Pod + _splr + _splr,
+            _Plr2 = _0Pod + _splr + "_Mirror",
             _1Cut = _0Pod + @"\Cuts",
             _Lbry = @"\Videos\",
             _AllSrc = @"", // @"1\pod\",
