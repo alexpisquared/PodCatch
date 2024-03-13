@@ -9,8 +9,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\2.ico" />
+    <None Remove="Assets\PopBest.wav" />
+    <None Remove="Assets\rss.ico" />
+    <None Remove="Assets\Windows-media-player.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\PopBest.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\AAV.Shared\Src\NetLts\WpfUserControlLib\WpfUserControlLib.csproj" />
+    <ProjectReference Include="..\Db.PodcastMgt.PowerTools\Db.PodcastMgt.PowerTools.csproj" />
     <ProjectReference Include="..\PodcastConditioningNet8\PodcastConditioningNet8.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Speech">
+      <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Speech.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\2.ico" />
+    <Resource Include="Assets\rss.ico" />
+    <Resource Include="Assets\Windows-media-player.ico" />
   </ItemGroup>
 
 </Project>
