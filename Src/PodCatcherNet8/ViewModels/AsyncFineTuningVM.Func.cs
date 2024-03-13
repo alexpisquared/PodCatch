@@ -1,8 +1,9 @@
 ﻿using Db.PodcastMgt.PowerTools.Models;
 using PodCatcher.Helpers;
-using System;
+using StandardLib.Extensions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -174,12 +175,12 @@ namespace PodCatcher.ViewModels
         onDbSave(null);
 #endif
 
-        RecentCmd.Execute(null);
+        //RecentCmd.Execute(null);
       }
       finally
       {
         MUProgressPerc = 1; MUProgressState = TaskbarItemProgressState.Paused;
-        Bpr.BeepDone();
+        //Bpr.BeepDone();
       }
     }
 
@@ -194,7 +195,7 @@ namespace PodCatcher.ViewModels
           var dnld = await dnLd_AddOrUpdate(feed, rdi);
           if (dnld != null)
           {
-            dnld.ReDownload = PodCatcherViewModel.IsDownloadRequiredWrpr(dnld);
+            //dnld.ReDownload = PodCatcherViewModel.IsDownloadRequiredWrpr(dnld);
             if (dnld.ReDownload) feed.NewCastCount++;
           }
           Val2++;//Appender += "·";          Bpr.BeepFD(14000, 55);
@@ -218,7 +219,7 @@ namespace PodCatcher.ViewModels
           {
             CastFileLength = rss.CastFileLen,
             CastFilenameExt = rss.CasFilename,
-            CastSummary = PodCatcherViewModel.safeLen(rss.CastSumry, 2048).Replace("\n\n", Environment.NewLine), // string.IsNullOrEmpty(rss.CastSumry) ? "" : rss.CastSumry.Length >= 1023 ? rss.CastSumry.Substring(0, 1023) : rss.CastSumry,
+            //CastSummary = PodCatcherViewModel.safeLen(rss.CastSumry, 2048).Replace("\n\n", Environment.NewLine), // string.IsNullOrEmpty(rss.CastSumry) ? "" : rss.CastSumry.Length >= 1023 ? rss.CastSumry.Substring(0, 1023) : rss.CastSumry,
             CastTitle = rss.CastTitle,
             CastUrl = rss.OrgSrcUrl,
             DnldStatusId = "N",
@@ -228,15 +229,17 @@ namespace PodCatcher.ViewModels
             PublishedAt = rss.Published,
             ModifiedAt = _crlnTS,
             RowAddedAt = _crlnTS,
-            RowAddedByPC = Environment.MachineName,
-            ErrLog = PodCatcherViewModel.safeLen(string.IsNullOrWhiteSpace(rss.AltSrcUrl) ? "" :
-                $"{rss.AltSrcUrl} :alt|org: \r\n{rss.OrignLink}", 1000),
+            //RowAddedByPC = Environment.MachineName,
+            //ErrLog = PodCatcherViewModel.safeLen(string.IsNullOrWhiteSpace(rss.AltSrcUrl) ? "" :                $"{rss.AltSrcUrl} :alt|org: \r\n{rss.OrignLink}", 1000),
             DurationMin = rss.TtlMinuts,
             TrgFileSortPrefix = "",
             AvailableLastDate = DateTime.Today,
             IsStillOnline = true,
             DownloadedAt = null,
             RunTimeNote = "New  DnLd row",
+             DnldStatusId_ex ="",
+             SrchD="",
+              
           };
 
           _db.DnLds.Add(dnld);
@@ -245,7 +248,7 @@ namespace PodCatcher.ViewModels
         }
         else
         {
-          PodCatcherViewModel.UpdateDbRowWhereChanged(rss, existingLcRow);
+          //PodCatcherViewModel.UpdateDbRowWhereChanged(rss, existingLcRow);
           return existingLcRow;
         }
       }
@@ -258,7 +261,7 @@ namespace PodCatcher.ViewModels
     void reloadActiveRecentDnlds(DateTime? upTo = null) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => (r.ModifiedAt >= (upTo ?? _crlnTS)) || r.ReDownload).OrderByDescending(r => r.ModifiedAt)); IsFeedNmVsbl = true; info(); }
     void reloadTopNnRecentDnlds(int topX = 128)
     {
-      _db.Database.CommandTimeout = 900; // seconds
+      //_db.Database.CommandTimeout = 900; // seconds
       DnLdList = new ObservableCollection<DnLd>(_db.DnLds.OrderByDescending(r => r.PublishedAt)
         //too slow: .ThenBy(r => r.Feed.Name)  :2024
         .Take(topX)); 

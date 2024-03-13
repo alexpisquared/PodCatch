@@ -1,8 +1,7 @@
-﻿using MVVM.Common;
-
+﻿
 namespace PodCatcher.ViewModels
 {
-    internal class DnldControlViewModel : BindableBaseViewModel//, IPodCatcherViewModel
+    internal class DnldControlViewModel : CommunityToolkit.Mvvm.ComponentModel.ObservableValidator//, IPodCatcherViewModel
 	{
 	}
 }

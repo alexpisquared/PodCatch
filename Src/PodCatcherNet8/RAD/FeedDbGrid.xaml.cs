@@ -11,12 +11,13 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Db.PodcastMgt.PowerTools.Models;
 using PodCatcherNet8;
+using PodCatcherNet8.RAD;
 
 namespace PodCatcher.RAD
 {
   public partial class FeedDbGrid : Window
   {
-    readonly PodcastMgtContext _dbx = PodcastMgtContext.Create();
+    readonly PodcastMgtContext _dbx = new PodcastMgtContext(null);
     CancellationTokenSource _cts;
     public string InfoMsg { get; set; }// { return _InfoMsg; } set { this.Set(ref this._InfoMsg, value + "\r\n" + _InfoMsg); } }										string _InfoMsg = "";
     ObservableCollection<FeedNpc> _feedList;

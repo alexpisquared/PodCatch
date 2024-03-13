@@ -90,7 +90,7 @@
 
         <Button Content="_Exit"					Command="{Binding CloseAppCmd}"    IsCancel="True"  />
         
-        <Button Content="New _UI" Click="Button_Click"				/>
+        <!--<Button Content="New _UI" Click="Button_Click"				/>-->
       </WrapPanel>
 
       <DataGrid x:Name="dgF" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Db.Feeds.Local}" Grid.Row="2" CanUserAddRows="False" 

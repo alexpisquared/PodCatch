@@ -1,4 +1,5 @@
 ﻿using PodcastClientTpl;
+using PodCatcher.Helpers;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;

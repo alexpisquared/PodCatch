@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using StandardLib.Extensions;
+using StandardLib.Helpers;
 
 namespace WebScrap
 {

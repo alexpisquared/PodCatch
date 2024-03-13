@@ -6,10 +6,11 @@ using PodCatcher.Views;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using StandardLib.Extensions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using EF.DbHelper.Lib;
 
 namespace PodCatcher.Helpers
 {
@@ -132,7 +133,7 @@ namespace PodCatcher.Helpers
 
             ttlDurnMin -= dr.DurationMin.Value;
             ttlCasts--;
-            Bpr.BeepOk();
+            //Bpr.BeepOk();
           }
         }
       }
@@ -156,7 +157,7 @@ namespace PodCatcher.Helpers
           dr.DurationMin = approximationBySize;
 
         if (_db != null)
-          _db.TrySaveReport();
+          await _db.TrySaveReportAsync();
       }
 
       Debug.Write($"Final: {dr.DurationMin,5:N1}, approx: {approximationBySize,5:N1}, {dr.CastTitle}\n");
@@ -184,7 +185,7 @@ namespace PodCatcher.Helpers
           await DoPostDownloadProcessing(getDnldRow(_db, file));
         }
 
-        Bpr.BeepOk();
+        //Bpr.BeepOk();
       }
     }
 
@@ -212,7 +213,7 @@ namespace PodCatcher.Helpers
     {
       try
       {
-        if (!db.DnLds.Any()) db.DnLds.Load();
+        //if (!db.DnLds.Any()) db.DnLds.Load();
 
         var nmeOnly = Path.GetFileNameWithoutExtension(audioFile);
         var cnt = db.DnLds.Count(r => r.CastFilenameExt.Contains(nmeOnly));
@@ -255,15 +256,18 @@ namespace PodCatcher.Helpers
               PublishedAt = DateTime.Today,
               ModifiedAt = DateTime.Now,
               RowAddedAt = DateTime.Now,
-              RowAddedByPC = Environment.MachineName,
+              //RowAddedByPC = Environment.MachineName,
               ErrLog = "",
               DurationMin = ConstHelper.Unknown4004Duration, //? will be refined later?
-              TrgFileSortPrefix = ""
+              TrgFileSortPrefix = "",
+               DnldStatusId_ex = "",
+                RunTimeNote = ".",
+                SrchD = "."
             };
 
             db.DnLds.Add(dr);
 
-            db.TrySaveReport();
+            /*await*/ db.TrySaveReportAsync();
             return dr;
           }
         }

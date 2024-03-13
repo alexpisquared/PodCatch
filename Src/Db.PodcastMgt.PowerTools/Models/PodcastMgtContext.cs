@@ -21,7 +21,9 @@ public partial class PodcastMgtContext : DbContext
 
     public virtual DbSet<Machine> Machines { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+  public static PodcastMgtContext Create() => throw new NotImplementedException();
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DnLd>(entity =>
         {

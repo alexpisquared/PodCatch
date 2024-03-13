@@ -1,6 +1,7 @@
 ﻿using AsLink;
 using System.Windows;
 using PodCatcher.ViewModels;
+using PodCatcherNet8.Properties;
 
 namespace PodCatcher.Views
 {
@@ -28,6 +29,6 @@ namespace PodCatcher.Views
       Settings.Default.Save();
     }
 
-    void Button_Click(object sender, RoutedEventArgs e) { BindableBaseViewModel.ShowMvvm(new AsyncFineTuningVM(false), new vwAsyncFineTuning()); }
+    //void Button_Click(object sender, RoutedEventArgs e) { CommunityToolkit.Mvvm.ComponentModel.ObservableValidator.ShowMvvm(new AsyncFineTuningVM(false), new vwAsyncFineTuning()); }
   }
 }

@@ -1,4 +1,5 @@
-﻿using Db.PodcastMgt.DbModel;
+﻿using Db.PodcastMgt.PowerTools.Models;
+using PodCatcherNet8;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,7 +19,7 @@ namespace PodCatcher.Views
 {
     public partial class xDataContextRecon : Window
     {
-        PodcastMgtContext db = PodcastMgtContext.Create();
+        PodcastMgtContext db = new PodcastMgtContext(null);
 
         public xDataContextRecon() { InitializeComponent(); MouseLeftButtonDown += (s, e) => DragMove(); KeyDown += (s, e) => { switch (e.Key) { case Key.Escape: Close(); App.Current.Shutdown(); break; } }; }
 

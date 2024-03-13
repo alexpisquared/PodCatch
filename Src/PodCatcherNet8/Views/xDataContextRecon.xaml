@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PodCatcher.Views"
-        xmlns:DbModel="clr-namespace:Db.PodcastMgt.DbModel;assembly=Db.PodcastMgt" x:Class="PodCatcher.Views.xDataContextRecon"
+        xmlns:DbModel="clr-namespace:Db.PodcastMgt.PowerTools.Models;assembly=Db.PodcastMgt.PowerTools" x:Class="PodCatcher.Views.xDataContextRecon"
         mc:Ignorable="d"
         Title="xDataContextRecon" Height="300" Width="900" Loaded="Window_Loaded">
   <Window.Resources>

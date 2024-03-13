@@ -1,4 +1,5 @@
-﻿using Db.PodcastMgt.DbModel;
+﻿using Db.PodcastMgt.PowerTools.Models;
+using PodCatcherNet8;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;

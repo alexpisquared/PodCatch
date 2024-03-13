@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Db.PodcastMgt.PowerTools.Models;
+using PodCatcherNet8.Properties;
 
 namespace PodCatcher.Helpers
 {

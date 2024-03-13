@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StandardLib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -11,7 +12,7 @@ using Db.PodcastMgt.PowerTools.Models;
 
 namespace PodCatcher.ViewModels
 {
-  public partial class AsyncFineTuningVM : BindableBaseViewModel
+  public partial class AsyncFineTuningVM : CommunityToolkit.Mvvm.ComponentModel.ObservableValidator
   {
     async Task asyUpdtFeedsCT(CancellationToken ct, List<Feed> feedList)
     {
@@ -90,7 +91,7 @@ namespace PodCatcher.ViewModels
             feed.LatestRssText = latestRssText;
             feed.RunTimeNote = string.Format("{2}{0:N0}kb \t{1:N0} b/ms.", .001 * feed.LatestRssText.Length, feed.LatestRssText.Length / _sw.ElapsedMilliseconds, __new);
             feed.LastCheckedAt = _crlnTS;
-            feed.LastCheckedPC = Environment.MachineName;
+            //feed.LastCheckedPC = Environment.MachineName;
           }
         }
         catch (Exception ex)
@@ -176,7 +177,7 @@ namespace PodCatcher.ViewModels
         dr.DnldStatusId = "H"; // HasBeenDownloaded
         dr.ReDownload = false;
         dr.DownloadedAt = DateTime.Now;
-        dr.DownloadedByPC = Environment.MachineName;
+        //dr.DownloadedByPC = Environment.MachineName;
         dr.DownloadedToDir = MiscHelper.DirPlyr;
         dr.DownloadedLength = new FileInfo(dr.FullPathFile(MiscHelper.DirPlyr)).Length;
         File.SetCreationTime(dr.FullPathFile(MiscHelper.DirPlyr), dr.PublishedAt);
@@ -184,7 +185,7 @@ namespace PodCatcher.ViewModels
 
       dr.ModifiedAt = DateTime.Now;
 
-      Bpr.BeepOk();
+      //Bpr.BeepOk();
     }
 
     static readonly object thisLock = new object();

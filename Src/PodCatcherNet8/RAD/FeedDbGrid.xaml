@@ -1,7 +1,7 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Models="clr-namespace:Db.PodcastMgt.DbModel;assembly=Db.PodcastMgt" mc:Ignorable="d" x:Class="PodCatcher.RAD.FeedDbGrid"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        mc:Ignorable="d" x:Class="PodCatcher.RAD.FeedDbGrid"
         Title="FeedDbGrid" Height="400" Width="813" Loaded="Window_Loaded">
 	<Window.Resources>
 		<CollectionViewSource x:Key="feedViewSource" d:DesignSource="{d:DesignInstance {x:Type Models:Feed}, CreateList=True}"/>
