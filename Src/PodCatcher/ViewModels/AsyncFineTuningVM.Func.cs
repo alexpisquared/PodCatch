@@ -36,11 +36,11 @@ namespace PodCatcher.ViewModels
       {
         Appender = "F1. Updating Feeds ... ";
         await asyUpdtFeedsCT(_cts.Token, feeds); //////////////////////////////////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        Appender += "complete. \r\n"; //        InfoMsg += DbSaveLib.TrySaveReport(db) + "  Updating Feeds ... complete.";
+        Appender += "complete. "; //        InfoMsg += DbSaveLib.TrySaveReport(db) + "  Updating Feeds ... complete.";
 
         _cts = null;
         IsBusy = false;
-        DF = Brushes.LightGreen;
+        DF = Brushes.Green;
         MUProgressPerc += .1; MUProgressState = TaskbarItemProgressState.Paused;
       }
       catch (OperationCanceledException ex) { ex.Log(); Appender += "\r\nDownloads canceled.\r\n"; DF = Brushes.Violet; }
@@ -58,7 +58,7 @@ namespace PodCatcher.ViewModels
       {
         FC = Brushes.Blue;
 
-        Appender += $"F2. Checking {feeds.Count}{(feedsParam == null ? " NEW" : " ALL")} feeds for new casts ... ";
+        Appender += $"\nF2. Checking {feeds.Count}{(feedsParam == null ? " NEW" : " ALL")} feeds for new casts ... ";
 
 #if !AwaitNotWorking
         await Task.Delay(3);
@@ -77,7 +77,7 @@ namespace PodCatcher.ViewModels
 
         //WARNING!!! This one does not AWAIT!!! ->lst.ToList().ForEach(async feed => { try { await addUPdate_SetIdrFlag(feed, RssHelper.FindNewCasts(feed).RssDnldInfos); } catch (Exception ex) { ex.Log(); feed.RunTimeNote = ex.Message; FC = Brushes.Violet; } });
 
-        Appender += $"done.  ({Val2} / {Max2} / {feeds.Sum(r => r.DnLds.Where(d => d.IsStillOnline == true).Count())})"; //saving must be donw only after dnldg finished otherwise there will be omissions from F2Same case:        InfoMsg += DbSaveLib.TrySaveReport(_db, "Db-saving new found casts done. \r\n");
+        Appender += $"done.  ({Val2} / {Max2} / {feeds.Sum(r => r.DnLds.Where(d => d.IsStillOnline == true).Count())})"; //saving must be donw only after dnldg finished otherwise there will be omissions from F2Same case:        InfoMsg += DbSaveLib.TrySaveReport(_db, "Db-saving new found casts done. ");
 
         //recursive calling itwself: onChgdSelectFeed1();
 
@@ -86,7 +86,7 @@ namespace PodCatcher.ViewModels
         else
           reloadActiveRecentDnlds();
 
-        FC = Brushes.LightGreen;
+        FC = Brushes.Green;
 #else
         var t = Task.Run(() => FeedList.ToList().ForEach(feed =>
         {
@@ -98,7 +98,7 @@ namespace PodCatcher.ViewModels
         {
           InfoMsg += DbSaveLib.TrySaveReport(_db, "Db-Saving new casts");
 
-          FC = Brushes.LightGreen;
+          FC = Brushes.Green;
         }, TaskScheduler.FromCurrentSynchronizationContext());
 
         InfoMsg += "\r\nWaiting ...";
@@ -118,15 +118,15 @@ namespace PodCatcher.ViewModels
       _cts = new CancellationTokenSource();
       try
       {
-        Appender += $"F3. Downloading {FeedList.Sum(r => r.NewCastCount)} new casts ... ";
+        Appender += $"\nF3. Downloading {FeedList.Sum(r => r.NewCastCount)} new casts ... ";
         await asyUpdtDnLdsCT(_cts.Token); //////////////////////////////////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        Appender += "done. ";
+        Appender += "done.";
 
         SelectFeed = null; // <== show dnld list.
 
         _cts = null;
         IsBusy = false;
-        DC = Brushes.LightGreen;
+        DC = Brushes.Green;
       }
       catch (OperationCanceledException ex) { ex.Log(); Appender += "\r\nDownloads canceled.\r\n"; DC = Brushes.Violet; }
       catch (Exception ex) { ex.Log(); Appender += "\r\nDownloads failed.\r\n" + ex.ToString(); DC = Brushes.Violet; }
@@ -139,7 +139,7 @@ namespace PodCatcher.ViewModels
       try
       {
         AG = Brushes.Blue;
-        Appender += "F4. Splitting and annons generation ... ";
+        Appender += "\nF4. Splitting and annons generation ... ";
         Val4 = 33;
 
         foreach (var path in Directory.GetDirectories(MiscHelper.DirPlyr, "*.*", SearchOption.TopDirectoryOnly))
@@ -149,9 +149,9 @@ namespace PodCatcher.ViewModels
         PostDnldHelper.CopyToMp3Player();
 #endif
 
-        Appender += "done. \r\n";
+        Appender += "done.";
         Val4 = 100;
-        AG = Brushes.LightGreen;
+        AG = Brushes.Green;
       }
       catch (Exception ex) { ex.Log(); Appender += "\r\nDownloads failed.\r\n" + ex.ToString(); AG = Brushes.Violet; }
       MUProgressPerc += .09; MUProgressState = TaskbarItemProgressState.Paused;
@@ -206,6 +206,8 @@ namespace PodCatcher.ViewModels
         feed.CastQntNew = feed.NewCastCount;
         feed.CastQntTtl = rdis.Count;
         feed.StatusInfo = $"{feed.NewCastCount} / {rdis.Count}"; //update feed with counts of new casts
+
+        Val2 = Max2;
       }
       catch (Exception ex) { ex.Log(); throw; }
     }

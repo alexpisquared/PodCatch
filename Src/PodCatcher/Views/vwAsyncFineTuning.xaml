@@ -6,7 +6,7 @@
 
                 Style="{StaticResource WindowStyle_Aav0}"
 
-                Title="{Binding WinTitle}" Height="450" Width="1800">
+                Title="{Binding WinTitle}" Height="380" Width="2000">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="10" />
   </WindowChrome.WindowChrome>
@@ -295,29 +295,20 @@
         <ColumnDefinition Width="3*"/>
       </Grid.ColumnDefinitions>
 
-      <TextBlock Text="{Binding Appender, FallbackValue=123}" Foreground="#08f" MinWidth="222" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Margin="15 0" ToolTip="{Binding Appender}" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" MaxHeight="93" />
-      <TextBlock Text="{Binding WinTitle, FallbackValue=123}" Foreground="#0c8" MinWidth="222" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="15 0" ToolTip="{Binding WinTitle}" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" />
+      <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" MaxHeight="98" >
+        <TextBlock Text="{Binding Appender, FallbackValue=123}" ToolTip="{Binding Appender}" Margin="15 0" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" Foreground="#08f" />
+      </ScrollViewer>
 
       <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" Foreground="#08f" >
+        <TextBlock Text="{Binding WinTitle, FallbackValue=123}"   ToolTip="{Binding WinTitle}" Margin="15 0" ToolTipService.ShowDuration="999999" Foreground="#0c8" />
         <StackPanel Orientation="Horizontal" Margin="3" >
-          <ProgressBar Maximum="{Binding Max1}" Value="{Binding Val1, FallbackValue=5}" Foreground="{Binding DF, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
-          <Rectangle Fill="#aaa" Width="4" Height="1" />
-          <ProgressBar Maximum="{Binding Max2}" Value="{Binding Val2, FallbackValue=5}" Foreground="{Binding FC, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
-          <Rectangle Fill="#aaa" Width="4" Height="1" />
-          <ProgressBar Maximum="{Binding Max3}" Value="{Binding Val3, FallbackValue=5}" Foreground="{Binding DC, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
-          <Rectangle Fill="#aaa" Width="4" Height="1" />
-          <ProgressBar Maximum="{Binding Max4}" Value="{Binding Val4, FallbackValue=5}" Foreground="{Binding AG, FallbackValue='#ccc'}" Width="30" Height="16" BorderThickness="0" />
+          <ProgressBar Maximum="{Binding Max1}" Value="{Binding Val1, FallbackValue=33}" Foreground="{Binding DF}" Width="36" Height="16" BorderThickness="0" Background="#333" />
+          <ProgressBar Maximum="{Binding Max2}" Value="{Binding Val2, FallbackValue=33}" Foreground="{Binding FC}" Width="36" Height="16" BorderThickness="0" Background="#333" />
+          <ProgressBar Maximum="{Binding Max3}" Value="{Binding Val3, FallbackValue=33}" Foreground="{Binding DC}" Width="36" Height="16" BorderThickness="0" Background="#333" />
+          <ProgressBar Maximum="{Binding Max4}" Value="{Binding Val4, FallbackValue=33}" Foreground="{Binding AG}" Width="36" Height="16" BorderThickness="0" Background="#333" />
         </StackPanel>
 
         <MenuItem   Command="{Binding StopCntDnCmd}"  Header="Stop CDn" ToolTip="" Visibility="{Binding IsCntDnOn, Converter={cnv:VisibilityConverter}}" Foreground="#d80" FontWeight="SemiBold" />
-
-        <MenuItem Header="Del" Foreground="#f30">
-          <MenuItem   Command="{Binding DelCastsCmd}"  Header="Keep Old" ToolTip="Delete only available in RSS Casts for the selected feed" />
-          <MenuItem   Command="{Binding DelCasAlCmd}"  Header="All"      ToolTip="Delete all Casts for the selected feed" />
-        </MenuItem >
-
-        <MenuItem Command="{Binding DbChckCmd}"     Header="Ch_k"   ToolTip="Check before DB Save" VerticalAlignment="Center" />
-        <MenuItem Command="{Binding DbSaveCmd}"     Header="_Save"  ToolTip="Save to DB" />
 
         <MenuItem Header="_Fx">
           <MenuItem Header="F_1 Updt Feeds  "		Command="{Binding F1UpdtFeedsCmd}" ToolTip="Download latest RSS XML Feeds and store to DB"	                              />
@@ -332,6 +323,10 @@
           <Separator />
           <MenuItem Header="F_9 All 4 Steps  "	Command="{Binding F9All4StepsCmd}" ToolTip="Run All Steps" />
         </MenuItem>
+
+        <MenuItem Command="{Binding DbChckCmd}"     Header="Ch_k"   ToolTip="Check before DB Save" VerticalAlignment="Center" />
+        <MenuItem Command="{Binding DbSaveCmd}"     Header="_Save"  ToolTip="Save to DB" />
+
         <MenuItem Header="Settings">
           <MenuItem Header="Proxy Setting" IsCheckable="True" />
           <Separator />
@@ -355,17 +350,24 @@
           </MenuItem>
         </MenuItem>
 
-        <MenuItem Command="{Binding RecentCmd}" Header="  Recent" Foreground="#070" ToolTip="Show top recent casts from all feeds." />
-        <MenuItem Command="{Binding DnldedCmd}" Header="DnLoaded" Foreground="#070" ToolTip="DnLoaded Only!" />
-        <MenuItem Command="{Binding PendngCmd}" Header="Pending " Foreground="#070" ToolTip="Marked for download only." />
+        <MenuItem Header="Show">
+          <MenuItem Command="{Binding RecentCmd}" Header="Recent"   ToolTip="Show top recent casts from all feeds." />
+          <MenuItem Command="{Binding DnldedCmd}" Header="DnLoaded" ToolTip="DnLoaded Only!" />
+          <MenuItem Command="{Binding PendngCmd}" Header="Pending " ToolTip="Marked for download only." />
+          <Separator />
+          <CheckBox IsChecked="{Binding IsBusy}" Content="Is_Busy"  ToolTip="" />
+          <CheckBox IsChecked="{Binding IncDel}" Content="_IncDel" ToolTip="Show all Feeds - including deleted" />
+          <MenuItem   Command="{Binding SeeDLsCmd}"     Header="SeeDLsCmd"    ToolTip="Show to be DnLoaded"         Foreground="#0aa" />
+          <CheckBox IsChecked="{Binding IsFeedNmVsbl}" Content="IsFeedNmVsbl" ToolTip="Show active/to be Downloads" Foreground="#0aa" />
+          <Separator />
+          <MenuItem Command="{Binding FdCmd}"   Header="Cmd0" ToolTip="Ctrl-D: Nothing yet " />
+          <MenuItem Click="Button_Click"				Header="Ev0"  ToolTip="Ctrl-D: Nothing yet " />
+          <MenuItem Header="Del" Foreground="#f30">
+            <MenuItem   Command="{Binding DelCastsCmd}"  Header="Keep Old" ToolTip="Delete only available in RSS Casts for the selected feed" />
+            <MenuItem   Command="{Binding DelCasAlCmd}"  Header="All"      ToolTip="Delete all Casts for the selected feed" />
+          </MenuItem >
+        </MenuItem>
 
-        <CheckBox IsChecked="{Binding IsBusy}" Content="Is_Busy"  ToolTip="" />
-        <CheckBox IsChecked="{Binding IncDel}" Content="_IncDel" ToolTip="Show all Feeds - including deleted" />
-        <MenuItem   Command="{Binding SeeDLsCmd}"     Header="SeeDLsCmd"    ToolTip="Show to be DnLoaded"         Foreground="#0aa" />
-        <CheckBox IsChecked="{Binding IsFeedNmVsbl}" Content="IsFeedNmVsbl" ToolTip="Show active/to be Downloads" Foreground="#0aa" />
-
-        <MenuItem Command="{Binding FdCmd}"   Header="Cmd0" ToolTip="Ctrl-D: Nothing yet " />
-        <MenuItem Click="Button_Click"				Header="Ev0"  ToolTip="Ctrl-D: Nothing yet " />
 
         <MenuItem Header="{Binding CurVer, FallbackValue='12312'}" Foreground="#0c8" Background="#00a" FontStyle="Italic" FontWeight="SemiBold" />
 
