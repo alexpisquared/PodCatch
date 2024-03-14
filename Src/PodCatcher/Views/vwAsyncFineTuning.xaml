@@ -3,9 +3,7 @@
                 xmlns:cnv="clr-namespace:AsLink" 
                 xmlns:stb="clr-namespace:AAV.Common"
                 xmlns:xui="clr-namespace:PodCatcher.Views"
-
                 Style="{StaticResource WindowStyle_Aav0}"
-
                 Title="{Binding WinTitle}" Height="380" Width="2000">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="10" />
@@ -32,7 +30,7 @@
       <ResourceDictionary.MergedDictionaries>
         <!--
         <ResourceDictionary Source="/AAV.AsLink.WPF;component/AsLink/Theme.Color.Lite.VaporWave.xaml" />-->
-        <ResourceDictionary Source="/AAV.WPF;component/ColorScheme/Theme.Color.Dark.Gray.xaml" />
+        <ResourceDictionary Source="/AAV.WPF;component/ColorScheme/Theme.Color.Dark.Google.xaml" />
         <ResourceDictionary Source="/AAV.WPF;component/Base/DataGrid.Base.xaml" />
         <ResourceDictionary Source="/AAV.WPF;component/Base/BasicDefaultsLayout.xaml" />
       </ResourceDictionary.MergedDictionaries>
@@ -270,7 +268,7 @@
     </ResourceDictionary>
 
   </lnk:WindowBase.Resources>
-  <Border Style="{StaticResource BorderStyle_Aav0}">
+  <Border Style="{StaticResource BorderStyle_Aav0}" Background="#012">
     <Grid x:Name="Zoomee">
       <Grid.LayoutTransform>
         <TransformGroup>
@@ -403,7 +401,7 @@
 
       <DataGrid Grid.Row="3" Grid.ColumnSpan="3" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding FeedList}" SelectedItem="{Binding SelectFeed}"
               RowDetailsTemplate="{StaticResource RowDtlTemplateAlt}" AreRowDetailsFrozen="True" 
-              RowDetailsVisibilityMode="{Binding RowDtlVisModeF, Converter={cnv:RowDtlVisMode}}" IsReadOnly="False">
+              RowDetailsVisibilityMode="{Binding RowDtlVisModeF, Converter={cnv:RowDtlVisMode}}" IsReadOnly="False" Background="#232">
         <DataGrid.Resources>
           <Style TargetType="{x:Type DataGridRow}">
             <Setter Property="Foreground" Value="#bb0" />
@@ -531,7 +529,7 @@
       <FrameworkElement x:Name="passThruIsFeedNmVsbl" Visibility="Collapsed" IsEnabled="{Binding IsFeedNmVsbl}"/>
 
       <DataGrid Grid.Row="5" Grid.ColumnSpan="3" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding DnLdList}"  SelectedItem="{Binding SelectDnLd}"   
-                x:Name="dgH" IsReadOnly="False" RowDetailsTemplate="{StaticResource RowDtlDataTmplt_Dnld}" AreRowDetailsFrozen="True" RowDetailsVisibilityMode="{Binding RowDtlVisModeD, Converter={cnv:RowDtlVisMode}}" >
+                x:Name="dgH" IsReadOnly="False" RowDetailsTemplate="{StaticResource RowDtlDataTmplt_Dnld}" AreRowDetailsFrozen="True" RowDetailsVisibilityMode="{Binding RowDtlVisModeD, Converter={cnv:RowDtlVisMode}}" Background="#232">
         <DataGrid.Columns>
 
           <DataGridTemplateColumn  Header="iso" >

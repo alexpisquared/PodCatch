@@ -145,7 +145,9 @@ namespace PodCatcher.ViewModels
         foreach (var path in Directory.GetDirectories(MiscHelper.DirPlyr, "*.*", SearchOption.TopDirectoryOnly))
           await PostDnldHelper.GenerateAllAndFolderAnons(_db, path);
 
-#if !DEBUG
+#if DEBUG
+      new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync("In debug mode, no copying to the player.");
+#else
         PostDnldHelper.CopyToMp3Player();
 #endif
 
@@ -318,9 +320,6 @@ namespace PodCatcher.ViewModels
     void reLoadFeedList_()
     {
       FeedList = new ObservableCollection<Feed>(_db.Feeds.Where(r =>
-#if DEBUG
-        //r.Id == 101 &&
-#endif
         // /*string.Compare(r.HostMachineId, Environment.MachineName, true) == 0 &&*/  --------------- Oct 2016
         (IncDel || !r.IsDeleted)).OrderByDescending(r => r.IsActive).ThenBy(r => r.Name));
     }

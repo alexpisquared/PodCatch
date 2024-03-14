@@ -82,9 +82,6 @@ namespace PodCatcher.Views
         await Task.Delay(200);
         me1.LoadedBehavior = MediaState.Manual;
         me1.Stop();
-#if !DEBUG
-        //Close();
-#endif
       }
 
       return ConstHelper.Unknown4004Duration;
