@@ -299,11 +299,11 @@
 
       <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" Foreground="#08f" >
         <TextBlock Text="{Binding WinTitle, FallbackValue=123}"   ToolTip="{Binding WinTitle}" Margin="15 0" ToolTipService.ShowDuration="999999" Foreground="#0c8" />
-        <StackPanel Orientation="Horizontal" Margin="3" >
-          <ProgressBar Maximum="{Binding Max1}" Value="{Binding Val1, FallbackValue=33}" Foreground="{Binding DF}" Width="36" Height="16" BorderThickness="0" Background="#333" />
-          <ProgressBar Maximum="{Binding Max2}" Value="{Binding Val2, FallbackValue=33}" Foreground="{Binding FC}" Width="36" Height="16" BorderThickness="0" Background="#333" />
-          <ProgressBar Maximum="{Binding Max3}" Value="{Binding Val3, FallbackValue=33}" Foreground="{Binding DC}" Width="36" Height="16" BorderThickness="0" Background="#333" />
-          <ProgressBar Maximum="{Binding Max4}" Value="{Binding Val4, FallbackValue=33}" Foreground="{Binding AG}" Width="36" Height="16" BorderThickness="0" Background="#333" />
+        <StackPanel Orientation="Horizontal" Background="#080">
+          <ProgressBar Maximum="{Binding Max1}" Value="{Binding Val1, FallbackValue=33}" Foreground="{Binding DF}" Width="36" Height="16" BorderThickness="1" Background="#333" BorderBrush="#371" />
+          <ProgressBar Maximum="{Binding Max2}" Value="{Binding Val2, FallbackValue=33}" Foreground="{Binding FC}" Width="36" Height="16" BorderThickness="1" Background="#333" BorderBrush="#371" />
+          <ProgressBar Maximum="{Binding Max3}" Value="{Binding Val3, FallbackValue=33}" Foreground="{Binding DC}" Width="36" Height="16" BorderThickness="1" Background="#333" BorderBrush="#371" />
+          <ProgressBar Maximum="{Binding Max4}" Value="{Binding Val4, FallbackValue=33}" Foreground="{Binding AG}" Width="36" Height="16" BorderThickness="1" Background="#333" BorderBrush="#371" />
         </StackPanel>
 
         <MenuItem   Command="{Binding StopCntDnCmd}"  Header="Stop CDn" ToolTip="" Visibility="{Binding IsCntDnOn, Converter={cnv:VisibilityConverter}}" Foreground="#d80" FontWeight="SemiBold" />
@@ -404,7 +404,7 @@
               RowDetailsVisibilityMode="{Binding RowDtlVisModeF, Converter={cnv:RowDtlVisMode}}" IsReadOnly="False" Background="#232">
         <DataGrid.Resources>
           <Style TargetType="{x:Type DataGridRow}">
-            <Setter Property="Foreground" Value="#bb0" />
+            <Setter Property="Foreground" Value="#dd2" />
             <Setter Property="ToolTipService.ShowDuration" Value="2900111" />
             <!--<Setter Property="ToolTipService.ToolTip" Value="Moved to columns ..." />-->
           </Style>
@@ -546,8 +546,8 @@
           <DataGridTemplateColumn Header="State"       ToolTipService.ToolTip="Dnld Status Id"  >
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <Grid  Background="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" ToolTip="{Binding lkuDnldStatu.Name}" ToolTipService.ShowDuration="600777" >
-                  <TextBlock Text="{Binding DnldStatusId}"                              ToolTip="{Binding lkuDnldStatu.Name}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Center" Foreground="#00f" />
+                <Grid  Background="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" ToolTip="{Binding DnldStatu.Name}" ToolTipService.ShowDuration="600777" >
+                  <TextBlock Text="{Binding DnldStatusId}"                              ToolTip="{Binding DnldStatu.Name}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Center" Foreground="#00f" />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -565,7 +565,7 @@
                     </Style>
                   </Grid.Resources>
 
-                  <ProgressBar Value="{Binding DownloadedLen, Mode=OneWay}" Maximum="{Binding CastFileLength, FallbackValue=1}" Foreground="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" ToolTip="{Binding lkuDnldStatu.Name}" IsIndeterminate="{Binding DnldStatusId, Converter={cnv:Equals EqualsText='True'}, ConverterParameter='F'}" BorderThickness="0" Background="Transparent" />
+                  <ProgressBar Value="{Binding DownloadedLen, Mode=OneWay}" Maximum="{Binding CastFileLength, FallbackValue=1}" Foreground="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" ToolTip="{Binding DnldStatu.Name}" IsIndeterminate="{Binding DnldStatusId, Converter={cnv:Equals EqualsText='True'}, ConverterParameter='F'}" BorderThickness="0" Background="Transparent" />
                   <TextBlock Text="{Binding DownloadedLength, StringFormat='{}{0,6:N1} ', Converter={cmn:Divider}}" HorizontalAlignment="Left" />
                   <TextBlock Text="{Binding CastFileLength,   StringFormat='{}{0,6:N1} ', Converter={cmn:Divider}}" HorizontalAlignment="Right" />
                 </Grid>
@@ -587,16 +587,16 @@
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
                 <Grid ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <TextBlock Text="{Binding DownloadedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding DownloadedAt, Converter={cnv:IsAfterAppStart}}" FontWeight="{Binding DownloadedAt, Converter={cnv:IsToday}}"        />
+                  <TextBlock Text="{Binding DownloadedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding DownloadedAt, Converter={cnv:IsToday}}" FontWeight="{Binding DownloadedAt, Converter={cnv:IsToday}}"        />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
 
-          <DataGridTextColumn     Header="Avail"      Binding="{Binding AvailableLastDate, StringFormat='{}{0:MM-dd}'}"                                                        />
-          <DataGridTextColumn     Header="Min"        Binding="{Binding DurationMin, StringFormat='{}{0:N0}'}"               ElementStyle="{StaticResource RightAlignStyle}"                                  />
+          <DataGridTextColumn     Header="Avail"      Binding="{Binding AvailableLastDate, StringFormat='{}{0:MM-dd}'}"                                                       Foreground="#dad"  />
+          <DataGridTextColumn     Header="Min"        Binding="{Binding DurationMin, StringFormat='{}{0:N0}'}"               ElementStyle="{StaticResource RightAlignStyle}"  Foreground="#add"                                 />
 
-          <DataGridTextColumn     Header="Feed++"     Binding="{Binding Feed.Name}"      Visibility="{Binding Path=IsEnabled, Source={x:Reference passThruIsFeedNmVsbl}, Converter={cnv:Bool}}" Width="100"    Foreground="#bb0"       />
+          <DataGridTextColumn     Header="Feed++"     Binding="{Binding Feed.Name}"      Visibility="{Binding Path=IsEnabled, Source={x:Reference passThruIsFeedNmVsbl}, Converter={cnv:Bool}}" Width="120" Foreground="#dd0"       />
           <!-- //nogo
         <DataGridTextColumn     Header="Feed  "     Binding="{Binding Feed.Name}"      Visibility="{Binding IsFeedNmVsbl, Converter={cnv:Bool}}" />
         <DataGridCheckBoxColumn Header="IsD"        Binding="{Binding IsDownloading}"  ToolTipService.ToolTip="Is Downloading"    />
@@ -605,7 +605,7 @@
           <DataGridTemplateColumn CanUserSort="True" SortMemberPath="CastTitle" Header="Cast Title"             Width="4*"	               >
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <stb:HighlightableTextBlock Text="{Binding CastTitle}" SearchText="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.SrchD}" TextWrapping="NoWrap" ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" />
+                <stb:HighlightableTextBlock Text="{Binding CastTitle}" SearchText="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.SrchD}" TextWrapping="NoWrap" ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" Foreground="#ccf" />
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
@@ -655,9 +655,6 @@
       </DataGrid.ContextMenu>-->
       </DataGrid>
       <CheckBox Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7 4" IsChecked="{Binding RowDtlVisModeD}" Content="_2" />
-
-      <StackPanel Grid.Row="5" Grid.ColumnSpan="8" Orientation="Horizontal" Margin="6" >
-      </StackPanel>
 
       <GridSplitter Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 -3" Background="Transparent" />
 

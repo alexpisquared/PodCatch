@@ -99,8 +99,7 @@ namespace PodCatcher.ViewModels
 
       if (e.Error != null && !string.IsNullOrEmpty(e.Error.Message))
       {
-        InfoApnd =
-            $"Oops! Download of {dr.CastTitle} has failed with the error {e.Error.InnermostMessage()}. {TtlDnLds2Finish} downloads to go.";
+        InfoApnd = $"Oops! Download of {dr.CastTitle} has failed with the error {e.Error.InnermostMessage()}. {TtlDnLds2Finish} downloads to go.";
         dr.DnldStatusId = "F"; // Failed to Download
         dr.ErrLog += $"\nDnld failed: {e.Error}";
         if (dr.ErrLog.Length > 1020) dr.ErrLog = dr.ErrLog.Substring(0, 1020);  // Trunkate(dr.ErrLog, 1000);
@@ -112,7 +111,7 @@ namespace PodCatcher.ViewModels
         await updateDb_doPostDnld(dr);
 
         if (TtlDnLds2Finish > 0)
-          InfoApnd = $"download of {dr.CastTitle} has succeeded. {TtlDnLds2Finish} more to go.";
+          InfoApnd = $"download of '{dr.CastTitle}' has succeeded. {TtlDnLds2Finish} more to go.";
         else
         {
           InfoApnd = string.Format("All downloads have finished. Pausing for a bit to get cutting of the last download to start.");

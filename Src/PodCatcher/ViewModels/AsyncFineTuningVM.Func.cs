@@ -36,7 +36,7 @@ namespace PodCatcher.ViewModels
       {
         Appender = "F1. Updating Feeds ... ";
         await asyUpdtFeedsCT(_cts.Token, feeds); //////////////////////////////////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        Appender += "complete. "; //        InfoMsg += DbSaveLib.TrySaveReport(db) + "  Updating Feeds ... complete.";
+        Appender += "done. "; //        InfoMsg += DbSaveLib.TrySaveReport(db) + "  Updating Feeds ... complete.";
 
         _cts = null;
         IsBusy = false;
@@ -58,7 +58,7 @@ namespace PodCatcher.ViewModels
       {
         FC = Brushes.Blue;
 
-        Appender += $"\nF2. Checking {feeds.Count}{(feedsParam == null ? " NEW" : " ALL")} feeds for new casts ... ";
+        Appender += $"\nF2. Checking {feeds.Count}{(feedsParam == null ? " NEW" : " ALL")} \tfeeds for new casts ... ";
 
 #if !AwaitNotWorking
         await Task.Delay(3);
@@ -118,7 +118,7 @@ namespace PodCatcher.ViewModels
       _cts = new CancellationTokenSource();
       try
       {
-        Appender += $"\nF3. Downloading {FeedList.Sum(r => r.NewCastCount)} new casts ... ";
+        Appender += $"\nF3. Dnlding {FeedList.Sum(r => r.NewCastCount)} new casts ... ";
         await asyUpdtDnLdsCT(_cts.Token); //////////////////////////////////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         Appender += "done.";
 

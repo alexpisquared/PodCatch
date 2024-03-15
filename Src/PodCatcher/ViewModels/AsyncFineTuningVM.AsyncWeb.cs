@@ -43,33 +43,29 @@ namespace PodCatcher.ViewModels
     }
     async Task asyUpdtDnLdsCT(CancellationToken ct)
     {
-      using (var handler = new HttpClientHandler())// { Credentials = ... })
+      using var handler = new HttpClientHandler();// { Credentials = ... })
+      handler.UseDefaultCredentials = true;
+      handler.Proxy = WebRequest.DefaultWebProxy;
+      handler.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+
+      using var client = new HttpClient(handler);
+      var dnldTasksQuery = from dnLd in _db.DnLds.Where(r => r.ReDownload).ToList() select updateDnLdFromWebTaskPP(dnLd, client, ct); // ***Create a query that, when executed, returns a collection of tasks.
+      var taskList = dnldTasksQuery.ToList();                                              // ***Use ToList to execute the query and start the tasks. 
+
+      Max3 = taskList.Count;
+      while (taskList.Count > 0)                                                           // ***Add a loop to process the tasks one at a time until none remain.
       {
-        handler.UseDefaultCredentials = true;
-        handler.Proxy = WebRequest.DefaultWebProxy;
-        handler.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+        var firstFinishedTask = await Task.WhenAny(taskList);                              // Identify the first task that completes.
+        taskList.Remove(firstFinishedTask);                                                // ***Remove the selected task from the list so that you don't process it more than once.
 
-        using (var client = new HttpClient(handler))
+        var dnLdCopyOrWhat = await firstFinishedTask;     // InfoMsg += string.Format("\r\n RV:  {0,4}  '{1}' {2}", dnLdCopyOrWhat.Id, dnLdCopyOrWhat.ErrLog, "");
+        dnLdCopyOrWhat.RunTimeNote = string.Format("Dnloaded, eh?");
+        if (dnLdCopyOrWhat.DnldStatusId == "I") //dbl chk/assign-t to H.
         {
-          var dnldTasksQuery = from dnLd in _db.DnLds.Where(r => r.ReDownload).ToList() select updateDnLdFromWebTaskPP(dnLd, client, ct); // ***Create a query that, when executed, returns a collection of tasks.
-          var taskList = dnldTasksQuery.ToList();                                                              // ***Use ToList to execute the query and start the tasks. 
-
-          Max3 = taskList.Count;
-          while (taskList.Count > 0)                                                                                        // ***Add a loop to process the tasks one at a time until none remain.
-          {
-            var firstFinishedTask = await Task.WhenAny(taskList);                                                    // Identify the first task that completes.
-            taskList.Remove(firstFinishedTask);                                                                             // ***Remove the selected task from the list so that you don't process it more than once.
-
-            var dnLdCopyOrWhat = await firstFinishedTask;     // InfoMsg += string.Format("\r\n RV:  {0,4}  '{1}' {2}", dnLdCopyOrWhat.Id, dnLdCopyOrWhat.ErrLog, "");
-            dnLdCopyOrWhat.RunTimeNote = string.Format("Dnloaded, eh?");
-            if (dnLdCopyOrWhat.DnldStatusId == "I") //dbl chk/assign-t to H.
-            {
-              dnLdCopyOrWhat.DnldStatusId = "H";
-              dnLdCopyOrWhat.ReDownload = false;
-            }
-            Val3++;
-          }
+          dnLdCopyOrWhat.DnldStatusId = "H";
+          dnLdCopyOrWhat.ReDownload = false;
         }
+        Val3++;
       }
     }
 
@@ -170,7 +166,7 @@ namespace PodCatcher.ViewModels
 
       if (e.Error != null && !string.IsNullOrEmpty(e.Error.Message))
       {
-        Appender += $"Oops! Download of {dr.CastTitle} has failed with the error {e.Error.InnermostMessage()}.";
+        Appender += $"Error downloading '{dr.CastTitle}':  {e.Error.InnermostMessage()}. ";
         dr.DnldStatusId = "F"; // Failed to Download
         dr.ErrLog += $"\r\nDnld failed: {e.Error}";
         if (dr.ErrLog.Length > 1020) dr.ErrLog = dr.ErrLog.Substring(0, 1020);  // Trunkate(dr.ErrLog, 1000);

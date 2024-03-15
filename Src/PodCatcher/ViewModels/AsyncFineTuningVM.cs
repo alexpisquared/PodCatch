@@ -326,7 +326,7 @@ namespace PodCatcher.ViewModels
     public bool canPendng => !IsBusy;
 
     void onDbChck(object p = null) { IsBusy = true; Bpr.BeepShort(); Appender += _db.GetDbChangesReport(); IsBusy = false; }
-    void onDbSave(object p = null) { IsBusy = true; Bpr.BeepShort(); Appender += _db.TrySaveReportAsync().Result; IsBusy = false; }
+    void onDbSave(object p = null) { IsBusy = true; Bpr.BeepShort(); Appender += _db.TrySaveReportAsync().Result.report; IsBusy = false; }
     void onSeeDLs(object p = null) { Bpr.BeepShort(); SelectFeed = null; }
     void onFd(object p) { IsBusy = true; Bpr.Beep1of2(); Appender = $"{FeedList?.Count} {DateTime.Now}"; refreshUiSynch(); IsBusy = false; Bpr.Beep2of2(); }
     void onRecent(object p) { Bpr.BeepShort(); SelectFeed = null; reloadTopNnRecentDnlds(); } // reloadActiveRecentDnlds(DateTime.Now.AddDays(-1)); 
