@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shell;
+using xMvvmMin;
 
 namespace PodCatcher.ViewModels
 {
@@ -262,19 +263,19 @@ namespace PodCatcher.ViewModels
     }
 
 
-    void reload1(Feed feed, DateTime? upTo = null) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.FeedId == feed.Id).OrderByDescending(r => r.PublishedAt)); info(); }
-    void reloadActiveRecentDnlds(DateTime? upTo = null) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => (r.ModifiedAt >= (upTo ?? _crlnTS)) || r.ReDownload).OrderByDescending(r => r.ModifiedAt)); IsFeedNmVsbl = true; info(); }
+    void reload1(Feed feed, DateTime? upTo = null) { DnLdList.ClearAddRangeAuto(_db.DnLds.Where(r => r.FeedId == feed.Id).OrderByDescending(r => r.PublishedAt)); info(); }
+    void reloadActiveRecentDnlds(DateTime? upTo = null) { DnLdList.ClearAddRangeAuto(_db.DnLds.Where(r => (r.ModifiedAt >= (upTo ?? _crlnTS)) || r.ReDownload).OrderByDescending(r => r.ModifiedAt)); IsFeedNmVsbl = true; info(); }
     void reloadTopNnRecentDnlds(int topX = 128)
     {
       _db.Database.CommandTimeout = 900; // seconds
-      DnLdList = new ObservableCollection<DnLd>(_db.DnLds.OrderByDescending(r => r.PublishedAt)
+      DnLdList.ClearAddRangeAuto(_db.DnLds.OrderByDescending(r => r.PublishedAt)
         //too slow: .ThenBy(r => r.Feed.Name)  :2024
         .Take(topX)); 
       IsFeedNmVsbl = true; 
       info();
     }
-    void reloadTopNnDnldedDnlds(int topX = 128) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.DownloadedAt != null).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
-    void reloadTopNnPendngDnlds(int topX = 128) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.ReDownload).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
+    void reloadTopNnDnldedDnlds(int topX = 128) { DnLdList.ClearAddRangeAuto(_db.DnLds.Where(r => r.DownloadedAt != null).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
+    void reloadTopNnPendngDnlds(int topX = 128) { DnLdList.ClearAddRangeAuto(_db.DnLds.Where(r => r.ReDownload).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
     void onSearchF(string value)
     {
       try
@@ -295,7 +296,7 @@ namespace PodCatcher.ViewModels
     {
       try
       {
-        DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r =>
+        DnLdList.ClearAddRangeAuto(_db.DnLds.Where(r =>
           (r.CastTitle != null && r.CastTitle.ToLower().Contains(value)) ||
           (r.CastSummary != null && r.CastSummary.ToLower().Contains(value)) ||
           (r.Note != null && r.Note.ToLower().Contains(value)) ||

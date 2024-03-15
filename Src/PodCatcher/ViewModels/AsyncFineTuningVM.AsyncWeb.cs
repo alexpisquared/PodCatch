@@ -28,14 +28,14 @@ namespace PodCatcher.ViewModels
         using (var client = new HttpClient(handler))
         {
           var dnldTasksQuery = from feed in feedList select updateFeedFromWebTaskPP(feed, client, ct); // ***Create a query that, when executed, returns a collection of tasks.
-          var taskList = dnldTasksQuery.ToList();                                                              // ***Use ToList to execute the query and start the tasks. 
+          var taskList = dnldTasksQuery.ToList();                                                      // ***Use ToList to execute the query and start the tasks. 
 
           Max1 = taskList.Count;
-          while (taskList.Count > 0)                                                                                        // ***Add a loop to process the tasks one at a time until none remain.
+          while (taskList.Count > 0)                                                                   // ***Add a loop to process the tasks one at a time until none remain.
           {
-            var firstFinishedTask = await Task.WhenAny(taskList);                                                    // Identify the first task that completes.
-            taskList.Remove(firstFinishedTask);                                                                             // ***Remove the selected task from the list so that you don't process it more than once.
-            var feedCopyOrWhat = await firstFinishedTask;     // InfoMsg += string.Format("\r\n RV:  {0,4}  '{1}' {2}", feedCopyOrWhat.Id, feedCopyOrWhat.ErrLog, "");
+            var firstFinishedTask = await Task.WhenAny(taskList);                                      // Identify the first task that completes.
+            taskList.Remove(firstFinishedTask);                                                        // ***Remove the selected task from the list so that you don't process it more than once.
+            var feedCopyOrWhat = await firstFinishedTask;                                              // InfoMsg += string.Format("\r\n RV:  {0,4}  '{1}' {2}", feedCopyOrWhat.Id, feedCopyOrWhat.ErrLog, "");
             Val1++;
           }
         }

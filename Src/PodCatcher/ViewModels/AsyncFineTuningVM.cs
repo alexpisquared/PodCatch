@@ -143,7 +143,7 @@ namespace PodCatcher.ViewModels
     Brush _AG = Brushes.Gray;       /**/ public Brush AG { get => _AG; set => Set(ref _AG, value); }
 
     ObservableCollection<Feed> _fl; /**/ public ObservableCollection<Feed> FeedList { get => _fl; set => _fl = value; }
-    ObservableCollection<DnLd> _dl; /**/ public ObservableCollection<DnLd> DnLdList { get => _dl; set => _dl = value; }
+    ObservableCollection<DnLd> _dl = new ObservableCollection<DnLd>(); /**/ public ObservableCollection<DnLd> DnLdList { get => _dl; set => _dl = value; }
 
     Feed _SelectFeed;               /**/ public Feed SelectFeed { get => _SelectFeed; set { if (Set(ref _SelectFeed, value)) threadAwareRun(onChgdSelectFeed2); } }
     DnLd _SelectDnLd;               /**/ public DnLd SelectDnLd { get => _SelectDnLd; set { if (Set(ref _SelectDnLd, value)) onChgdSelectDnLd(); } }
