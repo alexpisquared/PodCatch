@@ -566,8 +566,11 @@
                   </Grid.Resources>
 
                   <ProgressBar Value="{Binding DownloadedLen, Mode=OneWay}" Maximum="{Binding CastFileLength, FallbackValue=1}" Foreground="#040" IsIndeterminate="{Binding DnldStatusId, Converter={cnv:Equals EqualsText='True'}, ConverterParameter='F'}" BorderThickness="0" Background="Transparent" />
-                  <TextBlock Text="{Binding DownloadedLength, StringFormat='{}{0,3:N0} ', Converter={cmn:Divider}}" HorizontalAlignment="Left"  Foreground="#8ff" />
-                  <TextBlock Text="{Binding CastFileLength,   StringFormat='{}{0,3:N0} ', Converter={cmn:Divider}}" HorizontalAlignment="Right" Foreground="#ff0" />
+                  <TextBlock HorizontalAlignment="Center">
+                    <Run Text="{Binding DownloadedLength, StringFormat='{}{0,3:N0} ', Converter={cmn:Divider}}" Foreground="#8ff" />
+                    <Run Text="/" Foreground="#ddd" />
+                    <Run Text="{Binding CastFileLength,   StringFormat='{}{0,3:N0} ', Converter={cmn:Divider}}" Foreground="#ff0" />
+                  </TextBlock>
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>

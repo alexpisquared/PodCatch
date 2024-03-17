@@ -3,7 +3,8 @@ namespace Db.PodcastMgt.DbModel
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class DnLd
+  [PropertyChanged.AddINotifyPropertyChangedInterface] // 2024 moved to here from Db.PodcastMgt/Exts/Fody.cs  <== does not work.
+  public partial class DnLd
     {
         public int Id { get; set; }
 
