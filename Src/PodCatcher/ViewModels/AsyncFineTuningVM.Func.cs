@@ -173,12 +173,12 @@ namespace PodCatcher.ViewModels
 #else
         await asy1UpdtFeeds();
         await asy2FindNewDL();
-        onDbSave();
+        onDbSaveAsync();
         await asy3UpdtDnLds();
-        onDbSave();
+        onDbSaveAsync();
         await asy4AnonsGenr();
         await asy2FindNewDL(FeedList.Where(r => !r.IsDeleted).ToList());
-        onDbSave(null);
+        onDbSaveAsync(null);
 #endif
 
         RecentCmd.Execute(null);

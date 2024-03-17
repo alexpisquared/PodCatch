@@ -293,7 +293,7 @@
         <ColumnDefinition Width="3*"/>
       </Grid.ColumnDefinitions>
 
-      <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" MaxHeight="98" >
+      <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" MaxHeight="98" VerticalScrollBarVisibility="Hidden" >
         <TextBlock Text="{Binding Appender, FallbackValue=123}" ToolTip="{Binding Appender}" Margin="15 0" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" Foreground="#08f" />
       </ScrollViewer>
 
@@ -556,7 +556,7 @@
           <DataGridTemplateColumn  Header="Progress" Width="77" SortMemberPath="DownloadedLength" >
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <Grid Background="#fff" >
+                <Grid Background="#004" ToolTip="{Binding DnldStatu.Name}">
                   <Grid.Resources>
                     <Style TargetType="Grid">
                       <!--todo-->
@@ -565,9 +565,9 @@
                     </Style>
                   </Grid.Resources>
 
-                  <ProgressBar Value="{Binding DownloadedLen, Mode=OneWay}" Maximum="{Binding CastFileLength, FallbackValue=1}" Foreground="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" ToolTip="{Binding DnldStatu.Name}" IsIndeterminate="{Binding DnldStatusId, Converter={cnv:Equals EqualsText='True'}, ConverterParameter='F'}" BorderThickness="0" Background="Transparent" />
-                  <TextBlock Text="{Binding DownloadedLength, StringFormat='{}{0,6:N1} ', Converter={cmn:Divider}}" HorizontalAlignment="Left" />
-                  <TextBlock Text="{Binding CastFileLength,   StringFormat='{}{0,6:N1} ', Converter={cmn:Divider}}" HorizontalAlignment="Right" />
+                  <ProgressBar Value="{Binding DownloadedLen, Mode=OneWay}" Maximum="{Binding CastFileLength, FallbackValue=1}" Foreground="#040" IsIndeterminate="{Binding DnldStatusId, Converter={cnv:Equals EqualsText='True'}, ConverterParameter='F'}" BorderThickness="0" Background="Transparent" />
+                  <TextBlock Text="{Binding DownloadedLength, StringFormat='{}{0,3:N0} ', Converter={cmn:Divider}}" HorizontalAlignment="Left"  Foreground="#8ff" />
+                  <TextBlock Text="{Binding CastFileLength,   StringFormat='{}{0,3:N0} ', Converter={cmn:Divider}}" HorizontalAlignment="Right" Foreground="#ff0" />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -576,8 +576,8 @@
           <DataGridTemplateColumn Header="Published" SortDirection="Descending" SortMemberPath="PublishedAt" >
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
-                <Grid  Background="{Binding PublishedAt, Converter={cnv:AgeBrush}}" ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <TextBlock Text="{Binding PublishedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="#000" FontWeight="{Binding PublishedAt, Converter={cnv:IsToday}}"        />
+                <Grid  ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <TextBlock Text="{Binding PublishedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding PublishedAt, Converter={cnv:IsToday}}" />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -587,13 +587,23 @@
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
                 <Grid ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <TextBlock Text="{Binding DownloadedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding DownloadedAt, Converter={cnv:IsToday}}" FontWeight="{Binding DownloadedAt, Converter={cnv:IsToday}}"        />
+                  <TextBlock Text="{Binding DownloadedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding DownloadedAt, Converter={cnv:IsToday}}" FontWeight="Medium"        />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
 
-          <DataGridTextColumn     Header="Avail"      Binding="{Binding AvailableLastDate, StringFormat='{}{0:MM-dd}'}"                                                       Foreground="#dad"  />
+          <DataGridTemplateColumn Header="Avail" SortMemberPath="AvailableLastDate" >
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <TextBlock Text="{Binding AvailableLastDate, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding AvailableLastDate, Converter={cnv:IsToday}}" FontWeight="Medium"        />
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <!--<DataGridTextColumn     Header="Avail"      Binding="{Binding AvailableLastDate, StringFormat='{}{0:MM-dd}'}"                                                       Foreground="#dad"  />-->
+
           <DataGridTextColumn     Header="Min"        Binding="{Binding DurationMin, StringFormat='{}{0:N0}'}"               ElementStyle="{StaticResource RightAlignStyle}"  Foreground="#add"                                 />
 
           <DataGridTextColumn     Header="Feed++"     Binding="{Binding Feed.Name}"      Visibility="{Binding Path=IsEnabled, Source={x:Reference passThruIsFeedNmVsbl}, Converter={cnv:Bool}}" Width="120" Foreground="#dd0"       />

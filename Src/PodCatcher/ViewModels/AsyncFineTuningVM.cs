@@ -162,7 +162,7 @@ namespace PodCatcher.ViewModels
     ICommand _DelCasAl;             /**/ public ICommand DelCasAlCmd => _DelCasAl ?? (_DelCasAl = new RelayCommand(x => onDelCasAl(x), x => SelectFeed != null) { GestureKey = Key.None, GestureModifier = ModifierKeys.None });
 
     ICommand _DbChck;               /**/ public ICommand DbChckCmd => _DbChck ?? (_DbChck = new RelayCommand(x => onDbChck(x), x => canDbChck) { GestureKey = Key.A, GestureModifier = ModifierKeys.Control });
-    ICommand _DbSave;               /**/ public ICommand DbSaveCmd => _DbSave ?? (_DbSave = new RelayCommand(x => onDbSave(x), x => canDbSave) { GestureKey = Key.B, GestureModifier = ModifierKeys.Control });
+    ICommand _DbSave;               /**/ public ICommand DbSaveCmd => _DbSave ?? (_DbSave = new RelayCommand(async x => await onDbSaveAsync(x), x => canDbSave) { GestureKey = Key.B, GestureModifier = ModifierKeys.Control });
     ICommand _SeeDLs;               /**/ public ICommand SeeDLsCmd => _SeeDLs ?? (_SeeDLs = new RelayCommand(x => onSeeDLs(x), x => canSeeDLs) { GestureKey = Key.C, GestureModifier = ModifierKeys.Control });
     ICommand _Fd;                   /**/ public ICommand FdCmd => _Fd ?? (_Fd = new RelayCommand(x => onFd(x), x => canFd) { GestureKey = Key.D, GestureModifier = ModifierKeys.Control });
     ICommand _Recent;               /**/ public ICommand RecentCmd => _Recent ?? (_Recent = new RelayCommand(x => onRecent(x), x => canRecent) { GestureKey = Key.E, GestureModifier = ModifierKeys.Control });
@@ -326,7 +326,7 @@ namespace PodCatcher.ViewModels
     public bool canPendng => !IsBusy;
 
     void onDbChck(object p = null) { IsBusy = true; Bpr.BeepShort(); Appender += _db.GetDbChangesReport(); IsBusy = false; }
-    void onDbSave(object p = null) { IsBusy = true; Bpr.BeepShort(); Appender += _db.TrySaveReportAsync().Result.report; IsBusy = false; }
+    async Task onDbSaveAsync(object p = null) { IsBusy = true; Bpr.BeepShort(); Appender += (await _db.TrySaveReportAsync()).report; IsBusy = false; }
     void onSeeDLs(object p = null) { Bpr.BeepShort(); SelectFeed = null; }
     void onFd(object p) { IsBusy = true; Bpr.Beep1of2(); Appender = $"{FeedList?.Count} {DateTime.Now}"; refreshUiSynch(); IsBusy = false; Bpr.Beep2of2(); }
     void onRecent(object p) { Bpr.BeepShort(); SelectFeed = null; reloadTopNnRecentDnlds(); } // reloadActiveRecentDnlds(DateTime.Now.AddDays(-1)); 
