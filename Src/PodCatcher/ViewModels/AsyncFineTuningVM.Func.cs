@@ -140,7 +140,7 @@ namespace PodCatcher.ViewModels
       try
       {
         AG = Brushes.Blue;
-        Appender += "\nF4. Splitting and annons generation ... ";
+        Appender += "\nF4. Annons generation ... ";
         Val4 = 33;
 
         foreach (var path in Directory.GetDirectories(MiscHelper.DirPlyr, "*.*", SearchOption.TopDirectoryOnly))
@@ -173,12 +173,12 @@ namespace PodCatcher.ViewModels
 #else
         await asy1UpdtFeeds();
         await asy2FindNewDL();
-        onDbSaveAsync();
+        await onDbSaveAsync();
         await asy3UpdtDnLds();
-        onDbSaveAsync();
+        await onDbSaveAsync();
         await asy4AnonsGenr();
         await asy2FindNewDL(FeedList.Where(r => !r.IsDeleted).ToList());
-        onDbSaveAsync(null);
+        await onDbSaveAsync(null);
 #endif
 
         RecentCmd.Execute(null);
