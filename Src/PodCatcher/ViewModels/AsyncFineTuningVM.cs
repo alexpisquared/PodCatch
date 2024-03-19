@@ -335,18 +335,16 @@ namespace PodCatcher.ViewModels
 
     void threadAwareRun(Action actn)
     {
-      var s = $" ** {(Application.Current.Dispatcher.CheckAccess() ? "On UI." : "Darn! this is not UI thread any more")} ";
-      Debug.WriteLine(s);
-      new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync(s);
+      //var s = $" ** {(Application.Current.Dispatcher.CheckAccess() ? "On UI." : "Darn! this is not UI thread any more")} ";
+      //Debug.WriteLine(s);
+      //new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync(s);
 
       if (Application.Current.Dispatcher.CheckAccess()) // if on UI thread
-      {
         actn();
-      }
       else
-      {
         Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => actn()));
-      }
+
+      Bpr.BeepShort();
     }
     void onChgdSelectFeed2()
     {
