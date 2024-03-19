@@ -64,12 +64,12 @@ namespace PodCatcher.ViewModels
 				{
 #if !SkipCountDown
 					if (IsAutoNextStep) Bpr.BeepOkB(); Thread.Sleep(1000);
-					if (IsAutoNextStep) Bpr.BeepFD(9000, 200); Thread.Sleep(1000);
-					if (IsAutoNextStep) Bpr.BeepFD(8600, 200); Thread.Sleep(1000);
-					if (IsAutoNextStep) Bpr.BeepFD(8300, 200); Thread.Sleep(1000);
-					if (IsAutoNextStep) Bpr.BeepFD(8000, 600); Thread.Sleep(1000);
-					if (IsAutoNextStep) Bpr.BeepFD(7000, 200); Thread.Sleep(5);
-					if (IsAutoNextStep) Bpr.BeepFD(7000, 200);
+					if (IsAutoNextStep) Bpr.BeepFD(900, 200); Thread.Sleep(1000);
+					if (IsAutoNextStep) Bpr.BeepFD(860, 200); Thread.Sleep(1000);
+					if (IsAutoNextStep) Bpr.BeepFD(830, 200); Thread.Sleep(1000);
+					if (IsAutoNextStep) Bpr.BeepFD(800, 600); Thread.Sleep(1000);
+					if (IsAutoNextStep) Bpr.BeepFD(700, 200); Thread.Sleep(5);
+					if (IsAutoNextStep) Bpr.BeepFD(700, 200);
 #endif
 				})
 				.ContinueWith(_ => { if (IsAutoNextStep) onDoAll(null); }, TaskScheduler.FromCurrentSynchronizationContext())

@@ -93,7 +93,7 @@ namespace PodCatcher.ViewModels
 
     Func<Task> CountDown(double delaySec) => async () =>
                                                  {
-                                                   int fmin = VerHelper.IsMyHomePC ? 7000 : 19000, fadd = 2000, pow = 9, minDur = 50;
+                                                   int fmin = 800, fadd = 800, pow = 9, minDur = 50;
                                                    var startTime = DateTime.Now.AddSeconds(delaySec);
                                                    while (IsCntDnOn && DateTime.Now < startTime)
                                                    {
