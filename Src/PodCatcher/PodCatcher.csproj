@@ -22,6 +22,21 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -336,6 +351,10 @@
       <Project>{1ce2c02f-5fa8-41ca-ac2e-ba91ab283a02}</Project>
       <Name>AAV.WPF.4.8</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\AAV.Shared\Src\NetLts\StandardLib\StandardLib.csproj">
+      <Project>{b798878d-752e-45c0-8b93-57660f7a4c90}</Project>
+      <Name>StandardLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Db.PodcastMgt\Db.PodcastMgt.csproj">
       <Project>{3dff44ec-8bf7-4cd4-9d67-af96d02fb744}</Project>
       <Name>Db.PodcastMgt</Name>
@@ -344,6 +363,18 @@
       <Project>{ed816786-6557-41b2-b585-d09bee9d2f8e}</Project>
       <Name>PodcastConditioning</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -576,11 +576,11 @@
             </DataGridTemplateColumn.CellTemplate>
           </DataGridTemplateColumn>
 
-          <DataGridTemplateColumn Header="Published" SortDirection="Descending" SortMemberPath="PublishedAt" >
+          <DataGridTemplateColumn Header="Published" SortMemberPath="PublishedAt" SortDirection="Descending" >
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
                 <Grid  ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <TextBlock Text="{Binding PublishedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding PublishedAt, Converter={cnv:IsToday}}" />
+                  <TextBlock Text="{Binding PublishedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding PublishedAt, Converter={cnv:IsToday}}" FontWeight="Medium" />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
@@ -590,7 +590,7 @@
             <DataGridTemplateColumn.CellTemplate>
               <DataTemplate>
                 <Grid ToolTip="{StaticResource Tooltip_Dnld}" ToolTipService.ShowDuration="600777" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <TextBlock Text="{Binding DownloadedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding DownloadedAt, Converter={cnv:IsToday}}" FontWeight="Medium"        />
+                  <TextBlock Text="{Binding DownloadedAt, StringFormat='{}{0:yy-MM-dd} '}" HorizontalAlignment="Center" Foreground="{Binding DownloadedAt, Converter={cnv:IsToday}}" FontWeight="Medium" />
                 </Grid>
               </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
