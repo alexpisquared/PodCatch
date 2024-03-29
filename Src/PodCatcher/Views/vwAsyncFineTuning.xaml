@@ -385,7 +385,7 @@
 
         <TextBlock VerticalAlignment="Center" Margin="4 0">
         <Hyperlink NavigateUri="{Binding DirPlyr}" RequestNavigate="Hyperlink_RequestNavigate_1" >
-          <TextBlock Text="{Binding DirPlyr, FallbackValue=DirPlyr}" />
+          <TextBlock Text="Player Path" />
         </Hyperlink>
       </TextBlock>
 

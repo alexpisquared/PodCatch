@@ -8,10 +8,10 @@ namespace PodcastClientTpl
     public const string
             _0Pod = "0Pod",
             _PLYR = "_Player",
-            _splr = @"\" + _PLYR,
-            _Plyr = _0Pod + _splr,
-            _Plr2 = _0Pod + _splr + "_Mirror",
-            _1Cut = _0Pod + @"\Cuts",
+            _Mirr = "_Mirror",
+            _Plyr = @$"{_0Pod}\{_PLYR}",
+            _Plr2 = $@"{_Plyr}\{_Mirr}",
+            _1Cut = @$"{_0Pod}\Cuts",
             _Lbry = @"\Videos\",
             _AllSrc = @"", // @"1\pod\",
             _VideoTrg = @"1\v\pod\";
