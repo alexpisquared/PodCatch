@@ -89,9 +89,10 @@ namespace PodCatcher.Helpers
         return (false, $"####  too many files: {core.Count()} (> 30); obviously not for listening in a row.");
       }
 
-      if (core.Average(f => f.Length) < 1e7) // ~10mb ~ 10 min
+      var minFileSizeToDoAnnons = 2_000_000; // ~10mb ~ 10 min
+      if (core.Average(f => f.Length) < minFileSizeToDoAnnons) // ~10mb ~ 10 min
       {
-        return (false, $"####  files are too small: {core.Average(f => f.Length):N0} (< {1e7:N0}).");
+        return (false, $"####  files are too small: on average {core.Average(f => f.Length)/1000000:N1} (< {minFileSizeToDoAnnons / 1000000:N0}) Mb.");
       }
 
       var lastDnloadFileTime = core.Max(f => f.LastWriteTime);

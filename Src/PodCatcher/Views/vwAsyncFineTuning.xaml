@@ -35,9 +35,6 @@
         <ResourceDictionary Source="/AAV.WPF;component/Base/BasicDefaultsLayout.xaml" />
       </ResourceDictionary.MergedDictionaries>
 
-
-
-
       <Style TargetType="{x:Type stb:HighlightableTextBlock}">
         <Setter Property="Template">
           <Setter.Value>

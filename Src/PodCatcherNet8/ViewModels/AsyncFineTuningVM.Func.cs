@@ -1,16 +1,10 @@
-﻿using Db.PodcastMgt.PowerTools.Models;
-using PodCatcher.Helpers;
-using StandardLib.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Shell;
 
 namespace PodCatcher.ViewModels
 {
@@ -237,9 +231,9 @@ namespace PodCatcher.ViewModels
             IsStillOnline = true,
             DownloadedAt = null,
             RunTimeNote = "New  DnLd row",
-             DnldStatusId_ex ="",
-             SrchD="",
-              
+            DnldStatusId_ex = "",
+            SrchD = "",
+
           };
 
           _db.DnLds.Add(dnld);
@@ -264,8 +258,8 @@ namespace PodCatcher.ViewModels
       //_db.Database.CommandTimeout = 900; // seconds
       DnLdList = new ObservableCollection<DnLd>(_db.DnLds.OrderByDescending(r => r.PublishedAt)
         //too slow: .ThenBy(r => r.Feed.Name)  :2024
-        .Take(topX)); 
-      IsFeedNmVsbl = true; 
+        .Take(topX));
+      IsFeedNmVsbl = true;
       info();
     }
     void reloadTopNnDnldedDnlds(int topX = 128) { DnLdList = new ObservableCollection<DnLd>(_db.DnLds.Where(r => r.DownloadedAt != null).OrderByDescending(r => r.PublishedAt).ThenBy(r => r.Feed.Name).Take(topX)); IsFeedNmVsbl = true; info(); }
