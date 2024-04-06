@@ -29,6 +29,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   DateTime _crlnTS = DateTime.Now;
   readonly bool _autoStart = false;
   const string _same = "F1 same: ", __new = "F1 ***: ";
+  readonly System.Speech.Synthesis.SpeechSynthesizer _synth = new();
 
   public AsyncFineTuningVM(bool autoStart) => _autoStart = autoStart;
   public void Load() => AutoExec();
@@ -36,6 +37,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   {
     base.AutoExec();
     Bpr.Beep1of2();
+
 
     WinTitle = $"PodCatcher - {_crlnTS:ddd HH:mm}";
     DirPlyr = MiscHelper.DirPlyr;
@@ -47,11 +49,12 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
       //_db.Feeds.Load();
       //_db.DnLds.Load(); //todo: introduces dupes:  .Where(r => r.IsStillOnline == true).Load();
 
-      new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync("Loading feeds; takes seconds.");
+      _synth.Volume = 5; 
+      _synth.Speak("Loading feeds; takes seconds.");
       reLoadFeedList();
-      new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync("Loading downloads; takes a minute.");
+      _synth.Speak("Loading downloads; takes a minute.");
       reloadTopNnRecentDnlds();
-      new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync("Loading done!");
+      _synth.SpeakAsync("Loading done!");
 
       Appender = $"{FeedList.Count} / {DnLdList.Count} feeds/dnlds    {(_autoStart ? "Auto staritng ..." : "")} \r\n";
 
@@ -156,7 +159,10 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   ICommand _F6;                   /**/ public ICommand F6Cmd => _F6 ??= new RelayCommand(onF6, x => canF6) { GestureKey = Key.F6, GestureModifier = ModifierKeys.None };
   ICommand _F7;                   /**/ public ICommand F7Cmd => _F7 ??= new RelayCommand(onF7, x => canF7) { GestureKey = Key.F7, GestureModifier = ModifierKeys.None };
   ICommand _F8;                   /**/ public ICommand F8Cmd => _F8 ??= new RelayCommand(async x => await onF8(x), x => canF8) { GestureKey = Key.F8, GestureModifier = ModifierKeys.None };
-  ICommand _StopCntDn;            /**/ public ICommand StopCntDnCmd => _StopCntDn ??= new RelayCommand(onStopCntDn, x => true) { GestureKey = Key.Escape, GestureModifier = ModifierKeys.None };
+  ICommand _StopCntDn;            /**/
+
+  [Obsolete]
+  public ICommand StopCntDnCmd => _StopCntDn ??= new RelayCommand(onStopCntDn, x => true) { GestureKey = Key.Escape, GestureModifier = ModifierKeys.None };
   ICommand _DelCasts;             /**/ public ICommand DelCastsCmd => _DelCasts ??= new RelayCommand(onDelCasts, x => SelectFeed != null) { GestureKey = Key.None, GestureModifier = ModifierKeys.None };
   ICommand _DelCasAl;             /**/ public ICommand DelCasAlCmd => _DelCasAl ??= new RelayCommand(onDelCasAl, x => SelectFeed != null) { GestureKey = Key.None, GestureModifier = ModifierKeys.None };
 
@@ -337,7 +343,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   {
     //var s = $" ** {(Application.Current.Dispatcher.CheckAccess() ? "On UI." : "Darn! this is not UI thread any more")} ";
     //Debug.WriteLine(s);
-    //new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync(s);
+    //_synth.SpeakAsync(s);
 
     if (Application.Current.Dispatcher.CheckAccess()) // if on UI thread
       actn();
@@ -366,9 +372,9 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
         //{
         //  await asy1UpdtFeeds(new List<Feed> { SelectFeed });
         //  await asy2FindNewDL(new List<Feed> { SelectFeed });
-        //  new System.Speech.Synthesis.SpeechSynthesizer().Speak("1");
+        //  _synth.Speak("1");
         //}).Wait();
-        //new System.Speech.Synthesis.SpeechSynthesizer().Speak("2");
+        //_synth.Speak("2");
 
         DnLdList.ClearAddRangeAuto(_db.DnLds.Where(r => r.FeedId == SelectFeed.Id).OrderByDescending(r => r.PublishedAt).ToList()); // local 5 times faster but has only handful of records
 

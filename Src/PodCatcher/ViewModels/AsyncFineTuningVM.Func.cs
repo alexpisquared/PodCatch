@@ -147,7 +147,7 @@ namespace PodCatcher.ViewModels
           await PostDnldHelper.GenerateAllAndFolderAnons(_db, path);
 
 #if DEBUG
-      new System.Speech.Synthesis.SpeechSynthesizer().SpeakAsync("In debug mode, no copying to the player.");
+      _synth.SpeakAsync("In debug mode, no copying to the player.");
 #else
         PostDnldHelper.CopyToMp3Player();
 #endif
