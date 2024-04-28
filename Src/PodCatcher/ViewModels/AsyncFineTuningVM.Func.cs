@@ -176,7 +176,7 @@ namespace PodCatcher.ViewModels
         await onDbSaveAsync();
         await asy3UpdtDnLds();
         await onDbSaveAsync();
-        await asy4AnonsGenr();
+        _synth.SpeakAsync("Anons generation is not automated anymore. Use menu if needed."); // await asy4AnonsGenr();
         await asy2FindNewDL(FeedList.Where(r => !r.IsDeleted).ToList());
         await onDbSaveAsync(null);
 #endif
