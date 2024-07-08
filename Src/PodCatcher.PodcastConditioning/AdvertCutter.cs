@@ -132,7 +132,7 @@ namespace PodcastConditioning
       catch (Exception ex) { ex.Log(); }
     }
 
-    [Obsolete]
+    // [Obsolete] :why Copilot decides to mark it such?
     public static List<string> CutIntoPieces_OLD(string mp3file, long pieceCount)
     {
       if (pieceCount <= 0)

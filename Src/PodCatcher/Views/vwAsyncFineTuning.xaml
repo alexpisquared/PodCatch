@@ -362,10 +362,8 @@
             <MenuItem   Command="{Binding DelCasAlCmd}"  Header="All"      ToolTip="Delete all Casts for the selected feed" />
           </MenuItem >
         </MenuItem>
-
-
         <MenuItem Header="{Binding CurVer, FallbackValue='12312'}" Foreground="#0c8" Background="#00a" FontStyle="Italic" FontWeight="SemiBold" />
-
+        <Button Content="_X" IsCancel="True" Click="OnClose" Foreground="#d00" Margin="0 -5 -10 -5" />
       </Menu>
 
       <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" Margin="9" HorizontalAlignment="Right" >

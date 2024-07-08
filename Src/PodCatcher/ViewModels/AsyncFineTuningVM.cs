@@ -32,10 +32,10 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   readonly System.Speech.Synthesis.SpeechSynthesizer _synth = new();
 
   public AsyncFineTuningVM(bool autoStart) => _autoStart = autoStart;
-  public void Load() => AutoExec();
-  protected override void AutoExec()
+  protected override async Task AutoExecAsync()
   {
-    base.AutoExec();
+    await base.AutoExecAsync();
+    
     Bpr.Beep1of2();
 
 
@@ -49,7 +49,9 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
       //_db.Feeds.Load();
       //_db.DnLds.Load(); //todo: introduces dupes:  .Where(r => r.IsStillOnline == true).Load();
 
-      _synth.Volume = 5; 
+      await Task.Delay(220);
+
+      _synth.Volume = 5;
       _synth.Speak("Loading feeds; takes seconds.");
       reLoadFeedList();
       _synth.Speak("Loading downloads; takes a minute.");
@@ -161,7 +163,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   ICommand _F8;                   /**/ public ICommand F8Cmd => _F8 ??= new RelayCommand(async x => await onF8(x), x => canF8) { GestureKey = Key.F8, GestureModifier = ModifierKeys.None };
   ICommand _StopCntDn;            /**/
 
-  [Obsolete]
+  // [Obsolete] :why Copilot decides to mark it such?
   public ICommand StopCntDnCmd => _StopCntDn ??= new RelayCommand(onStopCntDn, x => true) { GestureKey = Key.Escape, GestureModifier = ModifierKeys.None };
   ICommand _DelCasts;             /**/ public ICommand DelCastsCmd => _DelCasts ??= new RelayCommand(onDelCasts, x => SelectFeed != null) { GestureKey = Key.None, GestureModifier = ModifierKeys.None };
   ICommand _DelCasAl;             /**/ public ICommand DelCasAlCmd => _DelCasAl ??= new RelayCommand(onDelCasAl, x => SelectFeed != null) { GestureKey = Key.None, GestureModifier = ModifierKeys.None };
@@ -190,7 +192,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   public bool canF7 => IsBusy;
   public bool canF8 => !IsBusy;
 
-  [Obsolete]
+  // [Obsolete] :why Copilot decides to mark it such?
   void onStopCntDn(object p)
   {
     Bpr.BeepClk();
