@@ -45,18 +45,30 @@ namespace PodcastConditioning
       if (durnMin > 2)
         try
         {
-          var dn = (durnMin == ConstHelper.Unknown4004Duration) ? "unknown " : $"{durnMin:N0}";
+          var dn = (durnMin == ConstHelper.Unknown4004Duration) ? "unknown " :
+            (durnMin > 8 ? $"{durnMin:N0}" : $"{durnMin:N1}");
           var py = (DateTime.Today - pubDate).TotalDays > 732 ? $"{pubDate.Year}" : (DateTime.Today - pubDate).TotalDays > 150 ? $"{pubDate: MMMM d yyyy}" : $"{pubDate: MMMM d}";
-          var ss = $"'{castTitle}', (duration: {dn} minutes).";
+          var ss = $"'{RemoveFirstCharacterIfFollowedBySpace(castTitle)}', (duration: {dn}).";
           if (castsLeft < 10)
             ss += $" Followed by {(castsLeft - 1)} others.";
 
-          //var ss = $"{dn} minutes of '{castTitle}', followed by {(castsLeft - 1)} others."; // marathon mode
-          //var ss = $"And now {dn} minutes of '{feedName}', titled '{castTitle}', followed by {(castsLeft - 1)} others."; 
-          //var ss = $"{(durationLeftMin / 60.0):N1} hours left of {castsLeft} shows.        Starting {dn} minutes of '{feedName}', titled '{castTitle}', published {py}";
           CreateWavConvertToMp3File(anonsFile, ss);
         }
         catch (Exception ex) { ex.Log(); }
+    }
+
+    private static string RemoveFirstCharacterIfFollowedBySpace(string castTitle)
+    {
+      if (string.IsNullOrEmpty(castTitle) || castTitle.Length < 2)
+        return castTitle;
+
+      for (int i = 1; i <= 2; i++) // do not pronounce the ordering prefix, like: a_123... b_323...
+      {
+        if (castTitle[i] == ' ')
+          return castTitle.Substring(i).Trim();
+      }
+
+      return castTitle;
     }
 
     public static string CalcAnonsFilename(string anonsFile)

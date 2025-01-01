@@ -121,7 +121,7 @@ namespace PodCatcher.Helpers
           collectTotalTime(_db, walkmanPlayableFiles, out var ttlCasts, out var ttlDurnMin);
           AdvertCutter.CreateSummaryAnons(ttlDurnMin, pathWalkmanMirror);
 
-          Debug.WriteLine($"<<<<  {pathWalkmanMirror,-80}: {walkmanPlayableFiles.Count(),4} media files,  \t {needReqson.reason},  {ttlDurnMin,4:N0}  min ");
+          Debug.WriteLine($"<<<<  {pathWalkmanMirror,-80}: {walkmanPlayableFiles.Count(),4} media files,  \t {needReqson.reason},  {ttlDurnMin,4:N1}  min ");
 
           foreach (var file in walkmanPlayableFiles) // add announces for each cast:
           {
