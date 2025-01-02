@@ -85,8 +85,8 @@ namespace NAudioTrimmer6
 
       await playNewFile(SettingsDefaultLastFile);
     }
-    async void slA_ValueChanged(object s, RoutedPropertyChangedEventArgs<double> e) { tbPntA.Text = $"{(me1.Position = TimeSpan.FromSeconds(slA.Value)):h\\:mm\\:ss\\.ff}"; if (slB.Value < slA.Value) slB.Value = slA.Value + 60; await Task.Yield(); }
-    async void slB_ValueChanged(object s, RoutedPropertyChangedEventArgs<double> e) { tbPntB.Text = $"{(TimeSpan.FromSeconds(slB.Value)):h\\:mm\\:ss\\.ff}"; if (slA.Value > slB.Value) slA.Value = slB.Value - 60; await Task.Yield(); }
+    void slA_ValueChanged(object s, RoutedPropertyChangedEventArgs<double> e) { tbPntA.Text = $"{(me1.Position = TimeSpan.FromSeconds(slA.Value)):h\\:mm\\:ss\\.f}"; if (slB.Value < slA.Value + 60) slB.Value = slA.Value + 60; }
+    void slB_ValueChanged(object s, RoutedPropertyChangedEventArgs<double> e) { tbPntB.Text = $"{(TimeSpan.FromSeconds(slB.Value)):h\\:mm\\:ss\\.f}"; if (slA.Value > slB.Value - 60) slA.Value = slB.Value - 60; tbPntC.Text = $"{TimeSpan.FromSeconds(Math.Abs(slA.Value - slB.Value)):h\\:mm\\:ss\\.f}"; }
     async void onBackToPositionA(object s, RoutedEventArgs e) { me1.Position = TimeSpan.FromSeconds(slA.Value); me1.Play(); _isPlaying = true; await Task.Yield(); }
     async void onMediaPosnToSliderA(object s, RoutedEventArgs e) { slA.Value = me1.Position.TotalSeconds; await Task.Yield(); }
     async void onMediaPosnToSliderB(object s, RoutedEventArgs e) { slB.Value = me1.Position.TotalSeconds; await Task.Yield(); }
@@ -96,14 +96,14 @@ namespace NAudioTrimmer6
     {
       slA.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(w40k).X / ((ProgressBar)s).ActualWidth;
       Trace.WriteLine($"  {((MouseDevice)e.Device).GetPosition(w40k).X}    {((MouseDevice)e.Device).GetPosition(sv1).X}    {((MouseDevice)e.Device).GetPosition(root).X}");
-      _markerPosn = ((MouseDevice)e.Device).GetPosition(sv1).X-50;
+      _markerPosn = ((MouseDevice)e.Device).GetPosition(sv1).X - 50;
     }
 
     void pb1_MouseUp_R_B(object s, MouseButtonEventArgs e) => slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(w40k).X / ((ProgressBar)s).ActualWidth;
     async void pb1_MousMov(object s, /**/  MouseEventArgs e) => await Task.Yield();             //slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(root).X / ((ProgressBar)s).ActualWidth;
     async void onPbMover()
     {
-      pb1.Value = me1.Position.TotalSeconds; tbPPos.Text = $"{me1.Position:h\\:mm\\:ss\\.fff}";
+      pb1.Value = me1.Position.TotalSeconds; tbPPos.Text = $"{me1.Position:h\\:mm\\:ss\\.f}";
       if (me1.Position.TotalSeconds >= slB.Value && slB.Value > 0)
       {
         me1.Pause();
@@ -116,15 +116,16 @@ namespace NAudioTrimmer6
       await Task.Yield();
     }
     async void onTglAutoResetter(object s, RoutedEventArgs e) { _resettter.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
-    async void onTglProgMoverter(object s, RoutedEventArgs e) { _progMover.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
-    async void onRequestNavigate(object s, System.Windows.Navigation.RequestNavigateEventArgs e) {
-      var audioFile = Path.Combine(e.Uri.LocalPath, tbFile.Text); 
+    async void onTglProgMoverter(object s, RoutedEventArgs e) { if (_progMover is null) return; _progMover.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
+    async void onRequestNavigate(object s, System.Windows.Navigation.RequestNavigateEventArgs e)
+    {
+      var audioFile = Path.Combine(e.Uri.LocalPath, tbFile.Text);
 
       if (audioFile is not null && File.Exists(audioFile))
         _ = Process.Start("Explorer.exe", $"/select, \"{audioFile}\"");
       else
         _ = MessageBox.Show($"Failed to create the CSV file \n\n{audioFile} \n\n", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-      
+
       e.Handled = true; await Task.Yield();
     }
 
