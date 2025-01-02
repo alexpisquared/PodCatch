@@ -313,9 +313,7 @@ namespace PodCatcher.ViewModels
 
     void reLoadFeedList()
     {
-      FeedList = new ObservableCollection<Feed>();
-      foreach (Feed feed in _db.Feeds.Where(r => (IncDel || !r.IsDeleted)).OrderByDescending(r => r.IsActive).ThenBy(r => r.Name))
-        FeedList.Add(feed);
+      FeedList = [.. _db.Feeds.Where(r => (IncDel || !r.IsDeleted)).OrderByDescending(r => r.IsActive).ThenBy(r => r.Name)];
       refreshUiSynch();
     }
     void reLoadFeedList_()

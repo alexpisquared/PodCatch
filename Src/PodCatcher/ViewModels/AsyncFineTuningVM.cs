@@ -46,15 +46,10 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
 
     try
     {
-      //_db.Feeds.Load();
-      //_db.DnLds.Load(); //todo: introduces dupes:  .Where(r => r.IsStillOnline == true).Load();
-
       await Task.Delay(220);
 
       _synth.Volume = 5;
-      _synth.Speak("Loading feeds; takes seconds.");
       reLoadFeedList();
-      _synth.Speak("Loading downloads; takes a minute.");
       reloadTopNnRecentDnlds();
       _synth.SpeakAsync("Loading done!");
 
@@ -79,7 +74,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
         Bpr.BeepOk();
       }); // , TaskScheduler.FromCurrentSynchronizationContext());
 #else
-      Task.Run(CountDown(9.1)).ContinueWith(_ =>
+      await Task.Run(CountDown(9.1)).ContinueWith(_ =>
       {
         if (IsCntDnOn)
         {
@@ -107,11 +102,13 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
                                                    var _0to1 = Math.Abs(Math.Pow((delaySec - secLeft) / delaySec, pow)); //0 - 1
                                                    var frq = (int)(fmin + (fadd * _0to1)); //500 - 5500
                                                    var dur = minDur + (int)(1000 * _0to1);
-                                                   Appender = $"Launching in {(startTime - DateTime.Now).TotalSeconds:N0} seconds ... Alt-B to aBort  {dur:N1}";
+                                                   Appender += $"\r\nLaunching in {(startTime - DateTime.Now).TotalSeconds:N0} seconds ... Alt-B to aBort  {dur:N1}";
                                                    Bpr.BeepFD(frq, dur);
                                                    //InfoMsg = "";
                                                    await Task.Delay(1000 - dur); Debug.WriteLine("{0} - {1}", pow, dur);
                                                  }
+
+                                                 Appender = "";
 
                                                  if (IsCntDnOn)
                                                    Bpr.BeepFD(fmin + fadd, 1000);
