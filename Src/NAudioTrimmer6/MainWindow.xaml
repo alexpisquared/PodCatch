@@ -1,6 +1,6 @@
 ﻿<Window x:Class="NAudioTrimmer6.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:NAudioTrimmer6"
-        Title="Audio Trimmer" MinHeight="220" Height="350" MaxHeight="350" Width="2200" AllowDrop="True" Drop="onDrop" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+        Title="Audio Trimmer" MinHeight="220" Height="350" MaxHeight="350" Width="2200" AllowDrop="True" Drop="OnDrop" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
   </WindowChrome.WindowChrome>
