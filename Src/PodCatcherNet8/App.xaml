@@ -8,11 +8,11 @@
 
       <ResourceDictionary.MergedDictionaries>
         <!--backup theme + designer's:-->
-        <ResourceDictionary Source="/AAV.WPF;component/ColorScheme/Theme.Color.Dark.Gray.xaml" />
+        <ResourceDictionary Source="/WpfUserControlLib;component/ColorScheme/Theme.Color.Dark.Gray.xaml" />
         <!--
-        <ResourceDictionary Source="/AAV.WPF;component/Base/DataGrid.Base.xaml" />
+        <ResourceDictionary Source="/WpfUserControlLib;component/Base/DataGrid.Base.xaml" />
         Allows Style="{StaticResource WindowStyle_Aav0}"  (since it is on top of the visual tree over the Window) -->
-        <ResourceDictionary Source="/AAV.WPF;component/Base/BasicDefaultsLayout.xaml" />
+        <ResourceDictionary Source="/WpfUserControlLib;component/Base/BasicDefaultsLayout.xaml" />
       </ResourceDictionary.MergedDictionaries>
 
       <!--<VerticalAlignment x:Key="VerticalAlignmentC">Center</VerticalAlignment>

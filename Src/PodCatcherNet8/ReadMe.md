@@ -1,0 +1,3 @@
+﻿## 2025-01-01
+  restored an effort to continue porting the .Net 4 version into .Net 9 ...
+  ... may be a good idea to restart porting from scratch, as the .Net 4 version has been updated since the last porting effort.

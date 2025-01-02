@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Content Include="Assets\PopBest.wav" />
+    <Content Include="ReadMe.md" />
   </ItemGroup>
 
   <ItemGroup>

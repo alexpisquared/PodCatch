@@ -26,7 +26,7 @@ namespace PodCatcher.ViewModels
 {
   public partial class AsyncFineTuningVM : CommunityToolkit.Mvvm.ComponentModel.ObservableValidator
   {
-    readonly PodcastMgtContext _db = new PodcastMgtContext(null);
+    readonly PodcastMgtContext _db = new PodcastMgtContext(new DbContextOptionsBuilder<PodcastMgtContext>().UseSqlServer(PodcastMgtContext.conStr).Options);
     CancellationTokenSource _cts;
     Stopwatch _sw = Stopwatch.StartNew();
     DateTime _crlnTS = DateTime.Now;

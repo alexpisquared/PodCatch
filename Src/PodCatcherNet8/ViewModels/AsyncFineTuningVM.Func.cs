@@ -1,10 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using StandardLib.Extensions;
+using AsLink;
+using Db.PodcastMgt.PowerTools.Models;
+using PodCatcher.Views;
+using PodCatcherNet8.AsLink;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shell;
+using System.Windows.Threading;
+using StandardLib.Helpers;
+using AmbienceLib;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using EF.DbHelper.Lib;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PodCatcher.Helpers;
 
 namespace PodCatcher.ViewModels
 {
