@@ -1,7 +1,9 @@
 ﻿<Window x:Class="PodCatcherNet9.Views.vwMain__GoodOldRetired___" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         Title="{Binding InfoMsg}" Width="1500"
         xmlns:xui="clr-namespace:PodCatcherNet9.Views"
-        xmlns:cmn="clr-namespace:PodCatcherNet9"	Style="{StaticResource chromeless}" ResizeMode="CanResize">
+        xmlns:cmn="clr-namespace:PodCatcherNet9.Helpers"	
+        xmlns:lcl="clr-namespace:PodCatcherNet9"	
+        Style="{StaticResource chromeless}" ResizeMode="CanResize">
   <Window.InputBindings>
     <KeyBinding   Command="{Binding RefreshFeedsCmd}"			CommandParameter="{Binding ElementName=dgF}" Key="{Binding RefreshFeedsCmd.GestureKey}" Modifiers="{Binding RefreshFeedsCmd.GestureModifier}" />
     <KeyBinding   Command="{Binding RefreshDgDCmd}"				CommandParameter="{Binding ElementName=dgD}" Key="{Binding RefreshDgDCmd.GestureKey}" Modifiers="{Binding RefreshDgDCmd.GestureModifier}" />
@@ -393,7 +395,7 @@
               <DataTemplate>
                 <Grid HorizontalAlignment="Stretch" Background="#fff" >
 
-                  <cmn:SpeedProj Time0="{Binding DownloadStart, FallbackValue='00:00'}"
+                  <lcl:SpeedProj Time0="{Binding DownloadStart, FallbackValue='00:00'}"
                                LenTotal="{Binding CastFileLength, FallbackValue=100}"
                                LenCurrent="{Binding DownloadedLength, FallbackValue=10}"/>
 

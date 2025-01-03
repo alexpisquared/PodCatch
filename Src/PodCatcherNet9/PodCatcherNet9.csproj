@@ -49,6 +49,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Properties\DataSources\PodCatcher.Models.DnLd.datasource">
+      <SubType>Designer</SubType>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

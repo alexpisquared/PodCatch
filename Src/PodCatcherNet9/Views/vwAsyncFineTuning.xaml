@@ -1,5 +1,5 @@
 ﻿<lnk:WindowBase xmlns:lnk="clr-namespace:AAV.WPF.Base;assembly=AAV.WPF" x:Name="wnd" x:Class="PodCatcherNet9.Views.vwAsyncFineTuning" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                xmlns:cmn="clr-namespace:PodCatcherNet9"
+                xmlns:cmn="clr-namespace:PodCatcherNet9.Helpers"
                 xmlns:cnv="clr-namespace:AsLink" 
                 xmlns:stb="clr-namespace:AAV.Common"
                 xmlns:xui="clr-namespace:PodCatcherNet9.Views"
