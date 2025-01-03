@@ -1,0 +1,89 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <SolidColorBrush x:Key="BackBackgroundBrush" Color="{DynamicResource BackBackgroundColor}"/>
+  <SolidColorBrush x:Key="ButnBackgroundBrush" Color="{DynamicResource ButnBackgroundColor}"/>
+  <SolidColorBrush x:Key="TextBackgroundBrush" Color="{DynamicResource TextBackgroundColor}"/>
+
+  <SolidColorBrush x:Key="LablForegroundBrush" Color="{DynamicResource LablForegroundColor}"/>
+  <SolidColorBrush x:Key="InfoForegroundBrush" Color="{DynamicResource InfoForegroundColor}"/>
+  <SolidColorBrush x:Key="MainForegroundBrush" Color="{DynamicResource TextForegroundColor}"/>
+  <SolidColorBrush x:Key="ErorForegroundBrush" Color="{DynamicResource ErorForegroundColor}"/>
+  <SolidColorBrush x:Key="LogoTextBrush"       Color="{DynamicResource LogoTextColor}"/>
+  <SolidColorBrush x:Key="___Brush"            Color="{DynamicResource ___Color}"/>
+
+  <!--Select All rowheader button is white without this-->
+  <Style TargetType="{x:Type Button}" x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}">
+    <Setter Property="Background" Value="Green"/>
+  </Style>
+
+  <!--rowheader style - rare but white without this-->
+  <Style TargetType="{x:Type DataGridRowHeader}" x:Key="RowHeaderStyle_Aav0" >
+    <Setter Property="Height"               Value="28"/>
+    <Setter Property="Foreground"           Value="{StaticResource LablForegroundBrush}" />
+    <Setter Property="Background"           Value="Transparent" />
+    <Setter Property="FontSize"             Value="12" />
+  </Style>
+
+  <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="ColumnHeaderStyle_Aav0" >
+    <Setter Property="Height"               Value="28"/>
+    <Setter Property="Foreground"           Value="{StaticResource LablForegroundBrush}" />
+    <Setter Property="Background"           Value="Transparent" />
+    <Setter Property="FontSize"             Value="12" />
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver"       Value="True">
+        <Setter Property="ToolTip"          Value="Click to sort."/>
+        <Setter Property="FontWeight"       Value="SemiBold"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="{x:Type DataGridColumnHeader}"   BasedOn="{StaticResource ColumnHeaderStyle_Aav0}" x:Key="ColumnHeaderStyle_Bold0" >
+    <Setter Property="Foreground"                     Value="Red"/>
+    <Setter Property="FontWeight"                     Value="Bold"/>
+  </Style>
+
+  <Style TargetType="{x:Type DataGrid}" x:Key="RowAnimationFriendly">
+    <Setter Property="IsSynchronizedWithCurrentItem"	Value="True"  />
+    <Setter Property="AutoGenerateColumns"		        Value="False"  />
+    <Setter Property="Background"			                Value="Transparent" />
+    <Setter Property="BorderThickness"			          Value="0" />
+    <Setter Property="BorderBrush"			              Value="{DynamicResource ButnBackgroundBrush}" />
+    <Setter Property="CanUserAddRows"			            Value="False" />
+    <Setter Property="ColumnHeaderStyle"		          Value="{StaticResource ColumnHeaderStyle_Aav0}"/>
+    <Setter Property="RowHeaderStyle"		              Value="{StaticResource RowHeaderStyle_Aav0}"/>
+    <Setter Property="EnableRowVirtualization"	      Value="True"  />
+    <Setter Property="Foreground"                     Value="{StaticResource MainForegroundBrush}" />
+    <Setter Property="GridLinesVisibility"		        Value="None" />
+    <Setter Property="HeadersVisibility"		          Value="Column" />
+    <Setter Property="IsReadOnly"				              Value="True"  />
+    <Setter Property="RowDetailsVisibilityMode"       Value="VisibleWhenSelected"  />
+    <Setter Property="VerticalAlignment"		          Value="Top"  />
+    <Setter Property="SelectionMode"		              Value="Single"  />
+  </Style>
+  <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource RowAnimationFriendly}" x:Key="FullDeal">
+    <Setter Property="AlternatingRowBackground" Value="{DynamicResource ButnBackgroundBrush}" />
+    <Setter Property="RowBackground"			      Value="{DynamicResource TextBackgroundBrush}" />
+  </Style>
+  <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource FullDeal}" />
+
+  <Style TargetType="{x:Type TextBlock}" x:Key="CenterAlignStyle" >
+    <Setter Property="TextAlignment" Value="Center" />
+  </Style>
+  <Style TargetType="{x:Type TextBlock}" x:Key="RightAlignStyle" >
+    <Setter Property="TextAlignment" Value="Right"  />
+    <Setter Property="Margin"        Value="6 0"  />
+  </Style>
+  <Style TargetType="{x:Type TextBlock}" x:Key="LeftAlignStyle" >
+    <Setter Property="TextAlignment" Value="Left" />
+  </Style>
+
+  <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="CenterGridHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle_Aav0}" >
+    <Setter Property="HorizontalContentAlignment"   Value="Center"/>
+  </Style>
+  <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="RightGridHeaderStyle"  BasedOn="{StaticResource ColumnHeaderStyle_Aav0}" >
+    <Setter Property="HorizontalContentAlignment"   Value="Right"/>
+  </Style>
+
+  <!-- Review for more styling C:\gh\s\WPF-Samples\Sample Applications\ExpenseIt\ExpenseItDemo\Styles.xaml-->
+
+</ResourceDictionary>

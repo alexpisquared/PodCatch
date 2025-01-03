@@ -1,0 +1,46 @@
+﻿<Window x:Class="PodCatcherNet9.Views.vwAddFeed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="vwAddFeed" SizeToContent="WidthAndHeight">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition MinWidth="250"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Label Grid.Row="1" Content="_Url" 				Target="{Binding ElementName=e1}" />
+		<Label Grid.Row="2" Content="_Name" 			Target="{Binding ElementName=e2}" />
+		<Label Grid.Row="3" Content="_Folder"     Target="{Binding ElementName=e3}" />
+		<Label Grid.Row="4" Content="_Prefix" 	  Target="{Binding ElementName=e4}" />
+		<Label Grid.Row="5" Content="_Note" 			Target="{Binding ElementName=e5}" />
+		<Label Grid.Row="6" Content="_Since" 			Target="{Binding ElementName=e6}" />
+		<Label Grid.Row="7" Content="_Active" 		Target="{Binding ElementName=e7}" />
+
+		<TextBox  Grid.Row="1" Grid.Column="1"		  Text="{Binding Feed.Url,		   UpdateSourceTrigger=PropertyChanged}"  x:Name="e1" />
+		<TextBox  Grid.Row="2" Grid.Column="1"		  Text="{Binding Feed.Name,		   UpdateSourceTrigger=PropertyChanged}"  x:Name="e2" />
+		<TextBox  Grid.Row="3" Grid.Column="1"		  Text="{Binding Feed.SubFolder, UpdateSourceTrigger=PropertyChanged}"  x:Name="e3" />
+		<TextBox  Grid.Row="4" Grid.Column="1"		  Text="{Binding Feed.Tla,		   UpdateSourceTrigger=PropertyChanged}"  x:Name="e4" />
+		<TextBox  Grid.Row="5" Grid.Column="1"		  Text="{Binding Feed.Note,		   UpdateSourceTrigger=PropertyChanged}"  x:Name="e5" />
+		<TextBox  Grid.Row="6" Grid.Column="1"		  Text="{Binding Feed.Since,	   UpdateSourceTrigger=PropertyChanged}"  x:Name="e6" />
+		<CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding Feed.Active,    UpdateSourceTrigger=PropertyChanged}"  x:Name="e7" />
+
+		<StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6" >
+			<Button Content="OK"     Margin="6" IsDefault="True" Click="OnOK"   />
+			<Button Content="Cancel" Margin="6" IsCancel="True"  Click="OnCancel" />
+		</StackPanel>
+
+	</Grid>
+</Window>

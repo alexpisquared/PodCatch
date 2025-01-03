@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\c\AsLink\DB\DbSaveMsgBox.cs" Link="AsLink\DB\DbSaveMsgBox.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\IsoStorage.cs" Link="AsLink\IsoStorage.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\ObservableCollectionEx.cs" Link="AsLink\ObservableCollectionEx.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\UI\Converters.Basic.cs" Link="AsLink\Converters.Basic.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\UI\HighlightableTextBlock.cs" Link="AsLink\HighlightableTextBlock.cs" />
+    <Compile Include="..\..\..\AAV.Shared\Src\Net6.0\AAV.UI\Converters\ConverterEx.cs" Link="AsLink\ConverterEx.cs" />
+    <Compile Include="..\..\..\ScSv\Src\AlexPi.Scr\WebScrap\WebScraper.cs" Link="AsLink\WebScraper.cs" />
+    <Compile Include="..\..\..\TypeCatch\Src\sln\TypeCatch\AsLink\Ext.DbContext.cs" Link="AsLink\DB\Ext.DbContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\PopBest.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageReference Include="Fody" Version="6.9.1" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="9.0.0" />
+    <PackageReference Include="System.Speech" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Port.Net9\AAV.Mvvm\AAV.Mvvm.Ne9.csproj" />
+    <ProjectReference Include="..\Port.Net9\AAV.Sys\AAV.Sys.4.8.Ne9.csproj" />
+    <ProjectReference Include="..\Port.Net9\AAV.WPF\AAV.WPF.4.8.Ne9.csproj" />
+    <ProjectReference Include="..\..\..\AAV.Shared\Src\NetLts\StandardLib\StandardLib.csproj" />
+    <ProjectReference Include="..\Db.PodcastMgt.Net9\Db.PodcastMgt.Ne9.csproj" />
+    <ProjectReference Include="..\PodCatcher.PodcastConditioning.Net9\PodcastConditioning.Ne9.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AsLink\DB\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\2.ico" />
+    <Resource Include="Assets\rss.ico" />
+    <Resource Include="Assets\Windows-media-player.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>
+
+
+<!--<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+</Project>-->

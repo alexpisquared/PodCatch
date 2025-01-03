@@ -1,0 +1,444 @@
+﻿<Window x:Class="PodCatcherNet9.Views.vwMain__GoodOldRetired___" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Title="{Binding InfoMsg}" Width="1500"
+        xmlns:xui="clr-namespace:PodCatcherNet9.Views"
+        xmlns:cmn="clr-namespace:PodCatcherNet9"	Style="{StaticResource chromeless}" ResizeMode="CanResize">
+  <Window.InputBindings>
+    <KeyBinding   Command="{Binding RefreshFeedsCmd}"			CommandParameter="{Binding ElementName=dgF}" Key="{Binding RefreshFeedsCmd.GestureKey}" Modifiers="{Binding RefreshFeedsCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding RefreshDgDCmd}"				CommandParameter="{Binding ElementName=dgD}" Key="{Binding RefreshDgDCmd.GestureKey}" Modifiers="{Binding RefreshDgDCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding RefreshDgHCmd}"				CommandParameter="{Binding ElementName=dgD}" Key="{Binding RefreshDgHCmd.GestureKey}" Modifiers="{Binding RefreshDgHCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding CheckSelectedFeedAsyncCmd}" CommandParameter="{Binding ElementName=pnl1}" Key="{Binding CheckSelectedFeedAsyncCmd.GestureKey}" Modifiers="{Binding CheckSelectedFeedAsyncCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding StartDnldsCmd}"				CommandParameter="{Binding ElementName=dgD}" Key="{Binding StartDnldsCmd.GestureKey}" Modifiers="{Binding StartDnldsCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding DoAllCmd}"						CommandParameter="{Binding ElementName=pnl1}" Key="{Binding DoAllCmd.GestureKey}" Modifiers="{Binding DoAllCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding GenerateAnoncesCmd}"	CommandParameter="{Binding ElementName=mainWin}" Key="{Binding GenerateAnoncesCmd.GestureKey}" Modifiers="{Binding GenerateAnoncesCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding CutOneCmd}"						CommandParameter="{Binding ElementName=mainWin}" Key="{Binding CutOneCmd.GestureKey}" Modifiers="{Binding CutOneCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding LoadExistingCmd}"			CommandParameter="{Binding ElementName=mainWin}" Key="{Binding LoadExistingCmd.GestureKey}" Modifiers="{Binding LoadExistingCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding CheckSaveCmd}"				CommandParameter="{Binding ElementName=mainWin}" Key="{Binding CheckSaveCmd.GestureKey}" Modifiers="{Binding CheckSaveCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding AddNewCmd}"						CommandParameter="{Binding ElementName=mainWin}" Key="{Binding AddNewCmd.GestureKey}" Modifiers="{Binding AddNewCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding ChkSelectFeedCmd}"						CommandParameter="{Binding ElementName=mainWin}" Key="{Binding ChkSelectFeedCmd.GestureKey}" Modifiers="{Binding ChkSelectFeedCmd.GestureModifier}" />
+  </Window.InputBindings>
+  <Border BorderBrush="#fff" Background="#dddd" CornerRadius="4" BorderThickness="1">
+    <Border.Resources>
+      <DataTemplate x:Key="RowDtlTemplateAlt">
+        <xui:ucRowDtlDataTmplt_Feed />
+      </DataTemplate>
+      <DataTemplate x:Key="RowDtlTemplateAl2">
+        <xui:ucRowDtlDataTmplt_Dnld />
+      </DataTemplate>
+    </Border.Resources>
+    <Grid x:Name="pnl1" >
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="100*" />
+        <RowDefinition Height="300*" />
+        <RowDefinition Height="8" />
+        <RowDefinition Height="Auto" MinHeight="120" MaxHeight="600"/>
+      </Grid.RowDefinitions>
+
+      <!--<Border Background="#ccc" CornerRadius="3" BorderThickness="0" Grid.ColumnSpan="1" Margin="0" Grid.RowSpan="1" />-->
+
+      <TextBlock Grid.Column="2" Margin="3 0" Text="{Binding CurVer, FallbackValue='15.11.11.dbg'}" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="#b00" FontSize="9" />
+
+      <ScrollViewer	Margin="4" VerticalScrollBarVisibility="Visible" Grid.RowSpan="2" >
+        <TextBlock   Text="{Binding InfoMsg, FallbackValue='InfoMsg Jul 25 qweq'}" FontSize="11" />
+      </ScrollViewer>
+      <Rectangle		Margin="4,4,22,4" Fill="#1000" Grid.RowSpan="2"/>
+
+      <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,20,0">
+        <TextBlock Margin="0 0" Text="{Binding TtlFeedsToCheck, FallbackValue=J25}" VerticalAlignment="Bottom" Foreground="#0a0" />
+        <TextBlock Margin="8 0" Text="{Binding TtlDnLds2Finish, FallbackValue=J25}" VerticalAlignment="Bottom" Foreground="#00f" />
+      </StackPanel>
+
+      <WrapPanel Grid.Column="2" Orientation="Horizontal" Margin="8" MinHeight="50">
+
+        <!--<DatePicker SelectedDate="{Binding SinceDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />-->
+        <CheckBox Content="Auto _Next" IsChecked="{Binding IsAutoNextStep}" />
+
+        <Button Content="Do All"							Command="{Binding DoAllCmd}"										CommandParameter="{Binding ElementName=pnl1}" IsDefault="True"  />
+
+        <Button Content="Add New (F8)"			Command="{Binding AddNewCmd}"					CommandParameter="{Binding ElementName=pnl1}" />
+
+        <Label Content="Check Feed:"  />
+        <Button Content="All"					Command="{Binding CheckFeedsAsyncCmd}"					CommandParameter="{Binding ElementName=pnl1}" />
+        <Button Content="One"					Command="{Binding ChkSelectFeedCmd}"		CommandParameter="{Binding ElementName=pnl1}" ToolTip="F1" />
+        <!--<Button Content="Sel Async"		Command="{Binding CheckSelectedFeedAsyncCmd}"		CommandParameter="{Binding ElementName=pnl1}" />-->
+
+        <!--<Label Content="Chk Sel Feed:" />
+        <Button Content="Synch"	Command="{Binding ChkSelectFeedCmd}"		CommandParameter="{Binding ElementName=pnl1}" />
+        <Button Content="Async"	Command="{Binding CheckSelectedFeedAsyncCmd}"		CommandParameter="{Binding ElementName=pnl1}" />-->
+
+        <Label Content="Refresh:"  />
+        <Button Content="Feed F5"				Command="{Binding RefreshFeedsCmd}"							CommandParameter="{Binding ElementName=dgF}"  />
+        <Button Content="DgD F6"				Command="{Binding RefreshDgDCmd}"								CommandParameter="{Binding ElementName=dgD}" />
+        <Button Content="DgH F7"				Command="{Binding RefreshDgHCmd}"								CommandParameter="{Binding ElementName=dgH}" />
+
+        <Label Content="Refresh:"  />
+        <Button Content="_Load FS"			Command="{Binding LoadExistingCmd}"								CommandParameter="{Binding ElementName=dgD}" />
+        <Button Content="Start Dnld"		Command="{Binding StartDnldsCmd}"									CommandParameter="{Binding ElementName=dgD}" />
+
+        <Label Content="Cut:" />
+        <Button Content="One"						Command="{Binding CutOneCmd}"											CommandParameter="{Binding ElementName=dgD}" />
+        <Button Content="Anon F9"				Command="{Binding GenerateAnoncesCmd}"						CommandParameter="{Binding ElementName=dgD}" />
+
+        <Label Content="Changes:" />
+        <Button Content="Ch_k"					Command="{Binding CheckSaveCmd}"									CommandParameter="{Binding ElementName=dgD}" />
+        <Button Content="_Save"					Command="{Binding SaveChangesCmd}"								CommandParameter="{Binding ElementName=dgD}" />
+
+        <Button Content="_Exit"					Command="{Binding CloseAppCmd}"    IsCancel="True"  />
+        
+        <Button Content="New _UI" Click="Button_Click"				/>
+      </WrapPanel>
+
+      <DataGrid x:Name="dgF" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Db.Feeds.Local}" Grid.Row="2" CanUserAddRows="False" 
+              SelectedItem="{Binding SelectedFeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Grid.Column="0" Margin="4" Foreground="#c70" RowDetailsTemplate="{StaticResource RowDtlTemplateAlt}" >
+        <DataGrid.ContextMenu>
+          <ContextMenu >
+            <MenuItem Header="Delete All Dnld History!!!" Command="{Binding DeleteAllDnldsOfThisFeedCmd}"	CommandParameter="{Binding ElementName=mainWin}" />
+            <!--<MenuItem Header="Chk _Synch - NO GO"					Command="{Binding ChkSelectFeedCmd}"	CommandParameter="{Binding ElementName=pnl1}" />
+            <MenuItem Header="Chk _Async - NO GO"					Command="{Binding CheckSelectedFeedAsyncCmd}"	CommandParameter="{Binding ElementName=pnl1}" />-->
+          </ContextMenu >
+        </DataGrid.ContextMenu>
+        <DataGrid.Resources>
+          <Style TargetType="DataGridRow">
+            <Setter Property="ToolTipService.ToolTip">
+              <Setter.Value>
+                <StackPanel Orientation="Vertical" MaxWidth="700" >
+                  <TextBlock Text="{Binding Name}"			TextWrapping="NoWrap" Foreground="#c70" FontSize="20" />
+
+                  <TextBlock TextWrapping="Wrap" Margin="0 12">
+                    <Run Foreground="#aaa" Text="Note: " />
+                    <Run Foreground="#00f" FontSize="16" Text="{Binding Note}" />
+                  </TextBlock>
+                  
+                  <TextBlock>
+                    <Run Foreground="#aaa" Text="URL: " />
+                    <Run Foreground="#888" FontSize="14" Text="{Binding Url}" />
+                  </TextBlock>
+                  <TextBlock>
+                    <Run Foreground="#aaa" Text="Tla: " />
+                    <Run Foreground="#888" FontSize="14" Text="{Binding Tla}" />
+                  </TextBlock>
+                </StackPanel>
+              </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTipService.ShowDuration" Value="600111" />
+            <Setter Property="Foreground" Value="#c70" />
+            <!--
+        <Setter Property="Background" Value="{Binding StatusInfo, Converter={cmn:StatusBrush}}" />
+        <Setter Property="Foreground" Value="#aaa" />
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding Path=InvoiceId}" Value="{x:Null}">
+            <Setter Property="Foreground" Value="Black" />
+          </DataTrigger>
+        </Style.Triggers>
+        -->
+          </Style>
+        </DataGrid.Resources>
+        <!--MouseDoubleClick="DataGrid_MouseDoubleClick"-->
+        <DataGrid.Columns>
+          <DataGridCheckBoxColumn Binding="{Binding IsTitleInFilename}" Header="TiF"  ToolTipService.ToolTip="Is Title in filename" />
+          <DataGridCheckBoxColumn Binding="{Binding IsDeleted}"					Header="Del"  ToolTipService.ToolTip="Set IsDeleted flag" />
+          <DataGridCheckBoxColumn Binding="{Binding IsActive}"					Header="On"		ToolTipService.ToolTip="Set IsActive flag" />
+          <DataGridCheckBoxColumn Binding="{Binding IsNewerFirst}"			Header="Rev"	ToolTipService.ToolTip="IsNewerFirst" />
+          <DataGridTemplateColumn Header="  State  " >
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid Background="{Binding StatusInfo, Converter={cmn:StatusBrush}}" HorizontalAlignment="Stretch" >
+                  <TextBlock Text="{Binding StatusInfo}" HorizontalAlignment="Center" Foreground="#fff" />
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn  Binding="{Binding Name}"																							Header="Name" />
+          <DataGridTextColumn  Binding="{Binding Note}"																							Header="Note" Width="*"  />
+          <!--<DataGridTextColumn  Binding="{Binding LastCheckedAt, StringFormat={}{0:yy-MM-dd HH:mm}}" Header="Last Checked" />
+        <DataGridTextColumn  Binding="{Binding Url}"																							Header="Url" /> -->
+          <DataGridTextColumn  Binding="{Binding LastCastAt,    StringFormat={}{0:yy-MM-dd}}"       Header="Last Cast " />
+          <DataGridTextColumn  Binding="{Binding AcptblAgeDay}"																			Header="AA&#10;(day)" ElementStyle="{StaticResource CenterAlignStyle}"  />
+          <DataGridTextColumn  Binding="{Binding AdOffsetSec}"																			Header="Ad&#10;(sec)" ElementStyle="{StaticResource CenterAlignStyle}"  />
+
+
+          <DataGridTextColumn  Binding="{Binding SubFolderEx}"			Header="Fol&#10;der" />
+          <DataGridTextColumn  Binding="{Binding Tla}"						Header="Pre&#10;fix" />
+          <DataGridTextColumn  Binding="{Binding PartSizeMin}"		Header="PtSz&#10;(min)" />
+          <!--dfd
+        <DataGridTextColumn  Binding="{Binding LastCheckedPC}" Header="Last Checked PC" />
+        <DataGridTextColumn  Binding="{Binding Tla}" Header="Tla" />
+        <DataGridTextColumn  Binding="{Binding AddedAt}" Header="Added At" />
+        <DataGridTextColumn  Binding="{Binding HostMachineId}" Header="Host Machine Id" />
+        <DataGridTextColumn  Binding="{Binding Id}" Header="Id" />
+        <DataGridTextColumn  Binding="{Binding IgnoreBefore}" Header="Ignore Before" />
+        <DataGridCheckBoxColumn Binding="{Binding IsActiveDbg}" Header="Is Active Dbg" />
+        <DataGridTextColumn  Binding="{Binding KbPerMin}" Header="Kb Per Min" />
+        dfds-->
+
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <DataGrid Grid.Row="1" x:Name="dgH" ItemsSource="{Binding AvailableDnLds}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" 
+              SelectedItem="{Binding SelectedDnLd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Grid.Column="2" Margin="4" Foreground="#00f" RowHeight="17" RowDetailsTemplate="{StaticResource RowDtlTemplateAl2}" 
+                Grid.RowSpan="2" >
+        <DataGrid.Resources>
+          <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="{Binding AvailableLastDate, Converter={cmn:IsTodayClr}}"/>
+            <Setter Property="ToolTipService.ToolTip">
+              <Setter.Value>
+                <StackPanel Orientation="Vertical" MaxWidth="700" >
+                  <TextBlock Text="{Binding Feed.Name}"				TextWrapping="Wrap" MaxWidth="440" Foreground="#c70" FontSize="20" />
+                  <TextBlock Text="{Binding CastTitle}"				TextWrapping="Wrap" MaxWidth="440" Foreground="#00f" FontSize="16" />
+
+                  <TextBlock TextWrapping="Wrap" Margin="0 12">
+                    <Run Foreground="#aaa" Text="Sum: " />
+                    <Run Foreground="#00f" FontSize="16" Text="{Binding CastSummary}" />
+                  </TextBlock>
+                  <TextBlock TextWrapping="Wrap" >
+                    <Run Foreground="#aaa" Text="File: " />
+                    <Run Foreground="#00f" FontSize="14" Text="{Binding CastFilenameExt}" />
+                  </TextBlock>
+                  <TextBlock TextWrapping="Wrap" >
+                    <Run Foreground="#aaa" Text="URL: " />
+                    <Run Foreground="#00f" FontSize="10" Text="{Binding CastUrl}" />
+                  </TextBlock>
+                  <TextBlock TextWrapping="Wrap" >
+                    <Run Foreground="#aaa" Text="Note: " />
+                    <Run Foreground="#777" FontSize="12" Text="{Binding Note}" />
+                  </TextBlock>
+
+                  <TextBlock Text="{Binding DownloadedToDir}"			TextWrapping="Wrap" MaxWidth="440" Foreground="#00f" FontSize="14" />
+                </StackPanel>
+              </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTipService.ShowDuration" Value="600777" />
+          </Style>
+        </DataGrid.Resources>
+        <DataGrid.ContextMenu>
+          <ContextMenu >
+            <MenuItem Header="Dnld ...tested???"   Command="{Binding DnldOneCmd}"				CommandParameter="{Binding ElementName=dgH}" />
+            <MenuItem Header="{Binding CastTitle, FallbackValue=NoGo, RelativeSource={RelativeSource AncestorType=DataGrid}}" Command="{Binding DataContext.DnldOneCmd, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+            <MenuItem Header="{Binding CastTitle, FallbackValue=NoGo, ElementName=SelectedDnLd}" Command="{Binding DataContext.DnldOneCmd, ElementName=dgH}" />
+            <MenuItem Header="{Binding CastTitle, FallbackValue=NoGo, ElementName=SelectedDnLd}" Command="{Binding Path=DataContext.DnldOneCmd, ElementName=dgH}" />
+            <Separator />
+            <MenuItem Header="Delete ...tested???" Command="{Binding DeleteOneCmd}"			CommandParameter="{Binding ElementName=dgH}" />
+          </ContextMenu >
+        </DataGrid.ContextMenu>
+        <DataGrid.Columns>
+          <DataGridTextColumn  Header="Title"							Binding="{Binding CastTitle}" Width="*" />
+          <DataGridTextColumn  Header="Published"					Binding="{Binding PublishedAt,		StringFormat={}{0:yy-MM-dd}}"/>
+          <DataGridTextColumn  Header="Mb"     						Binding="{Binding CastFileLength, StringFormat={}{0:N0}, Converter={cmn:Divider}}" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn  Header="Min"              	Binding="{Binding DurationMin,		StringFormat={}{0:N1}}" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn  Header="Downloaded"        Binding="{Binding DownloadedAt,		StringFormat={}{0:yy-MM-dd HH:mm}}"	Foreground="#d00" />
+          <DataGridTextColumn  Header="Note"							Binding="{Binding Note}" Width="111"  />
+          <DataGridTemplateColumn  Header="Do"				>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid Background="{Binding DnldStatusId, Converter={cmn:StatusBrush}}"  >
+                  <Button Content="DL" Command="{Binding DataContext.DnldOneCmd, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding ElementName=dgD}" Margin="2 0" Height="14" Width="22" Padding="-2" FontSize="7" />
+                  <!--//tu: Bind button in DataTemplate to command in the form's ViewModel
+                also try:
+                Command="{Binding ElementName=dgH, Path=DataContext.DnldOneCmd}"
+                -->
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn  Header="Last Avail"				Binding="{Binding AvailableLastDate,  StringFormat={}{0:yy-MM-dd}}" Foreground="{Binding AvailableLastDate, Converter={cmn:IsTodayClr}}" Width="Auto" />
+          <DataGridCheckBoxColumn  Header="Redo"					Binding="{Binding ReDownload}" />
+          <!--<DataGridHyperlinkColumn Header="HLnk"					Binding="{Binding DurationMin, StringFormat={}{0:N1}}" ContentBinding="{Binding DurationMin, StringFormat={}{0:N1}}" />-->
+
+          <!--
+        <DataGridTextColumn  Header="Filename"					Binding="{Binding CastFilenameExt}" Width="88"   />
+        <DataGridTextColumn  Header="Cast Url" Binding="{Binding CastUrl}"/>
+        <DataGridTextColumn  Header="Downloaded Length" Binding="{Binding DownloadedLength, FallbackValue=10}"/>
+        <DataGridTextColumn  Header="Downloaded By PC" Binding="{Binding DownloadedByPC}"/>
+        <DataGridTextColumn  Header="Downloaded To Dir" Binding="{Binding DownloadedToDir}"/>
+        <DataGridTextColumn  Header="Cast Summary" Binding="{Binding CastSummary}"/>-->
+        </DataGrid.Columns>
+        <!--<DataGrid.RowStyle>
+          <Style TargetType="DataGridRow">
+          </Style>
+        </DataGrid.RowStyle>-->
+      </DataGrid>
+
+      <DataGrid Grid.Row="4" x:Name="dgX" ItemsSource="{Binding FilteredDnLds}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False" Visibility="{Binding ElementName=tbs, Path=Text, Converter={cmn:LenToVis}}"
+              SelectedItem="{Binding SelectedDnLd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Grid.ColumnSpan="3" Foreground="#00f" RowHeight="23">
+        <DataGrid.Resources>
+          <Style TargetType="DataGridRow">
+            <Setter Property="ToolTipService.ToolTip">
+              <Setter.Value>
+                <StackPanel Orientation="Vertical">
+                  <TextBlock Text="{Binding Feed.Name}"				TextWrapping="Wrap" MaxWidth="333" Foreground="#c70" FontSize="16" />
+                  <TextBlock Text="{Binding CastTitle}"				TextWrapping="Wrap" MaxWidth="333" Foreground="#00f" FontSize="16" />
+                  <TextBlock Text="{Binding CastFilenameExt}" TextWrapping="Wrap" MaxWidth="333" Foreground="#888" />
+                  <TextBlock Text="{Binding CastUrl}"					TextWrapping="Wrap" MaxWidth="333" Foreground="#00f" FontSize="8" />
+                  <TextBlock Text="{Binding Note}"						TextWrapping="Wrap" MaxWidth="333" Foreground="#666" />
+                  <TextBlock Text="{Binding CastSummary}"			TextWrapping="Wrap" MaxWidth="333" Foreground="#00f" FontSize="14" />
+                </StackPanel>
+              </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTipService.ShowDuration" Value="29000" />
+            <Setter Property="Foreground" Value="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" />
+            <!--
+        <Setter Property="Background" Value="{Binding StatusInfo, Converter={cmn:StatusBrush}}" />
+        <Setter Property="Foreground" Value="#aaa" />
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding Path=InvoiceId}" Value="{x:Null}">
+            <Setter Property="Foreground" Value="Black" />
+          </DataTrigger>
+        </Style.Triggers>
+        -->
+          </Style>
+        </DataGrid.Resources>
+        <DataGrid.ContextMenu>
+          <ContextMenu >
+            <MenuItem Header="CutOneCmd" Command="{Binding CutOneCmd}"				CommandParameter="{Binding ElementName=mainWin}" />
+          </ContextMenu >
+        </DataGrid.ContextMenu>
+        <DataGrid.Columns>
+          <!--<DataGridComboBoxColumn Header="Status"  SelectedItemBinding="{Binding DnldStatusId}" ItemsSource="{Binding Source={StaticResource myEnum}}" /> http://msdn.microsoft.com/en-us/library/system.windows.controls.datagridcomboboxcolumn(v=vs.110).aspx-->
+
+          <DataGridTemplateColumn Header="" >
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid Background="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" HorizontalAlignment="Stretch" Width="16" >
+                  <TextBlock Text="{Binding DnldStatusId}" HorizontalAlignment="Center" Foreground="#fff" ToolTip="{Binding Note}" ToolTipService.ShowDuration="999" />
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTextColumn  Header="Feed"							Binding="{Binding Feed.Name}" />
+          <DataGridTextColumn  Header="Title"							Binding="{Binding CastTitle}" Width="222" />
+          <DataGridTextColumn  Header="Filename"					Binding="{Binding CastFilenameExt}" Width="*"   />
+          <DataGridTextColumn  Header="Min"              	Binding="{Binding DurationMin, StringFormat={}{0:N1}}" />
+          <DataGridTextColumn  Header="Download Start"		Binding="{Binding DownloadStart, StringFormat={}{0:yy-MM-dd HH:mm}}"	Foreground="#090" />
+          <DataGridTextColumn  Header="Download Finish"		Binding="{Binding DownloadedAt,  StringFormat={}{0:yy-MM-dd HH:mm}}"	Foreground="#d00" />
+          <DataGridTextColumn  Header="Note"							Binding="{Binding Note}" Width="222"  />
+          <DataGridTextColumn  Header="Published"					Binding="{Binding PublishedAt, StringFormat={}{0:yy-MM-dd}}"/>
+          <DataGridTextColumn  Header="Row Added"					Binding="{Binding RowAddedAt,  StringFormat={}{0:yy-MM-dd HH:mm}}"  Foreground="Brown" Width="98" />
+          <DataGridTextColumn  Header="Last Avail"				Binding="{Binding AvailableLastDate,  StringFormat={}{0:yy-MM-dd}}" Foreground="#808" Width="Auto" />
+          <DataGridCheckBoxColumn  Header="ReDl"	  			Binding="{Binding ReDownload}" />
+          <!--
+          <DataGridTextColumn  Header="Kb"     						Binding="{Binding CastFileLength, StringFormat={}{0:N0}}" />
+        <DataGridTextColumn  Header="Cast Url" Binding="{Binding CastUrl}"/>
+        <DataGridTextColumn  Header="Downloaded Length" Binding="{Binding DownloadedLength, FallbackValue=10}"/>
+        <DataGridTextColumn  Header="Downloaded By PC" Binding="{Binding DownloadedByPC}"/>
+        <DataGridTextColumn  Header="Downloaded To Dir" Binding="{Binding DownloadedToDir}"/>
+        <DataGridTextColumn  Header="Cast Summary" Binding="{Binding CastSummary}"/>-->
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <DataGrid Grid.Row="4" x:Name="dgD" ItemsSource="{Binding CurrentDnLds}" EnableRowVirtualization="True" AutoGenerateColumns="False" CanUserAddRows="False"  Visibility="{Binding ElementName=tbs, Path=Text, Converter={cmn:LenToVis  IsInverted=True}}"
+              SelectedItem="{Binding SelectedDnLd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Grid.ColumnSpan="3" Foreground="#00f" RowHeight="23">
+        <DataGrid.Resources>
+          <Style TargetType="DataGridRow">
+            <Setter Property="ToolTipService.ToolTip" Value="{Binding CastSummary}" />
+            <!--<Setter Property="ToolTipService.ToolTip" Value="{Binding CastUrl}" />-->
+            <Setter Property="ToolTipService.ShowDuration" Value="29000" />
+            <Setter Property="Foreground" Value="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" />
+            <!--
+        <Setter Property="Background" Value="{Binding StatusInfo, Converter={cmn:StatusBrush}}" />
+        <Setter Property="Foreground" Value="#aaa" />
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding Path=InvoiceId}" Value="{x:Null}">
+            <Setter Property="Foreground" Value="Black" />
+          </DataTrigger>
+        </Style.Triggers>
+        -->
+          </Style>
+        </DataGrid.Resources>
+        <DataGrid.ContextMenu>
+          <ContextMenu >
+            <MenuItem Header="CutOneCmd" Command="{Binding CutOneCmd}"				CommandParameter="{Binding ElementName=mainWin}" />
+            <!--<MenuItem Header="_Correct Cast Duration" Click="onCorrectDuration"/>-->
+          </ContextMenu >
+        </DataGrid.ContextMenu>
+        <DataGrid.Columns>
+          <!--<DataGridComboBoxColumn Header="Status"  SelectedItemBinding="{Binding DnldStatusId}" ItemsSource="{Binding Source={StaticResource myEnum}}" /> http://msdn.microsoft.com/en-us/library/system.windows.controls.datagridcomboboxcolumn(v=vs.110).aspx-->
+
+          <DataGridTemplateColumn Header="" >
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid Background="{Binding DnldStatusId, Converter={cmn:StatusBrush}}" HorizontalAlignment="Stretch" Width="16" >
+                  <TextBlock Text="{Binding DnldStatusId}" HorizontalAlignment="Center" Foreground="#fff" ToolTip="{Binding Note}" ToolTipService.ShowDuration="29999" />
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn Header="Progress" >
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid Width="80">
+                  <ProgressBar Minimum="0" Maximum="{Binding CastFileLength, FallbackValue=100}" Value="{Binding DownloadedLength, FallbackValue=10}" />
+                  <TextBlock Text="{Binding DownloadedLength, FallbackValue=10, StringFormat={}{0:N1}, Converter={cmn:Divider}}" HorizontalAlignment="Left"  Foreground="Yellow" />
+                  <TextBlock Text="{Binding CastFileLength,  FallbackValue=100, StringFormat={}{0:N1}, Converter={cmn:Divider}}" HorizontalAlignment="Right" Foreground="Black" />
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTemplateColumn >
+            <DataGridTemplateColumn.Header>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="mb/m " Foreground="#00f" />
+                <TextBlock Text=" min " Foreground="#090" />
+                <TextBlock Text=" ETA"  Foreground="#800" />
+              </StackPanel>
+            </DataGridTemplateColumn.Header>
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <Grid HorizontalAlignment="Stretch" Background="#fff" >
+
+                  <cmn:SpeedProj Time0="{Binding DownloadStart, FallbackValue='00:00'}"
+                               LenTotal="{Binding CastFileLength, FallbackValue=100}"
+                               LenCurrent="{Binding DownloadedLength, FallbackValue=10}"/>
+
+                  <!--<StackPanel>
+                  <cmm:ucSimple Txt="{Binding Note}" />
+                  <cmm:ucSimple Txt="{Binding Note, Mode=OneTime}" />
+                  <cmm:ucSimple Txt="{Binding Note, Mode=OneWay}" />
+                  <cmm:ucSimple Txt="{Binding Note, Mode=OneWayToSource}" />
+                  <cmm:ucSimple Txt="{Binding Note, Mode=TwoWay}" />
+                </StackPanel>-->
+
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+
+          <DataGridTextColumn  Header="Feed"							Binding="{Binding Feed.Name}" />
+          <DataGridTextColumn  Header="Title"							Binding="{Binding CastTitle}" Width="*" />
+          <DataGridTextColumn  Header="Filename"					Binding="{Binding CastFilenameExt}" Width="180"   />
+          <DataGridTextColumn  Header="Min"              	Binding="{Binding DurationMin, StringFormat={}{0:N1}}" />
+          <DataGridTextColumn  Header="Download Start"		Binding="{Binding DownloadStart, StringFormat={}{0:yy-MM-dd HH:mm}}"	Foreground="#090" />
+          <DataGridTextColumn  Header="Download Finish"		Binding="{Binding DownloadedAt,  StringFormat={}{0:yy-MM-dd HH:mm}}"	Foreground="#d00" />
+          <DataGridTextColumn  Header="Note"							Binding="{Binding Note}" Width="222"  />
+          <DataGridTextColumn  Header="Published"					Binding="{Binding PublishedAt, StringFormat={}{0:yy-MM-dd}}"/>
+          <DataGridTextColumn  Header="Row Added"					Binding="{Binding RowAddedAt,  StringFormat={}{0:yy-MM-dd HH:mm}}" Foreground="Brown" Width="98" />
+          <DataGridCheckBoxColumn  Header="ReDld "  			Binding="{Binding ReDownload}" />
+          <!--
+          <DataGridTextColumn  Header="Kb"     						Binding="{Binding CastFileLength, StringFormat={}{0:N0}}" />
+        <DataGridTextColumn  Header="Cast Url" Binding="{Binding CastUrl}"/>
+        <DataGridTextColumn  Header="Downloaded Length" Binding="{Binding DownloadedLength, FallbackValue=10}"/>
+        <DataGridTextColumn  Header="Downloaded By PC" Binding="{Binding DownloadedByPC}"/>
+        <DataGridTextColumn  Header="Downloaded To Dir" Binding="{Binding DownloadedToDir}"/>
+        <DataGridTextColumn  Header="Cast Summary" Binding="{Binding CastSummary}"/>-->
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <Grid Grid.Row="1" Grid.Column="2" Margin="80,6,0,0" Background="#1000" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Height="21" >
+        <Label Content="Searc_h:" HorizontalAlignment="Left" Height="21" Margin="0" Target="{Binding ElementName=tbs}" Padding="2" Foreground="Black" />
+        <TextBox Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged, Delay=333}" Margin="42,1,2,1" Name="tbs" VerticalAlignment="Center" Padding="0" BorderThickness="0" Height="19" FontWeight="SemiBold" Foreground="DarkOrange" />
+      </Grid>
+
+      <GridSplitter Grid.Column="1"								HorizontalAlignment="Stretch"	VerticalAlignment="Stretch" Background="#aaa"  Width="8" Margin="0" Grid.RowSpan="4" />
+      <GridSplitter Grid.Column="0" Grid.Row="3"	HorizontalAlignment="Stretch" Background="#aaa" Height="8" Margin="0" Grid.ColumnSpan="3" />
+      <!--<GridSplitter Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  ShowsPreview="True" Background="#ccc" Height="8" Margin="0 0 0 -4" Grid.ColumnSpan="2" Visibility="{Binding ElementName=tbs, Path=Text, Converter={cmn:LenToVis  IsInverted=True}}"/>-->
+
+    </Grid>
+  </Border>
+</Window>
