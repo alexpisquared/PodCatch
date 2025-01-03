@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\c\AsLink\DB\DbSaveMsgBox.cs" Link="AsLink\DB\DbSaveMsgBox.cs" />
