@@ -144,7 +144,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   Brush _FC = Brushes.Gray;       /**/ public Brush FC { get => _FC; set => Set(ref _FC, value); }
   Brush _DC = Brushes.Gray;       /**/ public Brush DC { get => _DC; set => Set(ref _DC, value); }
   Brush _AG = Brushes.Gray;       /**/ public Brush AG { get => _AG; set => Set(ref _AG, value); }
-  public ObservableCollection<Feed> FeedList { get; set; }
+  public ObservableCollection<Feed> FeedList { get; set; } = [];
   public ObservableCollection<DnLd> DnLdList { get; set; } = [];
 
   Feed _SelectFeed;               /**/ public Feed SelectFeed { get => _SelectFeed; set { if (Set(ref _SelectFeed, value)) threadAwareRun(onChgdSelectFeed2); } }
