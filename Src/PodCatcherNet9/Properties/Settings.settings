@@ -5,11 +5,11 @@
     <Setting Name="AppSettings" Type="System.String" Scope="User">
       <Value Profile="(Default)">AppSettings</Value>
     </Setting>
-    <Setting Name="TagCsv" Type="System.String" Scope="User">
-      <Value Profile="(Default)">fat, ron rosedalE</Value>
+    <Setting Name="xEmtpy" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Empty...?</Value>
     </Setting>
-    <Setting Name="xEmpty" Type="System.String" Scope="User">
-      <Value Profile="(Default)">+++</Value>
+    <Setting Name="TagCsv" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fat,ron rosedale</Value>
     </Setting>
   </Settings>
 </SettingsFile>

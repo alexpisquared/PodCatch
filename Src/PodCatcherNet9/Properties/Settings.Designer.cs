@@ -37,25 +37,25 @@ namespace PodCatcherNet9.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("fat, ron rosedalE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Empty...?")]
+        public string xEmtpy {
+            get {
+                return ((string)(this["xEmtpy"]));
+            }
+            set {
+                this["xEmtpy"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("fat,ron rosedale")]
         public string TagCsv {
             get {
                 return ((string)(this["TagCsv"]));
             }
             set {
                 this["TagCsv"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("+++")]
-        public string xEmpty {
-            get {
-                return ((string)(this["xEmpty"]));
-            }
-            set {
-                this["xEmpty"] = value;
             }
         }
     }
