@@ -26,11 +26,11 @@
     <PackageReference Include="System.Speech" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Db.PodcastMgt.Ne9.b\Db.PodcastMgt.Ne9.b.csproj" />
     <ProjectReference Include="..\Port.Net9\AAV.Mvvm\AAV.Mvvm.Ne9.csproj" />
     <ProjectReference Include="..\Port.Net9\AAV.Sys\AAV.Sys.4.8.Ne9.csproj" />
     <ProjectReference Include="..\Port.Net9\AAV.WPF\AAV.WPF.4.8.Ne9.csproj" />
     <ProjectReference Include="..\..\..\AAV.Shared\Src\NetLts\StandardLib\StandardLib.csproj" />
-    <ProjectReference Include="..\Db.PodcastMgt.Net9\Db.PodcastMgt.Ne9.csproj" />
     <ProjectReference Include="..\PodCatcher.PodcastConditioning.Net9\PodcastConditioning.Ne9.csproj" />
   </ItemGroup>
   <ItemGroup>
