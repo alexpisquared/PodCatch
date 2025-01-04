@@ -143,7 +143,7 @@ namespace PodCatcherNet9.ViewModels
         Appender += "\nF4. Annons generation ... ";
         Val4 = 33;
 
-        foreach (var path in Directory.GetDirectories(MiscHelper.DirPlyr, "*.*", SearchOption.AllDirectories))
+        foreach (var path in Directory.GetDirectories(MiscHelper.DirMirr, "*.*", SearchOption.AllDirectories))
           await PostDnldHelper.GenerateAllAndFolderAnons(_db, path);
 
 #if DEBUG

@@ -45,9 +45,9 @@ namespace PodCatcherNet9.Helpers
  _ignoreList = @"C:\0\0\WebScrape\PodcastClient\IgnoreList.txt";
 #endif
 
-    public static string DirRoot => ConstHelper.PodRoot + ConstHelper._0Pod;
+    public static string DirRoot => ConstHelper.PodRoot + ConstHelper._0Pod_;
     public static string DirPlyr => ConstHelper.PodRoot + ConstHelper._Plyr;
-    public static string DirPlr2 => ConstHelper.PodRoot + ConstHelper._Plr2;
+    public static string DirMirr => ConstHelper.PodRoot + ConstHelper._Mirr;
     public static string Dir1Cut => ConstHelper.PodRoot + ConstHelper._1Cut;
 
     static string safeFileName(string str) => str.Replace(":", ";").Replace("+", "-")

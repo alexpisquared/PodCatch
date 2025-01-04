@@ -6,12 +6,17 @@ namespace PodcastClientTpl
   public class ConstHelper // ORG RO
   {
     public const string
-            _0Pod = "0Pod",
-            _PLYR = "_Player",
-            _Mirr = "_Mirror",
-            _Plyr = @$"{_0Pod}\{_PLYR}",
-            _Plr2 = $@"{_Plyr}\{_Mirr}",
-            _1Cut = @$"{_0Pod}\Cuts",
+            _0Pod_ = "0Pod",
+            _PLYR_ = "_Player",
+            _Mirr_ = "_Mirror",
+            _Plyr = @$"{_0Pod_}\{_PLYR_}",
+#if DEBUG
+    _Mirr = $@"{_Plyr}\DevDbg",
+#else
+    _Mirr = $@"{_Plyr}\{_Mirr_}",
+#endif
+
+            _1Cut = @$"{_0Pod_}\Cuts",
             _Lbry = @"\Videos\",
             _AllSrc = @"", // @"1\pod\",
             _VideoTrg = @"1\v\pod\";
@@ -48,7 +53,7 @@ namespace PodcastClientTpl
 
         //var myPictures = Windows.Storage.StorageLibrary.GetLibraryAsync(Windows.Storage.KnownLibraryId.Pictures);
 
-        string root0Pod = root + _0Pod;
+        string root0Pod = root + _0Pod_;
 
         if (!Directory.Exists(root0Pod))
           Directory.CreateDirectory(root0Pod);

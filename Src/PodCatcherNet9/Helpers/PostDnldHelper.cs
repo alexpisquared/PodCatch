@@ -165,7 +165,7 @@ namespace PodCatcherNet9.Helpers
           _db.TrySaveReport();
       }
 
-      Debug.Write($"Final: {dr.DurationMin,5:N1}, approx: {approximationBySize,5:N1}, {dr.CastTitle}\n");
+      Debug.Write($"Minutes:  .Duration: {dr.DurationMin,5:N2},   approx by filesize: {approximationBySize,5:N2}    {dr.CastTitle}\n");
     }
 
     private static void collectTotalTime(A0DbContext _db, System.Collections.Generic.IEnumerable<string> walkmanPlayableFiles, out int ttlCasts, out double ttlDurnMin)
@@ -204,8 +204,8 @@ namespace PodCatcherNet9.Helpers
           var freeMb = new DriveInfo(target.Substring(0, 1)).AvailableFreeSpace / 1000000;
           if (freeMb < 100) return $"Free space is too small:  {freeMb} Mb. Must be not a player connected.";
 
-          Process.Start(new ProcessStartInfo(@"cmd", $@" /k robocopy  C:\Users\alexp\Videos\0Pod\{ConstHelper._PLYR}\  {target}\   /MIR   /XF *.DB *.BAT *.WAV    /XD bbc-wd ch9 BpM   /W:2 "));
-          Process.Start(new ProcessStartInfo(Path.Combine(target, ConstHelper._PLYR)));
+          Process.Start(new ProcessStartInfo(@"cmd", $@" /k robocopy  C:\Users\alexp\Videos\0Pod\{ConstHelper._PLYR_}\  {target}\   /MIR   /XF *.DB *.BAT *.WAV    /XD bbc-wd ch9 BpM   /W:2 "));
+          Process.Start(new ProcessStartInfo(Path.Combine(target, ConstHelper._PLYR_)));
           return null;
         }
       }

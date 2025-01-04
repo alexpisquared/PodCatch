@@ -52,7 +52,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
       _synth.Volume = 5;
       reLoadFeedList();
       reloadTopNnRecentDnlds();
-      _synth.SpeakAsync("Loading done!");
+      _synth.SpeakAsync(".Net 9.0 version is loaded!");
 
       Appender = $"{FeedList.Count} / {DnLdList.Count} feeds/dnlds    {(_autoStart ? "Auto staritng ..." : "")} \r\n";
 
@@ -354,8 +354,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   }
   void onChgdSelectFeed2()
   {
-    if (IsCntDnOn)
-      IsCntDnOn = false;
+    //if (IsCntDnOn)      IsCntDnOn = false;
 
     IsFeedNmVsbl = SelectFeed == null;
 

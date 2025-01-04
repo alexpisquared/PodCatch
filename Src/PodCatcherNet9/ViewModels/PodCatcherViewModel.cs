@@ -202,7 +202,7 @@ namespace PodCatcherNet9.ViewModels
 
 		public ICommand GenerateAnoncesCmd { get { return _GenerateAnoncesCmd ?? (_GenerateAnoncesCmd = new RelayCommand(async x => await onGenerateAnonces(x), x => canGenerateAnonces) { GestureKey = Key.F9, GestureModifier = ModifierKeys.None }); } }		ICommand _GenerateAnoncesCmd;
 		public bool canGenerateAnonces { get { return canGenerateAnoncesProp; } }
-		async Task onGenerateAnonces(object x) { Bpr.Beep1of2(); canGenerateAnoncesProp = false; await PostDnldHelper.GenerateAllAndFolderAnons(Db, MiscHelper.DirPlr2); Bpr.Beep2of2(); canGenerateAnoncesProp = true; }
+		async Task onGenerateAnonces(object x) { Bpr.Beep1of2(); canGenerateAnoncesProp = false; await PostDnldHelper.GenerateAllAndFolderAnons(Db, MiscHelper.DirMirr); Bpr.Beep2of2(); canGenerateAnoncesProp = true; }
 
 		public ICommand DnldCastCmd { get { return _DnldCastCmd ?? (_DnldCastCmd = new RelayCommand(async x => await onDnldCast(x), x => canDnldCast) { GestureKey = Key.F11, GestureModifier = ModifierKeys.None }); } }		ICommand _DnldCastCmd;
 		public bool canDnldCast { get; set; }

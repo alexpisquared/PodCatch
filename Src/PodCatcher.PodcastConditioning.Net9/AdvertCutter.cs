@@ -42,19 +42,20 @@ namespace PodcastConditioning
 
       if (File.Exists(anonsFile)) File.Delete(anonsFile);
 
-      if (durnMin > 2)
-        try
-        {
-          var dn = (durnMin == ConstHelper.Unknown4004Duration) ? "unknown " :
-            (durnMin > 8 ? $"{durnMin:N0}" : $"{durnMin:N1}");
-          var py = (DateTime.Today - pubDate).TotalDays > 732 ? $"{pubDate.Year}" : (DateTime.Today - pubDate).TotalDays > 150 ? $"{pubDate: MMMM d yyyy}" : $"{pubDate: MMMM d}";
-          var ss = $"'{RemoveFirstCharacterIfFollowedBySpace(castTitle)}', (duration: {dn}).";
-          if (castsLeft < 10)
-            ss += $" Followed by {(castsLeft - 1)} others.";
+      if (durnMin < .333) return;
 
-          CreateWavConvertToMp3File(anonsFile, ss);
-        }
-        catch (Exception ex) { ex.Log(); }
+      try
+      {
+        var dn = (durnMin == ConstHelper.Unknown4004Duration) ? "unknown " :
+          (durnMin > 8 ? $"{durnMin:N0}" : $"{durnMin:N1}");
+        var py = (DateTime.Today - pubDate).TotalDays > 732 ? $"{pubDate.Year}" : (DateTime.Today - pubDate).TotalDays > 150 ? $"{pubDate: MMMM d yyyy}" : $"{pubDate: MMMM d}";
+        var ss = $"'{RemoveFirstCharacterIfFollowedBySpace(castTitle)}', (duration: {dn}).";
+        if (castsLeft < 10)
+          ss += $" Followed by {(castsLeft - 1)} others.";
+
+        CreateWavConvertToMp3File(anonsFile, ss);
+      }
+      catch (Exception ex) { ex.Log(); }
     }
 
     private static string RemoveFirstCharacterIfFollowedBySpace(string castTitle)

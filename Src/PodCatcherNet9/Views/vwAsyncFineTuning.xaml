@@ -375,7 +375,7 @@
       <TextBox x:Name="tbSF" Text="{Binding SrchF,   UpdateSourceTrigger=PropertyChanged, Delay=333}" Width="120" />
       -->
 
-        <Label Content="      Searc_h" Target="{Binding ElementName=tbSD}" />
+        <Label Content=".Net 9.0 Jan 2025                  Searc_h" Target="{Binding ElementName=tbSD}" />
         <TextBox x:Name="tbSD" Text="{Binding SrchD,   UpdateSourceTrigger=PropertyChanged, Delay=333}" Width="120" />
 
         <TextBlock VerticalAlignment="Center" Margin="4 0">
