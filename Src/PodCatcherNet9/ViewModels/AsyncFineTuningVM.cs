@@ -153,7 +153,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   ICommand _F1UpdtFeeds;          /**/ public ICommand F1UpdtFeedsCmd => _F1UpdtFeeds ??= new RelayCommand(onF1UpdtFeeds, x => canF1UpdtFeeds) { GestureKey = Key.F1, GestureModifier = ModifierKeys.None };
   ICommand _F2FindNewDL;          /**/ public ICommand F2FindNewDLCmd => _F2FindNewDL ??= new RelayCommand(async x => await onF2FindNewDL(x), x => canF2FindNewDL) { GestureKey = Key.F2, GestureModifier = ModifierKeys.None };
   ICommand _F3DnLdCasts;          /**/ public ICommand F3DnLdCastsCmd => _F3DnLdCasts ??= new RelayCommand(onF3DnLdCasts, x => canF3DnLdCasts) { GestureKey = Key.F3, GestureModifier = ModifierKeys.None };
-  ICommand _F4AnonsGenr;          /**/ public ICommand F4AnonsGenrCmd => _F4AnonsGenr ??= new RelayCommand(onF4AnonsGenr, x => canF4AnonsGenr) { GestureKey = Key.F4, GestureModifier = ModifierKeys.None };
+  ICommand _F4AnnonsGenr;          /**/ public ICommand F4AnnonsGenrCmd => _F4AnnonsGenr ??= new RelayCommand(onF4AnnonsGenr, x => canF4AnnonsGenr) { GestureKey = Key.F4, GestureModifier = ModifierKeys.None };
   ICommand _F9All4Steps;          /**/ public ICommand F9All4StepsCmd => _F9All4Steps ??= new RelayCommand(onF9All4Steps, x => canF9All4Steps) { GestureKey = Key.F9, GestureModifier = ModifierKeys.None };
   ICommand _CancelAsy;            /**/ public ICommand CancelAsyCmd => _CancelAsy ??= new RelayCommand(onCancelAsy, x => canCancelAsy) { GestureKey = Key.F6, GestureModifier = ModifierKeys.None };
   ICommand _F6;                   /**/ public ICommand F6Cmd => _F6 ??= new RelayCommand(onF6, x => canF6) { GestureKey = Key.F6, GestureModifier = ModifierKeys.None };
@@ -180,8 +180,8 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   async Task onF2FindNewDL(object p) { IsCntDnOn = false; IsBusy = true; Bpr.Beep1of2(); await asy2FindNewDL(); IsBusy = false; Bpr.Beep2of2(); await refreshUi(); }
   public bool canF3DnLdCasts => !IsBusy;
   async void onF3DnLdCasts(object p) { IsCntDnOn = false; IsBusy = true; Bpr.Beep1of2(); await asy3UpdtDnLds(); IsBusy = false; Bpr.Beep2of2(); await refreshUi(); }
-  public bool canF4AnonsGenr => !IsBusy;
-  async void onF4AnonsGenr(object p) { IsCntDnOn = false; IsBusy = true; Bpr.Beep1of2(); await asy4AnonsGenr(); IsBusy = false; Bpr.Beep2of2(); await refreshUi(); }
+  public bool canF4AnnonsGenr => !IsBusy;
+  async void onF4AnnonsGenr(object p) { IsCntDnOn = false; IsBusy = true; Bpr.Beep1of2(); await asy4AnnonsGenr(); IsBusy = false; Bpr.Beep2of2(); await refreshUi(); }
   public bool canF9All4Steps => !IsBusy;
   async void onF9All4Steps(object p) { IsCntDnOn = false; IsBusy = true; await asyAll4Steps(); IsBusy = false; await refreshUi(); }
   public bool canCancelAsy => IsBusy;

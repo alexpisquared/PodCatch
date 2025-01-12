@@ -117,9 +117,9 @@ namespace PodCatcherNet9.ViewModels
         {
           InfoApnd = string.Format("All downloads have finished. Pausing for a bit to get cutting of the last download to start.");
           await Task.Delay(10333); //let the last downloaded file to start creating cut folder (lest launch two cutters for the same file).
-          InfoApnd = string.Format("Pausing is over: movin on to final anons generation.");
+          InfoApnd = string.Format("Pausing is over: movin on to final annons generation.");
           await onGenerateAnonces(null);
-          InfoApnd = string.Format("Final anons generation is complete.");
+          InfoApnd = string.Format("Final annons generation is complete.");
 
           if (IsAutoNextStep)
           {

@@ -40,11 +40,11 @@ public partial class App : Application
             //vw.ShowDialog();
 
 
-            //await new AsyncFineTuningVM(false).asy4AnonsGenr();
+            //await new AsyncFineTuningVM(false).asy4AnnonsGenr();
             //NAudioHelper.Test();
             //var rv = Helpers.PostDnldHelper.CopyToMp3Player();
             //AdvertCutter.WavDevDbgPoc();
-            PodcastConditioning.AdvertCutter.CreateSummaryAnons(123, @"D:\Users\alex\Videos\0Pod\_Player\_Player");
+            PodcastConditioning.AdvertCutter.CreateSummaryAnnons(123, @"D:\Users\alex\Videos\0Pod\_Player\_Player");
             //Process.Start(new ProcessStartInfo("cmd", " /k robocopy"));      Application.Current.Shutdown();      return;
             ////new PodCatcherNet9.RAD.FeedDbGrid().ShowDialog();			
             ////BindableBaseViewModel.ShowMvvm(new AsyncFineTuningVM(false), new vwAsyncFineTuning());

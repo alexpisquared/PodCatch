@@ -11,7 +11,7 @@
     public static string AudioExtDsv => AllMediaExtensions.Replace(",", "");
 
     public static string WalkmanPlayableExtDsv => ".mp3";
-    public static string AnonsExt => " .wav.mp3";
+    public static string AnnonsExt => " .wav.mp3";
 
     public static bool IsVideo(string fullPath) => AllVideoExtensions.Contains(System.IO.Path.GetExtension(fullPath));
 

@@ -10,7 +10,7 @@ namespace PodcastClientTpl
             _PLYR_ = "_Player",
             _Mirr_ = "_Mirror",
             _Plyr = @$"{_0Pod_}\{_PLYR_}",
-#if DEBUG
+#if DEBUG_____
     _Mirr = $@"{_Plyr}\DevDbg",
 #else
     _Mirr = $@"{_Plyr}\{_Mirr_}",

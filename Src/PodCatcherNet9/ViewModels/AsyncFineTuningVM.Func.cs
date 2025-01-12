@@ -134,7 +134,7 @@ namespace PodCatcherNet9.ViewModels
       MUProgressPerc += .09; MUProgressState = TaskbarItemProgressState.Paused;
 
     }
-    public async Task asy4AnonsGenr()
+    public async Task asy4AnnonsGenr()
     {
       MUProgressPerc += .06; MUProgressState = TaskbarItemProgressState.Normal;
       try
@@ -144,7 +144,7 @@ namespace PodCatcherNet9.ViewModels
         Val4 = 33;
 
         foreach (var path in Directory.GetDirectories(MiscHelper.DirMirr, "*.*", SearchOption.AllDirectories))
-          await PostDnldHelper.GenerateAllAndFolderAnons(_db, path);
+          await PostDnldHelper.GenerateAllAndFolderAnnons(_db, path);
 
 #if DEBUG
       _synth.SpeakAsync("In debug mode, no copying to the player.");
@@ -169,14 +169,14 @@ namespace PodCatcherNet9.ViewModels
         //Bpr.BeepFDNK(2000, 100, 20);
 #if DEBUG_THIS
         Bpr.BeepDone();
-      await asy4AnonsGenr();
+      await asy4AnnonsGenr();
 #else
         await asy1UpdtFeeds();
         await asy2FindNewDL();
         await onDbSaveAsync();
         await asy3UpdtDnLds();
         await onDbSaveAsync();
-        _synth.SpeakAsync("Anons generation is not automated anymore. Use menu if needed."); // await asy4AnonsGenr();
+        _synth.SpeakAsync("Annons generation is not automated anymore. Use menu if needed."); // await asy4AnnonsGenr();
         await asy2FindNewDL(FeedList.Where(r => !r.IsDeleted).ToList());
         await onDbSaveAsync(null);
 #endif

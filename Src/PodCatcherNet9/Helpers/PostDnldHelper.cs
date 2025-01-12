@@ -81,7 +81,7 @@ namespace PodCatcherNet9.Helpers
     {
       if (trgDir.Contains(@"_NoAn"))
       {
-        return (false, $"####  '_NoAn' means skip the annonce generation.");
+        return (false, $"####  '_NoAn' means skip the announce generation.");
       }
 
       var core = new DirectoryInfo(trgDir).GetFiles("*.*", SearchOption.TopDirectoryOnly).Where(f => f.Length > 1e6);
@@ -104,14 +104,14 @@ namespace PodCatcherNet9.Helpers
       var ano = Directory.GetFiles(trgDir, "*.wav.mp3", SearchOption.TopDirectoryOnly).Count();
       var notAll = (ano - 1) * 2 < ttl - 1;
 
-      return (hasNew || notAll, $"####  {trgDir.Split('\\').LastOrDefault(),-32} Latest dnld: {lastDnloadFileTime:yyyy-MM-dd HH} => {(hasNew ? "ToDo" : "Skip")}     Anons/TTL: {ano,4}/{ttl,-4} => {(notAll ? "ToDo" : "Skip")} ==> {((notAll || hasNew) ? "ToDo" : "Skip")} ");
+      return (hasNew || notAll, $"####  {trgDir.Split('\\').LastOrDefault(),-32} Latest dnld: {lastDnloadFileTime:yyyy-MM-dd HH} => {(hasNew ? "ToDo" : "Skip")}     Annons/TTL: {ano,4}/{ttl,-4} => {(notAll ? "ToDo" : "Skip")} ==> {((notAll || hasNew) ? "ToDo" : "Skip")} ");
     }
 
-    public static async Task GenerateAllAndFolderAnons(A0DbContext _db, string pathWalkmanMirror)
+    public static async Task GenerateAllAndFolderAnnons(A0DbContext _db, string pathWalkmanMirror)
     {
       try
       {
-        var walkmanPlayableFiles = Directory.GetFiles(pathWalkmanMirror, "*.*", SearchOption.AllDirectories).Where(f => MediaHelper.WalkmanPlayableExtDsv.Contains(Path.GetExtension(f).ToLower()) && !f.EndsWith(MediaHelper.AnonsExt));
+        var walkmanPlayableFiles = Directory.GetFiles(pathWalkmanMirror, "*.*", SearchOption.AllDirectories).Where(f => MediaHelper.WalkmanPlayableExtDsv.Contains(Path.GetExtension(f).ToLower()) && !f.EndsWith(MediaHelper.AnnonsExt));
         var needReqson = isAnonGenNeeded(pathWalkmanMirror);
         if (!needReqson.needed)
         {
@@ -120,7 +120,7 @@ namespace PodCatcherNet9.Helpers
         else
         {
           collectTotalTime(_db, walkmanPlayableFiles, out var ttlCasts, out var ttlDurnMin);
-          AdvertCutter.CreateSummaryAnons(ttlDurnMin, pathWalkmanMirror);
+          //AdvertCutter.CreateSummaryAnnons(ttlDurnMin, pathWalkmanMirror);
 
           Debug.WriteLine($"<<<<  {pathWalkmanMirror,-80}: {walkmanPlayableFiles.Count(),4} media files,  \t {needReqson.reason},  {ttlDurnMin,4:N1}  min ");
 
@@ -133,13 +133,16 @@ namespace PodCatcherNet9.Helpers
             await getUpdateSaveMediaDuration(_db, file, dr);
 
 #if !__DEBUG
-            AdvertCutter.CreateOverwriteAnons(dr.Feed == null ? "Unknown feed" : dr.Feed.Name, dr.PublishedAt, dr.CastTitle, ttlCasts, ttlDurnMin, dr.DurationMin.Value, file);
+            AdvertCutter.CreateOverwriteAnnons(dr.Feed == null ? "Unknown feed" : dr.Feed.Name, dr.PublishedAt, dr.CastTitle, ttlCasts, ttlDurnMin, dr.DurationMin.Value, file);
 #endif
 
             ttlDurnMin -= dr.DurationMin.Value;
             ttlCasts--;
             Bpr.BeepOk();
           }
+
+          collectTotalTime(_db, walkmanPlayableFiles, out ttlCasts, out ttlDurnMin);
+          AdvertCutter.CreateSummaryAnnons(ttlDurnMin, pathWalkmanMirror);
         }
       }
       catch (Exception ex) { ex.Log(); }
@@ -170,13 +173,13 @@ namespace PodCatcherNet9.Helpers
 
     private static void collectTotalTime(A0DbContext _db, System.Collections.Generic.IEnumerable<string> walkmanPlayableFiles, out int ttlCasts, out double ttlDurnMin)
     {
-      var af = walkmanPlayableFiles.Where(r => !r.EndsWith(MediaHelper.AnonsExt));
+      var af = walkmanPlayableFiles.Where(r => !r.EndsWith(MediaHelper.AnnonsExt));
       ttlCasts = af.Count();
       ttlDurnMin = 0.0;
       foreach (var file in af.ToList()) //         foreach (var dir in Directory.GetDirectories(MiscHelper.Dir1Cut))
       {
-        var dr = getDnldRow(_db, file);// Path.GetFileName(dir));
-        ttlDurnMin += dr == null ? 60 : dr.DurationMin.Value;
+        var downloadRow = getDnldRow(_db, file);// Path.GetFileName(dir));
+        ttlDurnMin += downloadRow == null ? 60 : downloadRow.DurationMin.Value;
       }
     }
 

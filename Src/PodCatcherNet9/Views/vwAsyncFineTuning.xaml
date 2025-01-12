@@ -12,7 +12,7 @@
     <KeyBinding   Command="{Binding F1UpdtFeedsCmd}"	CommandParameter="{Binding ElementName=wnd}" Key="{Binding F1UpdtFeedsCmd.GestureKey}"	Modifiers="{Binding F1UpdtFeedsCmd.GestureModifier}" />
     <KeyBinding   Command="{Binding F2FindNewDLCmd}"	CommandParameter="{Binding ElementName=wnd}" Key="{Binding F2FindNewDLCmd.GestureKey}"	Modifiers="{Binding F2FindNewDLCmd.GestureModifier}" />
     <KeyBinding   Command="{Binding F3DnLdCastsCmd}"	CommandParameter="{Binding ElementName=wnd}" Key="{Binding F3DnLdCastsCmd.GestureKey}"	Modifiers="{Binding F3DnLdCastsCmd.GestureModifier}" />
-    <KeyBinding   Command="{Binding F4AnonsGenrCmd}"	CommandParameter="{Binding ElementName=wnd}" Key="{Binding F4AnonsGenrCmd.GestureKey}"	Modifiers="{Binding F4AnonsGenrCmd.GestureModifier}" />
+    <KeyBinding   Command="{Binding F4AnnonsGenrCmd}"	CommandParameter="{Binding ElementName=wnd}" Key="{Binding F4AnnonsGenrCmd.GestureKey}"	Modifiers="{Binding F4AnnonsGenrCmd.GestureModifier}" />
     <KeyBinding   Command="{Binding F9All4StepsCmd}"	CommandParameter="{Binding ElementName=wnd}" Key="{Binding F9All4StepsCmd.GestureKey}"	Modifiers="{Binding F9All4StepsCmd.GestureModifier}" />
     <KeyBinding   Command="{Binding CancelAsyCmd}"		CommandParameter="{Binding ElementName=wnd}" Key="{Binding CancelAsyCmd.GestureKey}"	Modifiers="{Binding CancelAsyCmd.GestureModifier}" />
     <KeyBinding   Command="{Binding F6Cmd}"						CommandParameter="{Binding ElementName=wnd}" Key="{Binding F6Cmd.GestureKey}"	Modifiers="{Binding F6Cmd.GestureModifier}" />
@@ -309,7 +309,7 @@
           <MenuItem Header="F_1 Updt Feeds  "		Command="{Binding F1UpdtFeedsCmd}" ToolTip="Download latest RSS XML Feeds and store to DB"	                              />
           <MenuItem Header="F_2 Find New DL  "	Command="{Binding F2FindNewDLCmd}" ToolTip="Process current RSS XML Feeds stored to DB and find/store outstanding casts" />
           <MenuItem Header="F_3 DnLd Casts  "		Command="{Binding F3DnLdCastsCmd}" ToolTip="Download outstanding casts"                                                  />
-          <MenuItem Header="F_4 Anons Genr  "		Command="{Binding F4AnonsGenrCmd}" ToolTip="Final Anons Generation"                                                      />
+          <MenuItem Header="F_4 Annons Genr  "		Command="{Binding F4AnnonsGenrCmd}" ToolTip="Final Annons Generation"                                                      />
           <Separator />
           <MenuItem Header="F_5 Cancel Async" Command="{Binding CancelAsyCmd}"     ToolTip="" />
           <MenuItem Header="F_6 Set Availbty" Command="{Binding F6Cmd}"            ToolTip="" />
