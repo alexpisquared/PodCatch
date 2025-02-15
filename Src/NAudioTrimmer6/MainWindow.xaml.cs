@@ -15,10 +15,10 @@ public partial class MainWindow : Window
 {
   readonly INAudioHelper _nauHelper;
   readonly IBitmapHelper _bmpHelper;
-  readonly DispatcherTimer _resettter, _progMover;
+  readonly DispatcherTimer _resetTimer, _progMover;
   bool _isPlaying;
-  string SettingsDefaultLastFile = @"C:\Users\alexp\Videos\0Pod\_Player\BpM\105 BPM - Globetrotter.mp3";
-  private double _markerPosn = 0;
+  string SettingsDefaultLastFile = @"C:\Users\AlexP\Videos\0Pod\_Player\BpM\105 BPM - Globetrotter.mp3";
+  private double _markerPosition = 0;
 
   public MainWindow(INAudioHelper naHelper, BitmapHelper waveImage)
   {
@@ -28,10 +28,10 @@ public partial class MainWindow : Window
     _bmpHelper = waveImage;
 
     dragPnl.MouseLeftButtonDown += (s, e) => DragMove();
-    me1.MediaOpened += MediaOpened;
-    me1.MediaFailed += MediaFailed;
     me1.MediaEnded += MediaEnded;
-    Loaded += onLoaded;
+    me1.MediaOpened += MediaOpened;
+    me1.MediaFailed += async (s, e) => await Task.Yield();
+    Loaded += async (s, e) => { if (!string.IsNullOrEmpty(SettingsDefaultLastFile)) await playNewFile(SettingsDefaultLastFile); };
     KeyDown += (s, e) =>
     {
       var step =
@@ -50,12 +50,11 @@ public partial class MainWindow : Window
     };
 
     _progMover = new DispatcherTimer(TimeSpan.FromSeconds(.02), DispatcherPriority.Normal, new EventHandler((s, e) => onPbMover()), Dispatcher.CurrentDispatcher);
-    _resettter = new DispatcherTimer(TimeSpan.FromSeconds(2), DispatcherPriority.Background, new EventHandler((s, e) => onBackToPositionA(s, null)), Dispatcher.CurrentDispatcher); //tu: one-line timer
-    _resettter.Stop();
+    _resetTimer = new DispatcherTimer(TimeSpan.FromSeconds(2), DispatcherPriority.Background, new EventHandler((s, e) => onBackToPositionA(s, null)), Dispatcher.CurrentDispatcher); //tu: one-line timer
+    _resetTimer.Stop();
     if (Debugger.IsAttached) Topmost = true;
   }
   void slS_PreviewKeyDown(object s, KeyEventArgs e) { }      //            e.Handled = true;
-  async void onLoaded(object s, RoutedEventArgs e) { if (!string.IsNullOrEmpty(SettingsDefaultLastFile)) await playNewFile(SettingsDefaultLastFile); }
   async void MediaOpened(object s, RoutedEventArgs e)
   {
     hlPath.NavigateUri = new Uri(tbPath.Text = $"{System.IO.Path.GetDirectoryName(me1.Source.LocalPath)}\\");
@@ -68,14 +67,13 @@ public partial class MainWindow : Window
     _progMover.Start();
     await Task.Yield();
   }
-  async void MediaFailed(object s, ExceptionRoutedEventArgs e) => await Task.Yield();
+
   async void MediaEnded(object s, RoutedEventArgs e) => await Task.Delay(25); /*_progMover.Stop();*/
   async void OnDrop(object s, DragEventArgs e)
   {
     if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
-    var files = e.Data.GetData(DataFormats.FileDrop) as string[];
-    if (files is null || files.Length < 1) return;
+    if (e.Data.GetData(DataFormats.FileDrop) is not string[] files || files.Length < 1) return;
 
     _ = string.Join("|", files);      //if (ex.KeyStates == DragDropKeyStates.ControlKey)			//	m.LoadNewMedia(csv);//TODO: Add to the curent list			//else			//	m.LoadNewMedia(csv);
 
@@ -95,7 +93,7 @@ public partial class MainWindow : Window
   {
     slA.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(w40k).X / ((ProgressBar)s).ActualWidth;
     Trace.WriteLine($"  {((MouseDevice)e.Device).GetPosition(w40k).X}    {((MouseDevice)e.Device).GetPosition(sv1).X}    {((MouseDevice)e.Device).GetPosition(root).X}");
-    _markerPosn = ((MouseDevice)e.Device).GetPosition(sv1).X - 50;
+    _markerPosition = ((MouseDevice)e.Device).GetPosition(sv1).X - 50;
   }
 
   void pb1_MouseUp_R_B(object s, MouseButtonEventArgs e) => slB.Value = me1.NaturalDuration.TimeSpan.TotalSeconds * ((MouseDevice)e.Device).GetPosition(w40k).X / ((ProgressBar)s).ActualWidth;
@@ -110,11 +108,11 @@ public partial class MainWindow : Window
     }
 
     if (me1.NaturalDuration.HasTimeSpan)
-      sv1.ScrollToHorizontalOffset(-_markerPosn + (w40k.ActualWidth * me1.Position.TotalSeconds / me1.NaturalDuration.TimeSpan.TotalSeconds));
+      sv1.ScrollToHorizontalOffset(-_markerPosition + (w40k.ActualWidth * me1.Position.TotalSeconds / me1.NaturalDuration.TimeSpan.TotalSeconds));
 
     await Task.Yield();
   }
-  async void onTglAutoResetter(object s, RoutedEventArgs e) { _resettter.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
+  async void onTglAutoResetter(object s, RoutedEventArgs e) { _resetTimer.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
   async void onTglProgMoverter(object s, RoutedEventArgs e) { if (_progMover is null) return; _progMover.IsEnabled = ((CheckBox)s).IsChecked == true; await Task.Yield(); }
   async void onRequestNavigate(object s, System.Windows.Navigation.RequestNavigateEventArgs e)
   {

@@ -44,6 +44,7 @@ public class NAudioHelper : INAudioHelper
                       graphics.DrawLine(pen, xPos, y0 + max, xPos, y0 - max);
 #else
           graphics.DrawLine(pen, xPos, y0 + yScale * buffer.Max(), xPos, y0 + yScale * buffer.Min());
+#endif
 
         Debug.WriteLine($"Len:{reader.Length:N0} / batchLen:{batchLen:N0} = {reader.Length / batchLen:N0} ?? {xPos:N0}");
       }
