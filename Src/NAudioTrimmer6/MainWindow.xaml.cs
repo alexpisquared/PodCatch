@@ -75,7 +75,7 @@ public partial class MainWindow : Window
 
     if (e.Data.GetData(DataFormats.FileDrop) is not string[] files || files.Length < 1) return;
 
-    _ = string.Join("|", files);      //if (ex.KeyStates == DragDropKeyStates.ControlKey)			//	m.LoadNewMedia(csv);//TODO: Add to the curent list			//else			//	m.LoadNewMedia(csv);
+    //_ = string.Join("|", files);      //if (ex.KeyStates == DragDropKeyStates.ControlKey)			//	m.LoadNewMedia(csv);//TODO: Add to the curent list			//else			//	m.LoadNewMedia(csv);
 
     SettingsDefaultLastFile = files.First();
     //Settings.Default.Save();

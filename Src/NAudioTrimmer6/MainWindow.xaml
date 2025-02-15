@@ -18,9 +18,11 @@
       <Setter Property="Background" Value="Transparent"/>
     </Style>
     <Style TargetType="Button">
-      <Setter Property="Margin" Value="10 5"/>
+      <Setter Property="Margin"  Value="10 2"/>
+      <Setter Property="Padding" Value="16 8"/>
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="MinWidth" Value="160"/>
+      <Setter Property="Background" Value="#1fff" />
     </Style>
     <Style TargetType="CheckBox">
       <Setter Property="Margin" Value="10 5"/>
