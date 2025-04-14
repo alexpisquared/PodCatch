@@ -12,7 +12,7 @@
     <Compile Include="..\..\..\..\c\AsLink\UI\Converters.Basic.cs" Link="AsLink\Converters.Basic.cs" />
     <Compile Include="..\..\..\..\c\AsLink\UI\HighlightableTextBlock.cs" Link="AsLink\HighlightableTextBlock.cs" />
     <Compile Include="..\..\..\AAV.Shared\Src\Net6.0\AAV.UI\Converters\ConverterEx.cs" Link="AsLink\ConverterEx.cs" />
-    <Compile Include="..\..\..\ScSv\Src\AlexPi.Scr\WebScrap\WebScraper.cs" Link="AsLink\WebScraper.cs" />
+    <Compile Include="..\..\..\AAV.ScrSvr\Src\AlexPi.Scr\WebScrap\WebScraper.cs" Link="AsLink\WebScraper.cs" />
     <Compile Include="..\..\..\TypeCatch\Src\sln\TypeCatch\AsLink\Ext.DbContext.cs" Link="AsLink\DB\Ext.DbContext.cs" />
   </ItemGroup>
   <ItemGroup>
