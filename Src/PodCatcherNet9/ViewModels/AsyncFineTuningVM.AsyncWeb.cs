@@ -130,6 +130,8 @@ namespace PodCatcherNet9.ViewModels
 
     async Task startDownload(DnLd dnld)
     {
+      await Task.Delay(100); // trying to fix runtime error .. probably if returns before awaited task is started
+
       var file = dnld.FullPathFile(MiscHelper.DirPlyr);
       if (File.Exists(file))
       {
@@ -138,28 +140,87 @@ namespace PodCatcherNet9.ViewModels
         return;
       }
 
+      if (dnld.DnldStatusId == "P") // Pending manual confirmation         //DateTime.Now != DateTime.Today)
+        return;
+
       var diry = Path.GetDirectoryName(file);
       if (!Directory.Exists(diry)) Directory.CreateDirectory(diry);
 
+      using var handler = new HttpClientHandler();
+      handler.UseDefaultCredentials = true;
+      handler.Proxy = WebRequest.DefaultWebProxy;
+      handler.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 
-      var wc = new WebClient
+      using var client = new HttpClient(handler);
+
+      try
       {
-        Proxy = WebRequest.DefaultWebProxy //TU: 1/2
-      };
+        dnld.DnldStatusId = _IsBeingDownloaded; // Is Being Downloaded
+        dnld.ModifiedAt = DateTime.Now;
+        dnld.DownloadStart = DateTime.Now;
+        dnld.DownloadedAt = null;
 
-      wc.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials; //TU: 2/2
-      wc.BaseAddress = dnld.CastUrl;
-      wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
-      wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
-      await wc.DownloadFileTaskAsync(new Uri(dnld.CastUrl), file);
+        using var response = await client.GetAsync(dnld.CastUrl, HttpCompletionOption.ResponseHeadersRead);
+        response.EnsureSuccessStatusCode();
 
-      Debug.WriteLine("{0:HH:mm:ss.fff} - ### Is it done downloading? ###", DateTime.Now);
+        var totalBytes = response.Content.Headers.ContentLength ?? -1L;
 
-      dnld.DnldStatusId = _IsBeingDownloaded; // Is Being Downloaded
-      dnld.ModifiedAt = DateTime.Now;
-      dnld.DownloadStart = DateTime.Now;
-      dnld.DownloadedAt = null;                     //no need here as there is no changes yet: if (dgD != null) Application.Current.Dispatcher.BeginInvoke(new Action(() => dgD.Items.Refresh()));
+        using var contentStream = await response.Content.ReadAsStreamAsync();
+        using var fileStream = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+
+        var buffer = new byte[8192];
+        long bytesRead = 0;
+        var isComplete = false;
+
+        while (!isComplete)
+        {
+          var read = await contentStream.ReadAsync(buffer, 0, buffer.Length);
+          if (read == 0)
+          {
+            isComplete = true;
+            continue;
+          }
+
+          await fileStream.WriteAsync(buffer, 0, read);
+          bytesRead += read;
+
+          // Report progress
+          dnld.DownloadedLength = bytesRead;
+
+          // Throttle UI updates
+          var now = DateTime.Now;
+          if (now >= _nextRefreshTime)
+          {
+            _nextRefreshTime = now.AddMilliseconds(999);
+            await Task.Delay(1); // Allow UI to refresh
+          }
+        }
+
+        // Download completed successfully
+        if (dnld.CastFileLength < bytesRead) dnld.CastFileLength = bytesRead;
+        dnld.DnldStatusId = _HasBeenDownloaded; // HasBeenDownloaded
+        dnld.ReDownload = false;
+        dnld.DownloadedAt = DateTime.Now;
+        dnld.DownloadedByPC = Environment.MachineName;
+        dnld.DownloadedToDir = MiscHelper.DirPlyr;
+        dnld.DownloadedLength = new FileInfo(file).Length;
+        File.SetCreationTime(file, dnld.PublishedAt);
+
+        Bpr.BeepOk();
+      }
+      catch (Exception ex)
+      {
+        Appender += $"Error downloading '{dnld.CastTitle}': {ex.InnermostMessage()}. ";
+        dnld.DnldStatusId = _Failed; // Failed to Download
+        dnld.ErrLog += $"\r\nDnld failed: {ex}";
+        if (dnld.ErrLog.Length > 1020) dnld.ErrLog = dnld.ErrLog.Substring(0, 1020);
+      }
+      finally
+      {
+        dnld.ModifiedAt = DateTime.Now;
+      }
     }
+
     async void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
     {
       var now = DateTime.Now; if (now < _nextRefreshTime) return; _nextRefreshTime = now.AddMilliseconds(999);

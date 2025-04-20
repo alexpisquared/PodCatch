@@ -51,7 +51,7 @@ namespace PodCatcherNet9.ViewModels
     {
       MUProgressPerc += .06; MUProgressState = TaskbarItemProgressState.Normal;
 
-      var feeds = feedsParam ?? FeedList.Where(r => r.RunTimeNote.StartsWith(__new)).ToList();        //var lst = FeedList.Where(r => r.Name == "CBC Ideas "); //.RunTimeNote.StartsWith(__new));
+      var feeds = feedsParam ?? FeedList.Where(r => r.RunTimeNote.StartsWith(__new))?.ToList();        //var lst = FeedList.Where(r => r.Name == "CBC Ideas "); //.RunTimeNote.StartsWith(__new));
 
       Max2 = feeds.Sum(r => r.DnLds.Where(d => d.IsStillOnline == true).Count());
 

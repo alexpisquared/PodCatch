@@ -49,10 +49,9 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
     {
       //await Task.Delay(220);
 
-      _synth.Volume = 5;
+      _synth.Volume = 25;
       reLoadFeedList();
       reloadTopNnRecentDnlds();
-      _synth.SpeakAsync(".Net 9.0 version is loaded!");
 
       Appender = $"{FeedList.Count} / {DnLdList.Count} feeds/dnlds    {(_autoStart ? "Auto staritng ..." : "")} \r\n";
 
