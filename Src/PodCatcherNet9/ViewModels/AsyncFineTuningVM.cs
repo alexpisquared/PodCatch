@@ -33,10 +33,10 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   readonly System.Speech.Synthesis.SpeechSynthesizer _synth = new();
 
   public AsyncFineTuningVM(bool autoStart) => _autoStart = autoStart;
-  protected override async Task AutoExecAsync()
+  public async Task AutoExec__Async()
   {
     await base.AutoExecAsync();
-    
+
     Bpr.Beep1of2();
 
 
@@ -47,7 +47,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
 
     try
     {
-      await Task.Delay(220);
+      //await Task.Delay(220);
 
       _synth.Volume = 5;
       reLoadFeedList();
@@ -94,26 +94,26 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
   protected override bool CanClose() => !IsCntDnOn;
 
   Func<Task> CountDown(double delaySec) => async () =>
-                                               {
-                                                 int fmin = 800, fadd = 800, pow = 9, minDur = 50;
-                                                 var startTime = DateTime.Now.AddSeconds(delaySec);
-                                                 while (IsCntDnOn && DateTime.Now < startTime)
-                                                 {
-                                                   var secLeft = Math.Abs((startTime - DateTime.Now).TotalSeconds);
-                                                   var _0to1 = Math.Abs(Math.Pow((delaySec - secLeft) / delaySec, pow)); //0 - 1
-                                                   var frq = (int)(fmin + (fadd * _0to1)); //500 - 5500
-                                                   var dur = minDur + (int)(1000 * _0to1);
-                                                   Appender += $"\r\nLaunching in {(startTime - DateTime.Now).TotalSeconds:N0} seconds ... Alt-B to aBort  {dur:N1}";
-                                                   Bpr.BeepFD(frq, dur);
-                                                   //InfoMsg = "";
-                                                   await Task.Delay(1000 - dur); Debug.WriteLine("{0} - {1}", pow, dur);
-                                                 }
+  {
+    int fmin = 260, fadd = 80, pow = 9, minDur = 50;
+    var startTime = DateTime.Now.AddSeconds(delaySec);
+    while (IsCntDnOn && DateTime.Now < startTime)
+    {
+      var secLeft = Math.Abs((startTime - DateTime.Now).TotalSeconds);
+      var _0to1 = Math.Abs(Math.Pow((delaySec - secLeft) / delaySec, pow)); //0 - 1
+      var frq = (int)(fmin + (fadd * _0to1)); //500 - 5500
+      var dur = minDur + (int)(1000 * _0to1);
+      Appender += $"\r\nLaunching in {(startTime - DateTime.Now).TotalSeconds:N0} seconds ... Alt-B to aBort  {dur:N1}";
+      Bpr.BeepFD(frq, dur);
+      //InfoMsg = "";
+      await Task.Delay(1000 - dur); Debug.WriteLine("{0} - {1}", pow, dur);
+    }
 
-                                                 Appender = "";
+    Appender = "";
 
-                                                 if (IsCntDnOn)
-                                                   Bpr.BeepFD(fmin + fadd, 1000);
-                                               };
+    if (IsCntDnOn)
+      Bpr.BeepFD(fmin + fadd, 1000);
+  };
 
   string _cv = "?!@#";            /**/ public string CurVer { get => _cv; set => Set(ref _cv, value); }
   string _SrchF;                  /**/ public string SrchF { get => _SrchF; set { if (Set(ref _SrchF, value) && value.Length > 0) { onSearchF(value); } } }
@@ -202,7 +202,7 @@ public partial class AsyncFineTuningVM : BindableBaseViewModel
         CloseAppCmd.Execute(p);
       else
       {
-        retry:
+      retry:
         switch (MessageBox.Show(_db.GetDbChangesReport(22), "Save Changes?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes))
         {
           case MessageBoxResult.Yes: var rowsSaved = _db.TrySaveReport().rowsSavedCnt; if (rowsSaved < 0) goto retry; CloseAppCmd.Execute(p); break;

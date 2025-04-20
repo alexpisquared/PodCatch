@@ -276,13 +276,13 @@
         </TransformGroup>
       </Grid.LayoutTransform>
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition x:Name="ph" />
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="2*"/>
-        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto" MinHeight="8" />
+        <RowDefinition Height="Auto" MinHeight="8" />
+        <RowDefinition Height="Auto" MinHeight="8" />
+        <RowDefinition x:Name="ph"   MinHeight="8" />
+        <RowDefinition Height="Auto" MinHeight="8" />
+        <RowDefinition Height="2*"   MinHeight="8" />
+        <RowDefinition Height="Auto" MinHeight="8" />
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
@@ -290,8 +290,8 @@
         <ColumnDefinition Width="3*"/>
       </Grid.ColumnDefinitions>
 
-      <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" MaxHeight="98" VerticalScrollBarVisibility="Hidden" >
-        <TextBlock Text="{Binding Appender, FallbackValue=123}" ToolTip="{Binding Appender}" Margin="15 0" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" Foreground="#08f" />
+      <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" MaxHeight="98" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+        <TextBlock Text="{Binding Appender, FallbackValue='All stuff ... narrative, in other words.'}" ToolTip="{Binding Appender}" Margin="15 0" MaxWidth="1920" ToolTipService.ShowDuration="999999" VerticalAlignment="Top" Foreground="#0bf" />
       </ScrollViewer>
 
       <Menu x:Name="MainMenu" HorizontalAlignment="Right" Grid.ColumnSpan="4" Background="Transparent" Foreground="#08f" >
@@ -664,7 +664,8 @@
       </DataGrid>
       <CheckBox Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="7 4" IsChecked="{Binding RowDtlVisModeD}" Content="_2" />
 
-      <GridSplitter Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 -3" Background="Transparent" />
+      <GridSplitter Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Margin="0 -3" Background="#3800" Height="8" />
+      <GridSplitter Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 -3" Background="#3800" />
 
     </Grid>
   </Border>

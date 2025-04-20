@@ -1,31 +1,20 @@
-﻿using System;
+﻿using AAV.WPF.Helpers;
+using PodCatcherNet9.ViewModels;
+using PodCatcherNet9.Views;
+using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using AAV.WPF.Helpers;
-using AsLink;
-using PodCatcherNet9.ViewModels;
-using PodCatcherNet9.Views;
-using AAV.WPF.Helpers;
-using System;
-using System.Configuration;
-using System.Data;
-using System.Windows;
-using System.Windows.Controls;
-
 namespace PodCatcherNet9;
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App : Application
 {
   public static DateTime AppStartAt = DateTime.Now;
 
-  protected override void OnStartup(StartupEventArgs e)
+  protected override async void OnStartup(StartupEventArgs e)
   {
     Application.Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
     EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler((s, re) => { (s as TextBox).SelectAll(); })); //tu: TextBox
-    ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue)); //tu: ToolTip ShowDuration !!!
+    ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue)); //tu: ToolTip ShowDuration !!!
 
     //DevOpStartup.SetupTracingOptions("PodCatcherNet9");            //ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
@@ -53,11 +42,10 @@ public partial class App : Application
             //((PodCatcherViewModel)vm).Pnl1 = (((vwMain__Old)vw).pnl1);
             //var rv = BindableBaseViewModel.ShowModalMvvm(vm, vw);
 #else
-    MVVM.Common.BindableBaseViewModel.ShowModalMvvm(new AsyncFineTuningVM(true), new vwAsyncFineTuning());
+    var vm = new AsyncFineTuningVM(true);
+    MVVM.Common.BindableBaseViewModel.ShowMvvm(vm, new vwAsyncFineTuning());
+    await vm.AutoExec__Async();
 #endif
-
-    Thread.Sleep(500);
-    Application.Current.Shutdown();
   }
 }
 

@@ -18,6 +18,10 @@ namespace PodCatcherNet9.ViewModels
 {
   public partial class AsyncFineTuningVM : BindableBaseViewModel
   {
+    string _IsBeingDownloaded = "I";
+    string _HasBeenDownloaded = "H";
+    string _Failed = "F";
+
     async Task asyUpdtFeedsCT(CancellationToken ct, List<Feed> feedList)
     {
       using (var handler = new HttpClientHandler())// { Credentials = ... })
@@ -61,9 +65,9 @@ namespace PodCatcherNet9.ViewModels
 
         var dnLdCopyOrWhat = await firstFinishedTask;     // InfoMsg += string.Format("\r\n RV:  {0,4}  '{1}' {2}", dnLdCopyOrWhat.Id, dnLdCopyOrWhat.ErrLog, "");
         dnLdCopyOrWhat.RunTimeNote = string.Format("Dnloaded, eh?");
-        if (dnLdCopyOrWhat.DnldStatusId == "I") //dbl chk/assign-t to H.
+        if (dnLdCopyOrWhat.DnldStatusId == _IsBeingDownloaded) //dbl chk/assign-t to H.
         {
-          dnLdCopyOrWhat.DnldStatusId = "H";
+          dnLdCopyOrWhat.DnldStatusId = _HasBeenDownloaded;
           dnLdCopyOrWhat.ReDownload = false;
         }
         Val3++;
@@ -109,7 +113,7 @@ namespace PodCatcherNet9.ViewModels
       try
       {        //HttpResponseMessage response = await client.GetAsync(dnLd.CastUrl, ct);        byte[]  RssText = await response.Content.ReadAsByteArrayAsync();        var latestRssText = System.Text.Encoding.Default.GetString(RssText);
         dnld.RunTimeNote = string.Format("### DnLd Launched ###");
-        dnld.DnldStatusId = "I"; // Is Being Downloaded
+        dnld.DnldStatusId = _IsBeingDownloaded; // Is Being Downloaded
         dnld.ModifiedAt = DateTime.Now;
         dnld.DownloadStart = DateTime.Now;
         await startDownload(dnld);
@@ -127,13 +131,22 @@ namespace PodCatcherNet9.ViewModels
     async Task startDownload(DnLd dnld)
     {
       var file = dnld.FullPathFile(MiscHelper.DirPlyr);
+      if (File.Exists(file))
+      {
+        dnld.DnldStatusId = "Q"; // Question: it is already there .. let's not download it again!!!!!!!!! 2025
+        dnld.Note = "■ ■ ■ File is already there .. let's not download it again!!!!!!!!!";
+        return;
+      }
+
       var diry = Path.GetDirectoryName(file);
       if (!Directory.Exists(diry)) Directory.CreateDirectory(diry);
+
 
       var wc = new WebClient
       {
         Proxy = WebRequest.DefaultWebProxy //TU: 1/2
       };
+
       wc.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials; //TU: 2/2
       wc.BaseAddress = dnld.CastUrl;
       wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
@@ -142,7 +155,7 @@ namespace PodCatcherNet9.ViewModels
 
       Debug.WriteLine("{0:HH:mm:ss.fff} - ### Is it done downloading? ###", DateTime.Now);
 
-      dnld.DnldStatusId = "I"; // Is Being Downloaded
+      dnld.DnldStatusId = _IsBeingDownloaded; // Is Being Downloaded
       dnld.ModifiedAt = DateTime.Now;
       dnld.DownloadStart = DateTime.Now;
       dnld.DownloadedAt = null;                     //no need here as there is no changes yet: if (dgD != null) Application.Current.Dispatcher.BeginInvoke(new Action(() => dgD.Items.Refresh()));
@@ -168,13 +181,13 @@ namespace PodCatcherNet9.ViewModels
       if (e.Error != null && !string.IsNullOrEmpty(e.Error.Message))
       {
         Appender += $"Error downloading '{dr.CastTitle}':  {e.Error.InnermostMessage()}. ";
-        dr.DnldStatusId = "F"; // Failed to Download
+        dr.DnldStatusId = _Failed; // Failed to Download
         dr.ErrLog += $"\r\nDnld failed: {e.Error}";
         if (dr.ErrLog.Length > 1020) dr.ErrLog = dr.ErrLog.Substring(0, 1020);  // Trunkate(dr.ErrLog, 1000);
       }
       else
       {
-        dr.DnldStatusId = "H"; // HasBeenDownloaded
+        dr.DnldStatusId = _HasBeenDownloaded; // HasBeenDownloaded
         dr.ReDownload = false;
         dr.DownloadedAt = DateTime.Now;
         dr.DownloadedByPC = Environment.MachineName;

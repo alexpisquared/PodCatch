@@ -77,6 +77,8 @@ namespace PodCatcherNet9.ViewModels
 
     public Grid Pnl1 { get { return _pnl1; } set { _pnl1 = value; } }
     Grid _pnl1 = null;
+    string _NewJustCreated = "N";
+
     void checkAllFeeds(object pnl1)
     {
       if (_pnl1 == null)
@@ -207,7 +209,7 @@ namespace PodCatcherNet9.ViewModels
             CastSummary = safeLen(rss.CastSumry, 1023).Replace("\n\n", Environment.NewLine), // string.IsNullOrEmpty(rss.CastSumry) ? "" : rss.CastSumry.Length >= 1023 ? rss.CastSumry.Substring(0, 1023) : rss.CastSumry,
             CastTitle = rss.CastTitle,
             CastUrl = rss.OrgSrcUrl,
-            DnldStatusId = "N",
+            DnldStatusId = _NewJustCreated,
             FeedId = feed.Id,
             Feed = feed,
             IsDownloading = false,
