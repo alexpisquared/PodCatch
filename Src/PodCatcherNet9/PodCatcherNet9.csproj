@@ -4,6 +4,7 @@
     <TargetFramework>net9.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
+    <ApplicationIcon>Assets\2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\c\AsLink\DB\DbSaveMsgBox.cs" Link="AsLink\DB\DbSaveMsgBox.cs" />
@@ -16,6 +17,7 @@
     <Compile Include="..\..\..\TypeCatch\Src\sln\TypeCatch\AsLink\Ext.DbContext.cs" Link="AsLink\DB\Ext.DbContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\2.ico" />
     <Content Include="Assets\PopBest.wav" />
   </ItemGroup>
   <ItemGroup>

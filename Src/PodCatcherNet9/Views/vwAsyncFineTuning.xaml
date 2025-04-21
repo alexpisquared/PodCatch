@@ -4,7 +4,7 @@
                 xmlns:stb="clr-namespace:AAV.Common"
                 xmlns:xui="clr-namespace:PodCatcherNet9.Views"
                 Style="{StaticResource WindowStyle_Aav0}"
-                Title="{Binding WinTitle}" Height="380" Width="2000">
+                Title="{Binding WinTitle}" Height="380" Width="2000" Icon="/Assets/rss.ico">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="10" />
   </WindowChrome.WindowChrome>
