@@ -30,9 +30,9 @@
       <ResourceDictionary.MergedDictionaries>
         <!--
         <ResourceDictionary Source="/AAV.AsLink.WPF;component/AsLink/Theme.Color.Lite.VaporWave.xaml" />-->
-        <ResourceDictionary Source="/AAV.WPF;component/ColorScheme/Theme.Color.Dark.Google.xaml" />
-        <ResourceDictionary Source="/AAV.WPF;component/Base/DataGrid.Base.xaml" />
-        <ResourceDictionary Source="/AAV.WPF;component/Base/BasicDefaultsLayout.xaml" />
+        <ResourceDictionary Source="/AAV.WPF.4.8.Ne9;component/ColorScheme/Theme.Color.Dark.Google.xaml" />
+        <ResourceDictionary Source="/AAV.WPF.4.8.Ne9;component/Base/DataGrid.Base.xaml" />
+        <ResourceDictionary Source="/AAV.WPF.4.8.Ne9;component/Base/BasicDefaultsLayout.xaml" />
       </ResourceDictionary.MergedDictionaries>
 
       <Style TargetType="{x:Type stb:HighlightableTextBlock}">

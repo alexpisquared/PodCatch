@@ -13,7 +13,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\Base\BasicDefaultsLayout.xaml" Link="Base\BasicDefaultsLayout.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Dark.Google.xaml" Link="ColorScheme\Theme.Color.Dark.Google.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Dark.Gray.xaml" Link="ColorScheme\Theme.Color.Dark.Gray.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Dark.Iress.xaml" Link="ColorScheme\Theme.Color.Dark.Iress.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Lite.Bootstrap.xaml" Link="ColorScheme\Theme.Color.Lite.Bootstrap.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Lite.Google.xaml" Link="ColorScheme\Theme.Color.Lite.Google.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Lite.Gray.xaml" Link="ColorScheme\Theme.Color.Lite.Gray.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Lite.Iress.xaml" Link="ColorScheme\Theme.Color.Lite.Iress.xaml" />
+    <Page Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\ColorScheme\Theme.Color.Lite.VaporWave.xaml" Link="ColorScheme\Theme.Color.Lite.VaporWave.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AAV.Sys\AAV.Sys.4.8.Ne9.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ColorScheme\" />
   </ItemGroup>
 
 </Project>
