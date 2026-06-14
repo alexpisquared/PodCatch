@@ -1,4 +1,4 @@
-﻿using AAV.WPF.Helpers;
+﻿using StandardLib.Helpers;
 using PodCatcherNet9.ViewModels;
 using PodCatcherNet9.Views;
 using System;
@@ -12,7 +12,7 @@ public partial class App : Application
 
   protected override async void OnStartup(StartupEventArgs e)
   {
-    Application.Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
+    //Application.Current.DispatcherUnhandledException += UnhandledExceptionHndlr.OnCurrentDispatcherUnhandledException;
     EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler((s, re) => { (s as TextBox).SelectAll(); })); //tu: TextBox
     ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue)); //tu: ToolTip ShowDuration !!!
 

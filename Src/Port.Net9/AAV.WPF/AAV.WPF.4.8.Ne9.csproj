@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\..\..\AAV.Shared\Src\net6.0\AAV.WPF\Base\WindowBase.cs" Link="Base\WindowBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AAV.Sys\AAV.Sys.4.8.Ne9.csproj" />
   </ItemGroup>
 
