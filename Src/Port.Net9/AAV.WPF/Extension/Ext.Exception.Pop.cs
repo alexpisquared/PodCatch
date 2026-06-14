@@ -1,5 +1,6 @@
 ﻿#nullable enable
-using AAV.Sys.Ext;
+//using AAV.Sys.Ext;
+using StandardLib.Extensions;
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -14,8 +15,8 @@ namespace AAV.WPF.Ext
 
       if (Debugger.IsAttached)
         Debugger.Break();
-      else
-        new AAV.WPF.View.ExceptionPopup(ex, optl, cmn, cfp, cln).ShowDialog(); //MessageBox.Show($"{cfp}({cln}): {cmn}()\r\n{(optl?.Length > 0 ? optl + "\r\n" : "")}\n{ex.InnerMessages()}", "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+      //else
+      //  new AAV.WPF.View.ExceptionPopup(ex, optl, cmn, cfp, cln).ShowDialog(); //MessageBox.Show($"{cfp}({cln}): {cmn}()\r\n{(optl?.Length > 0 ? optl + "\r\n" : "")}\n{ex.InnerMessages()}", "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
     }
   }
 }
