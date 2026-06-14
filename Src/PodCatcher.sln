@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31912.275
+# Visual Studio Version 18
+VisualStudioVersion = 18.8.11904.113 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodCatcher", "PodCatcher\PodCatcher.csproj", "{B7F44694-18B5-4F83-8CED-4F6EF48CB30A}"
 EndProject
@@ -56,6 +56,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Db.PodcastMgt.Ne9.b", "Db.PodcastMgt.Ne9.b\Db.PodcastMgt.Ne9.b.csproj", "{BE5991BA-9550-45A2-A39A-A3B47101335F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Db.PodcastMgt.EF.Net9", "Db.PodcastMgt.EF.Net9\Db.PodcastMgt.EF.Net9.csproj", "{7105AC19-CDA9-2D50-65F9-2B13919EC1FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{544DD440-8D9F-4513-B0F1-EA4894E6AC94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -737,6 +739,36 @@ Global
 		{7105AC19-CDA9-2D50-65F9-2B13919EC1FC}.Release64|x64.Build.0 = Release|Any CPU
 		{7105AC19-CDA9-2D50-65F9-2B13919EC1FC}.Release64|x86.ActiveCfg = Release|Any CPU
 		{7105AC19-CDA9-2D50-65F9-2B13919EC1FC}.Release64|x86.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|ARM.Build.0 = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|x64.Build.0 = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Debug|x86.Build.0 = Debug|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|ARM.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|ARM.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|x64.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|x64.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|x86.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release|x86.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|Any CPU.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|Any CPU.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|ARM.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|ARM.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|Mixed Platforms.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|x64.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|x64.Build.0 = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|x86.ActiveCfg = Release|Any CPU
+		{544DD440-8D9F-4513-B0F1-EA4894E6AC94}.Release64|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

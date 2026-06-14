@@ -4,11 +4,6 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\AAV.Sys\AAV.Sys.4.8.Ne9.csproj" />
-  </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿Jan 2020
 In order to use C# 8 on .Net 4.8, added this: 
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 whish is exactly what Core 3 has as well
