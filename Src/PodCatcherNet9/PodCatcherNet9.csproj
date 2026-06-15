@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+    <ApplicationIcon>Assets\2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\c\AsLink\DB\DbSaveMsgBox.cs" Link="AsLink\DB\DbSaveMsgBox.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\IsoStorage.cs" Link="AsLink\IsoStorage.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\ObservableCollectionEx.cs" Link="AsLink\ObservableCollectionEx.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\UI\Converters.Basic.cs" Link="AsLink\Converters.Basic.cs" />
+    <Compile Include="..\..\..\..\c\AsLink\UI\HighlightableTextBlock.cs" Link="AsLink\HighlightableTextBlock.cs" />
+    <Compile Include="..\..\..\AAV.Shared\Src\Net6.0\AAV.UI\Converters\ConverterEx.cs" Link="AsLink\ConverterEx.cs" />
+    <Compile Include="..\..\..\AAV.ScrSvr\Src\AlexPi.Scr\WebScrap\WebScraper.cs" Link="AsLink\WebScraper.cs" />
+    <Compile Include="..\..\..\TypeCatch\Src\sln\TypeCatch.Net5\AsLink\Ext.DbContext.cs" Link="AsLink\Ext.DbContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\2.ico" />
+    <Content Include="Assets\PopBest.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.2" />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageReference Include="Fody" Version="6.9.3" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.9" />
+    <PackageReference Include="System.Speech" Version="10.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Db.PodcastMgt.Ne9.b\Db.PodcastMgt.Ne9.b.csproj" />
+    <ProjectReference Include="..\Port.Net9\AAV.Mvvm\AAV.Mvvm.Ne9.csproj" />
+    <ProjectReference Include="..\Port.Net9\AAV.WPF\AAV.WPF.4.8.Ne9.csproj" />
+    <ProjectReference Include="..\..\..\AAV.Shared\Src\NetLts\StandardLib\StandardLib.csproj" />
+    <ProjectReference Include="..\PodCatcher.PodcastConditioning.Net9\PodcastConditioning.Ne9.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AsLink\DB\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\2.ico" />
+    <Resource Include="Assets\rss.ico" />
+    <Resource Include="Assets\Windows-media-player.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\DataSources\PodCatcher.Models.DnLd.datasource">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>
+<!--<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+</Project>-->

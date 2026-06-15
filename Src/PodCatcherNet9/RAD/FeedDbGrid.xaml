@@ -1,0 +1,46 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Models="clr-namespace:Db.PodcastMgt.DbModel;assembly=Db.PodcastMgt" mc:Ignorable="d" x:Class="PodCatcherNet9.RAD.FeedDbGrid"
+        Title="FeedDbGrid" Height="400" Width="813" Loaded="Window_Loaded">
+	<Window.Resources>
+		<CollectionViewSource x:Key="feedViewSource" d:DesignSource="{d:DesignInstance {x:Type Models:Feed}, CreateList=True}"/>
+	</Window.Resources>
+	<Grid DataContext="{StaticResource feedViewSource}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+
+		<DataGrid x:Name="feedDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="5" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Grid.ColumnSpan="1">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+				<DataGridTextColumn Width="*"   Header="Name" Binding="{Binding Name}"/>
+				<DataGridTextColumn Width="122" Header="Note" Binding="{Binding Note}"/>
+				<DataGridTextColumn Width="*"		Header="Latest Rss Xml" Binding="{Binding LatestRssXml}"/>
+				<!--<DataGridTextColumn Width="SizeToHeader" Header="Acptbl Age Day" Binding="{Binding AcptblAgeDay}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Added At" Binding="{Binding AddedAt}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Ad Offset Sec" Binding="{Binding AdOffsetSec}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Host Machine Id" Binding="{Binding HostMachineId}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Ignore Before" Binding="{Binding IgnoreBefore}"/>
+				<DataGridCheckBoxColumn Width="SizeToHeader" Header="Is Active" Binding="{Binding IsActive}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Is Active Dbg" Binding="{Binding IsActiveDbg}"/>
+				<DataGridCheckBoxColumn Width="SizeToHeader" Header="Is Deleted" Binding="{Binding IsDeleted}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Kb Per Min" Binding="{Binding KbPerMin}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Last Avail Cast Count" Binding="{Binding LastAvailCastCount}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Last Cast At" Binding="{Binding LastCastAt}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Last Checked At" Binding="{Binding LastCheckedAt}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Last Checked PC" Binding="{Binding LastCheckedPC}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Status Info" Binding="{Binding StatusInfo}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Sub Folder" Binding="{Binding SubFolderEx}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Tla" Binding="{Binding Tla}"/>
+				<DataGridTextColumn Width="SizeToHeader" Header="Url" Binding="{Binding Url}"/>-->
+			</DataGrid.Columns>
+		</DataGrid>
+		<Button Content="_X" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Bottom" Click="start0Button_Click" Grid.Column="1"/>
+		<TextBlock Grid.Column="1" Margin="10" TextWrapping="Wrap" Name="t1" />
+
+	</Grid>
+</Window>
+
+<!--//tu: Column x:Name=".*?"-->

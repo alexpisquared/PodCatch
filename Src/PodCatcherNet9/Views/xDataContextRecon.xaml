@@ -1,0 +1,84 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PodCatcherNet9.Views"
+        xmlns:DbModel="clr-namespace:Db.PodcastMgt.DbModel;assembly=Db.PodcastMgt" x:Class="PodCatcherNet9.Views.xDataContextRecon"
+        mc:Ignorable="d"
+        Title="xDataContextRecon" Height="300" Width="900" Loaded="Window_Loaded">
+  <Window.Resources>
+    <CollectionViewSource x:Key="feedViewSource" d:DesignSource="{d:DesignInstance {x:Type DbModel:Feed}, CreateList=True}"/>
+  </Window.Resources>
+  <Grid >
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="22*"/>
+      <RowDefinition Height="232*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <Grid DataContext="{StaticResource feedViewSource}" Grid.Row="1" >
+      <DataGrid x:Name="feedDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+        <DataGrid.Columns>
+          <DataGridTextColumn Width="Auto" Header="New Cast Count" Binding="{Binding NewCastCount}"/>
+          <DataGridTextColumn Width="*"    Header="Note" Binding="{Binding Note}"/>
+          <!--
+        <DataGridTextColumn x:Name="acptblAgeDayColumn" Width="SizeToHeader" Header="Acptbl Age Day" Binding="{Binding AcptblAgeDay}"/>
+        <DataGridTextColumn x:Name="addedAtColumn" Width="SizeToHeader" Header="Added At" Binding="{Binding AddedAt}"/>
+        <DataGridTextColumn x:Name="adOffsetSecColumn" Width="SizeToHeader" Header="Ad Offset Sec" Binding="{Binding AdOffsetSec}"/>
+        <DataGridTextColumn x:Name="castQntNewColumn" Width="SizeToHeader" Header="Cast Qnt New" Binding="{Binding CastQntNew}"/>
+        <DataGridTextColumn x:Name="castQntTtlColumn" Width="SizeToHeader" Header="Cast Qnt Ttl" Binding="{Binding CastQntTtl}"/>
+        <DataGridTextColumn x:Name="hostMachineIdColumn" Width="SizeToHeader" Header="Host Machine Id" Binding="{Binding HostMachineId}"/>
+        <DataGridTextColumn x:Name="idColumn" Width="SizeToHeader" Header="Id" Binding="{Binding Id}"/>
+        <DataGridTextColumn x:Name="ignoreBeforeColumn" Width="SizeToHeader" Header="Ignore Before" Binding="{Binding IgnoreBefore}"/>
+        <DataGridCheckBoxColumn x:Name="isActiveColumn" Width="SizeToHeader" Header="Is Active" Binding="{Binding IsActive}"/>
+        <DataGridTextColumn x:Name="isActiveDbgColumn" Width="SizeToHeader" Header="Is Active Dbg" Binding="{Binding IsActiveDbg}"/>
+        <DataGridCheckBoxColumn x:Name="isDeletedColumn" Width="SizeToHeader" Header="Is Deleted" Binding="{Binding IsDeleted}"/>
+        <DataGridCheckBoxColumn x:Name="isNewerFirstColumn" Width="SizeToHeader" Header="Is Newer First" Binding="{Binding IsNewerFirst}"/>
+        <DataGridCheckBoxColumn x:Name="isTitleInFilenameColumn" Width="SizeToHeader" Header="Is Title In Filename" Binding="{Binding IsTitleInFilename}"/>
+        <DataGridTextColumn x:Name="kbPerMinColumn" Width="SizeToHeader" Header="Kb Per Min" Binding="{Binding KbPerMin}"/>
+        <DataGridTextColumn x:Name="lastAvailCastCountColumn" Width="SizeToHeader" Header="Last Avail Cast Count" Binding="{Binding LastAvailCastCount}"/>
+        <DataGridTextColumn x:Name="lastCastAtColumn" Width="SizeToHeader" Header="Last Cast At" Binding="{Binding LastCastAt}"/>
+        <DataGridTextColumn x:Name="lastCheckedAtColumn" Width="SizeToHeader" Header="Last Checked At" Binding="{Binding LastCheckedAt}"/>
+        <DataGridTextColumn x:Name="lastCheckedPCColumn" Width="SizeToHeader" Header="Last Checked PC" Binding="{Binding LastCheckedPC}"/>
+        <DataGridTextColumn x:Name="latestRssTextColumn" Width="SizeToHeader" Header="Latest Rss Text" Binding="{Binding LatestRssText}"/>
+        <DataGridTextColumn x:Name="latestRssXmlColumn" Width="SizeToHeader" Header="Latest Rss Xml" Binding="{Binding LatestRssXml}"/>
+        <DataGridTextColumn x:Name="nameColumn" Width="SizeToHeader" Header="Name" Binding="{Binding Name}"/>
+        <DataGridTextColumn x:Name="partSizeMinColumn" Width="SizeToHeader" Header="Part Size Min" Binding="{Binding PartSizeMin}"/>
+        <DataGridTextColumn x:Name="priorityGroupColumn" Width="SizeToHeader" Header="Priority Group" Binding="{Binding PriorityGroup}"/>
+        <DataGridTextColumn x:Name="runTimeNoteColumn" Width="SizeToHeader" Header="Run Time Note" Binding="{Binding RunTimeNote}"/>
+        <DataGridTextColumn x:Name="srchFColumn" Width="SizeToHeader" Header="Srch F" Binding="{Binding SrchF}"/>
+        <DataGridTextColumn x:Name="statusInfoColumn" Width="SizeToHeader" Header="Status Info" Binding="{Binding StatusInfo}"/>
+        <DataGridTextColumn x:Name="subFolderColumn" Width="SizeToHeader" Header="Sub Folder" Binding="{Binding SubFolder}"/>
+        <DataGridTextColumn x:Name="subFolderExColumn" Width="SizeToHeader" IsReadOnly="True" Header="Sub Folder Ex" Binding="{Binding SubFolderEx}"/>
+        <DataGridTextColumn x:Name="tlaColumn" Width="SizeToHeader" Header="Tla" Binding="{Binding Tla}"/>
+        <DataGridTextColumn x:Name="urlColumn" Width="SizeToHeader" Header="Url" Binding="{Binding Url}"/>-->
+        </DataGrid.Columns>
+      </DataGrid>
+    </Grid>
+    <DataGrid RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Row="1" ItemsSource="{Binding FeedList}" SelectedItem="{Binding SelectFeed}"
+              EnableRowVirtualization="True" Grid.Column="1" AutoGenerateColumns="False" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+      <DataGrid.Columns>
+        <DataGridTextColumn Width="Auto" Header="New Cast Count"  Binding="{Binding NewCastCount}"/>
+        <DataGridTextColumn Width="*"    Header="Note"            Binding="{Binding Note}"/>
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Grid.ColumnSpan="2">
+      <TextBlock x:Name="tbInfo" />
+      <TextBlock Text="{Binding CurVer}" />
+      <TextBlock Text="{Binding FeedList}" />
+      <TextBlock Text="{Binding FeedList.Count}" />
+      <TextBlock Text="{Binding Appender}" />
+      <Button Content="_dc" Click="on1" />
+      <Button Content="_dc" Click="on2" />
+      <Button Content="_dc" Click="on3" />
+      <Button Content="_4" Command="{Binding FdCmd}"/>
+    </StackPanel>
+    
+  </Grid>
+</Window>

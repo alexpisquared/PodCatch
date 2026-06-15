@@ -18,9 +18,11 @@
       <Setter Property="Background" Value="Transparent"/>
     </Style>
     <Style TargetType="Button">
-      <Setter Property="Margin" Value="10 5"/>
+      <Setter Property="Margin"  Value="10 2"/>
+      <Setter Property="Padding" Value="16 8"/>
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="MinWidth" Value="160"/>
+      <Setter Property="Background" Value="#1fff" />
     </Style>
     <Style TargetType="CheckBox">
       <Setter Property="Margin" Value="10 5"/>
@@ -91,17 +93,17 @@
 
       <StackPanel  Grid.Column="1" Grid.Row="6" x:Name="cntrlPnl" Orientation="Horizontal" HorizontalAlignment="Center">
         <StackPanel>
-          <Button  Content="▼_Set slider A to current"           Click="onMediaPosnToSliderA" Foreground="#0b4" />
-          <Button  Content="▲S_et slider B to current"           Click="onMediaPosnToSliderB" Foreground="#0b4" />
+          <Button  Content="▼Set slider _A to current"           Click="onMediaPosnToSliderA" Foreground="#0b4" />
+          <Button  Content="▲Set slider _B to current"           Click="onMediaPosnToSliderB" Foreground="#0b4" />
         </StackPanel>
 
-        <Button    Content="|&lt;-_Back to Slider Point"           Click="onBackToPositionA"    Foreground="#fbb" Margin="26 0 0 0" />
-        <CheckBox  Content="_Auto-Back " Checked="onTglAutoResetter" Unchecked="onTglAutoResetter" ToolTip="Toggle Auto Resetter" FontStyle="Oblique"/>
+        <Button    Content="|&lt;-Back to _Slider Point"         Click="onBackToPositionA"    Foreground="#fbb" Margin="26 0 0 0" />
+        <CheckBox  Content="A_uto-Back " Checked="onTglAutoResetter" Unchecked="onTglAutoResetter" ToolTip="Toggle Auto Resetter" FontStyle="Oblique"/>
 
         <CheckBox  Content="_Motion    " Checked="onTglProgMoverter" Unchecked="onTglProgMoverter" ToolTip="Toggle Auto Motioner" Foreground="#08f" Background="#08f" IsChecked="True" Margin="26 0 0 0" />
 
-        <Button    Content="_Play/Pause"     Click="onTglPlay"            Foreground="#0a0" FontWeight="Bold" Margin="26 0 0 0" IsDefault="True" />
-        <Button    Content="_Trim/Save"      Click="onTrimBoth"           Foreground="#d44" FontWeight="Bold" Margin="26 0 0 0" ToolTip="Trims both ends and saves to .\Trimmed\"/>
+        <Button    Content="_Play/Pause"     Click="onTglPlay"            Foreground="#00f" FontWeight="Bold" Margin="26 0 0 0" IsDefault="True" />
+        <Button    Content="_Trim/Save"      Click="onTrimBoth"           Foreground="#f80" FontWeight="Bold" Margin="26 0 0 0" ToolTip="Trims both ends -- AT WHAT POINTS? -- and saves to .\Trimmed\"/>
         <!--<Button    Content="**"          Click="on01"                 Foreground="#888" FontWeight="SemiBold" />
       <Button    Content="_Waveform"       Click="onShowWaveform"       Foreground="#08f" FontWeight="SemiBold" x:Name="btn1"/>
       <Button    Content="**"              Click="on00"                 Foreground="#888" FontWeight="SemiBold" />-->

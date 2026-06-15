@@ -1,0 +1,15 @@
+{
+  "solution": {
+    "path": "PodCatcher.sln",
+    "projects": [
+      "..\\..\\..\\C\\AAV\\AAV.Sys\\AAV.Sys.4.8.csproj",
+      "..\\..\\AAV.Shared\\Src\\NetLts\\StandardLib\\StandardLib.csproj",
+      "Db.PodcastMgt.Ne9.b\\Db.PodcastMgt.Ne9.b.csproj",
+      "PodCatcher.PodcastConditioning.Net9\\PodcastConditioning.Ne9.csproj",
+      "PodCatcherNet9\\PodCatcherNet9.csproj",
+      "Port.Net9\\AAV.Mvvm\\AAV.Mvvm.Ne9.csproj",
+      "Port.Net9\\AAV.Sys\\AAV.Sys.4.8.Ne9.csproj",
+      "Port.Net9\\AAV.WPF\\AAV.WPF.4.8.Ne9.csproj"
+    ]
+  }
+}

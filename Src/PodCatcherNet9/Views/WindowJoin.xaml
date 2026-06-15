@@ -1,0 +1,106 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Models="clr-namespace:Db.PodcastMgt.DbModel;assembly=Db.PodcastMgt" mc:Ignorable="d" x:Class="PodCatcherNet9.Views.WindowJoin" Title="WindowJoin" Height="900" Width="1600" Left="11" Top="1111" Loaded="Window_Loaded">
+	<Window.Resources>
+		<CollectionViewSource x:Key="machineViewSource" d:DesignSource="{d:DesignInstance {x:Type Models:Machine}, CreateList=True}"/>
+		<CollectionViewSource x:Key="machineFeedsViewSource" Source="{Binding Feeds, Source={StaticResource machineViewSource}}"/>
+		<CollectionViewSource x:Key="feedViewSource" d:DesignSource="{d:DesignInstance {x:Type Models:Feed}, CreateList=True}"/>
+	</Window.Resources>
+	<Grid DataContext="{StaticResource machineViewSource}" >
+		<ListBox x:Name="machineListBox" DisplayMemberPath="Id" ItemsSource="{Binding}" Margin="66,79,1426,690" SelectedValuePath="Id"/>
+		<DataGrid x:Name="feedsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource machineFeedsViewSource}}" Margin="342,10,850,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="acptblAgeDayColumn" Binding="{Binding AcptblAgeDay}" Header="Acptbl Age Day" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="addedAtColumn" Header="Added At" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding AddedAt, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="adOffsetSecColumn" Binding="{Binding AdOffsetSec}" Header="Ad Offset Sec" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="hostMachineIdColumn" Binding="{Binding HostMachineId}" Header="Host Machine Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="ignoreBeforeColumn" Header="Ignore Before" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding IgnoreBefore, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridCheckBoxColumn x:Name="isActiveColumn" Binding="{Binding IsActive}" Header="Is Active" Width="SizeToHeader"/>
+				<DataGridCheckBoxColumn x:Name="isActiveDbgColumn" Binding="{Binding IsActiveDbg}" Header="Is Active Dbg" Width="SizeToHeader"/>
+				<DataGridCheckBoxColumn x:Name="isDeletedColumn" Binding="{Binding IsDeleted}" Header="Is Deleted" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="kbPerMinColumn" Binding="{Binding KbPerMin}" Header="Kb Per Min" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="lastAvailCastCountColumn" Binding="{Binding LastAvailCastCount}" Header="Last Avail Cast Count" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="lastCastAtColumn" Header="Last Cast At" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding LastCastAt, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn x:Name="lastCheckedAtColumn" Header="Last Checked At" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding LastCheckedAt, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="lastCheckedPCColumn" Binding="{Binding LastCheckedPC}" Header="Last Checked PC" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="noteColumn" Binding="{Binding Note}" Header="Note" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="subFolderColumn" Binding="{Binding SubFolderEx}" Header="Sub Folder" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="tlaColumn" Binding="{Binding Tla}" Header="Tla" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="urlColumn" Binding="{Binding Url}" Header="Url" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="userNameColumn" Binding="{Binding StatusInfo}" Header="User Name" Width="SizeToHeader"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<DataGrid x:Name="feedDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource feedViewSource}}" Margin="910,10,282,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="acptblAgeDayColumn1" Binding="{Binding AcptblAgeDay}" Header="Acptbl Age Day" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="addedAtColumn1" Header="Added At" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding AddedAt, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="adOffsetSecColumn1" Binding="{Binding AdOffsetSec}" Header="Ad Offset Sec" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="hostMachineIdColumn1" Binding="{Binding HostMachineId}" Header="Host Machine Id" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="ignoreBeforeColumn1" Header="Ignore Before" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding IgnoreBefore, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridCheckBoxColumn x:Name="isActiveColumn1" Binding="{Binding IsActive}" Header="Is Active" Width="SizeToHeader"/>
+				<DataGridCheckBoxColumn x:Name="isActiveDbgColumn1" Binding="{Binding IsActiveDbg}" Header="Is Active Dbg" Width="SizeToHeader"/>
+				<DataGridCheckBoxColumn x:Name="isDeletedColumn1" Binding="{Binding IsDeleted}" Header="Is Deleted" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="kbPerMinColumn1" Binding="{Binding KbPerMin}" Header="Kb Per Min" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="lastAvailCastCountColumn1" Binding="{Binding LastAvailCastCount}" Header="Last Avail Cast Count" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="lastCastAtColumn1" Header="Last Cast At" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding LastCastAt, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn x:Name="lastCheckedAtColumn1" Header="Last Checked At" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding LastCheckedAt, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="lastCheckedPCColumn1" Binding="{Binding LastCheckedPC}" Header="Last Checked PC" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="nameColumn1" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="noteColumn1" Binding="{Binding Note}" Header="Note" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="subFolderColumn1" Binding="{Binding SubFolderEx}" Header="Sub Folder" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="tlaColumn1" Binding="{Binding Tla}" Header="Tla" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="urlColumn1" Binding="{Binding Url}" Header="Url" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="userNameColumn1" Binding="{Binding StatusInfo}" Header="User Name" Width="SizeToHeader"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</Window>
