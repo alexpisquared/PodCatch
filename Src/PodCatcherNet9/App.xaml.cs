@@ -9,6 +9,7 @@ namespace PodCatcherNet9;
 public partial class App : Application
 {
   public static DateTime AppStartAt = DateTime.Now;
+  private static Timer? _scheduledAutoShutdownTimer;
 
   protected override async void OnStartup(StartupEventArgs e)
   {
@@ -19,6 +20,16 @@ public partial class App : Application
     //DevOpStartup.SetupTracingOptions("PodCatcherNet9");            //ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
     base.OnStartup(e);      //dbIni: //DBInitializer.DropCreateDB();				//test: var _db = new MediaQADB();				_db.MediaInfos.Load();				foreach (var mi in _db.MediaInfos.Local) Console.WriteLine(mi); 
+
+    if (Array.Exists(e.Args, arg => arg.Contains("Schedule", StringComparison.OrdinalIgnoreCase)))
+    {
+      _scheduledAutoShutdownTimer = new Timer(_ =>
+      {
+        _scheduledAutoShutdownTimer?.Dispose();
+        _scheduledAutoShutdownTimer = null;
+        Current?.Dispatcher.Invoke(() => Current?.Shutdown());
+      }, null, TimeSpan.FromMinutes(8), Timeout.InfiniteTimeSpan);
+    }
 
 #if DEBUG__
             //var vw = new xDataContextRecon();
