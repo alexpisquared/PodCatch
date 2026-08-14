@@ -24,8 +24,8 @@
     <PackageReference Include="EntityFramework" Version="6.5.2" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
     <PackageReference Include="Fody" Version="6.9.3" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.10" />
-    <PackageReference Include="System.Speech" Version="10.0.10" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.11" />
+    <PackageReference Include="System.Speech" Version="10.0.11" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Db.PodcastMgt.Ne9.b\Db.PodcastMgt.Ne9.b.csproj" />
