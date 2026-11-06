@@ -1,22 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net11.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\..\..\..\..\C\AavCore\AAV.Sys\Helpers\NativeMethods.cs" Link="AsLink\NativeMethods.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="System.Speech" Version="10.0.14" />
+    <PackageReference Include="System.Speech" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\AAV.Shared\Src\NetLts\StandardLib\StandardLib.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageVersion Include="EntityFramework" Version="6.5.2" />
+    <PackageVersion Include="Fody" Version="6.9.3" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.14" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.14" />
+    <PackageVersion Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageVersion Include="NAudio" Version="3.3.0" />
+    <PackageVersion Include="NAudio.Asio" Version="3.3.0" />
+    <PackageVersion Include="NAudio.Core" Version="3.3.0" />
+    <PackageVersion Include="NAudio.Midi" Version="3.3.0" />
+    <PackageVersion Include="NAudio.Wasapi" Version="22.0.0" />
+    <PackageVersion Include="NAudio.WinForms" Version="3.3.0" />
+    <PackageVersion Include="NAudio.WinMM" Version="3.3.0" />
+    <PackageVersion Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageVersion Include="System.Security.AccessControl" Version="6.0.1" />
+    <PackageVersion Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.14" />
+    <PackageVersion Include="System.Speech" Version="10.0.14" />
+  </ItemGroup>
+</Project>
+
