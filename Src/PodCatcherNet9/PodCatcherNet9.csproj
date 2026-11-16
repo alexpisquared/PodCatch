@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net11.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <ApplicationIcon>Assets\2.ico</ApplicationIcon>
@@ -14,18 +14,19 @@
     <Compile Include="..\..\..\..\c\AsLink\UI\HighlightableTextBlock.cs" Link="AsLink\HighlightableTextBlock.cs" />
     <Compile Include="..\..\..\AAV.Shared\Src\Net6.0\AAV.UI\Converters\ConverterEx.cs" Link="AsLink\ConverterEx.cs" />
     <Compile Include="..\..\..\AAV.ScrSvr\Src\AlexPi.Scr\WebScrap\WebScraper.cs" Link="AsLink\WebScraper.cs" />
-    <Compile Include="..\..\..\TypeCatch\Src\sln\TypeCatch\AsLink\Ext.DbContext.cs" Link="AsLink\DB\Ext.DbContext.cs" />
+    <Compile Include="..\..\..\TimeTracking\Src\Db.EventLog\AsLink\Ext.DbContext.cs" Link="AsLink\DB\Ext.DbContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\2.ico" />
     <Content Include="Assets\PopBest.wav" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CliWrap" Version="3.10.5" />
     <PackageReference Include="EntityFramework" Version="6.5.2" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
     <PackageReference Include="Fody" Version="6.9.3" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.9" />
-    <PackageReference Include="System.Speech" Version="10.0.9" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="11.0.0" />
+    <PackageReference Include="System.Speech" Version="11.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Db.PodcastMgt.Ne9.b\Db.PodcastMgt.Ne9.b.csproj" />
